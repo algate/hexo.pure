@@ -1279,7 +1279,7 @@ body {
         left: 0;
         right: 0;
         height: 80px;
-        z-index: 999
+        z-index: 4
     }
     .logo {
         float: none;
