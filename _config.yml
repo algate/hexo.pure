@@ -1,0 +1,83 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+Htitle: 欢迎来到Algate's Blog
+title: Algate's Blog
+email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Welcome to my blog. If the site update the content, I will push information in time.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://algate.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: jekyllrb
+github_username:  jekyll
+
+# rss订阅
+
+# site message
+baidu:
+    id: 617bf75bfd954382202927d87bf48f13
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins_dir:
+  - jekyll-feed
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+
+
+port: 4000
+
+# Pagination
+gems: [jekyll-paginate]
+paginate: 12
+# paginate_path: "archive/page/:num/"
+paginatepath: ["page/:num/","archive/page/:num/"]
+
+#nav
+nav: [
+    {
+        title: 所有文章,
+        description: archive,
+        url: '/archive'
+        # nav: [
+        #     {
+        #         title: tob主题,
+        #         description : jekyll
+        #     },
+        #     {
+        #         title: DUX主题,
+        #         description : jekyll
+        #     },
+        #     {
+        #         title: XIU主题,
+        #         description : jekyll
+        #     },
+        # ]
+    },
+    {title: 分类标签, description: tags, url: '/tags'},
+    {title: 日记, description: notes, url: '/notes'},
+    {title: 关于我的, description: about, url: '/about'}
+]

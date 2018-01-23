@@ -1,0 +1,61 @@
+---
+layout: default
+title: 关于我
+---
+<link rel="stylesheet" type="text/css" href="/assets/css/resume.css">
+    {% include resume.html %}
+<!-- <div style="width:830px;margin:0 auto;overflow:hidden;">
+    <embed id="embed" type="application/pdf" title="我的简历" style="width:100%;height:100%;margin-top: -60px;"></embed>
+</div> -->
+<script type="text/javascript">
+/*var embed = document.getElementById('embed');
+window.URL = window.URL || window.webkitURL;
+var assetURL = '../assets/doc/algate-resume.pdf';
+// var xhr = new XMLHttpRequest;
+var xmlhttp = function () {
+    var xmlhttp;
+    if (window.XMLHttpRequest)  {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    } else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    return xmlhttp;
+}
+function myAsyncFunction(url) {
+    return new Promise((resolve, reject) => {
+        // const xhr = new XMLHttpRequest();
+        let xhr = xmlhttp();
+        xhr.open("GET", url);
+        xhr.responseType = 'blob';
+        xhr.onload = () => resolve(xhr.response);
+        xhr.onerror = () => reject(xhr.status);
+        xhr.send();
+    });
+};
+let promiseBlob = myAsyncFunction(assetURL);
+promiseBlob.then(function(blob){
+    // console.log(blob);
+    embed.onload = function(){
+        window.URL.revokeObjectURL(embed.src);
+    }
+    embed.src = window.URL.createObjectURL(blob);
+})*/
+
+/*function getFileBlob(dataURL) {
+    xhr.open('get', assetURL, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function(){
+        console.log(this);
+        if(this.status == 200){
+            console.log(this.response);
+            var blob = this.response;
+            embed.onload = function(e){
+                window.URL.revokeObjectURL(embed.src);
+            }
+            embed.src = window.URL.createObjectURL(blob);
+        }
+    }
+    xhr.send();
+}*/
+
+</script>

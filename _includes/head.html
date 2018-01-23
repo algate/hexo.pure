@@ -1,0 +1,57 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>{% if page.title %}Algate's Blog|{{ page.title | escape }}{% else %}{{ site.Htitle | escape }}{% endif %}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="algate">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+    <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
+    <link href="/assets/icon/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/assets/icon/favicon.svg" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    {% if site.baidu.id %}
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?{{site.baidu.id}}";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    {% endif %}
+    <script type="text/javascript">
+    window.google = {
+        kEI: "3TLKTfD9DsmxcNrP7aIG",
+        kEXPI: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205",
+        kCSI: {
+            e: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205",
+            ei: "3TLKTfD9DsmxcNrP7aIG",
+            expi: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205"
+        },
+        authuser: 0,
+        ml: function() {},
+        kHL: "zh-CN",
+        time: function() {
+            return (new Date).getTime()
+        },
+        log: function(c, d, b) {
+            var a = new Image,
+                e = google,
+                g = e.lc,
+                f = e.li;
+            a.onerror = (a.onload = (a.onabort = function() {
+                delete g[f]
+            }));
+            g[f] = a;
+            b = b || "/gen_204?atyp=i&ct=" + c + "&cad=" + d + "&zx=" + google.time();
+            a.src = b;
+            e.li = f + 1
+        },
+        lc: [],
+        li: 0,
+        Toolbelt: {}
+    };
+    </script>
+</head>

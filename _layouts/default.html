@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% include head.html %}
+
+<body class="nav-fixed-top">
+    {% include header.html %}
+    <section class="container">
+        <div class="excerpts-wrapper" style="margin-top:0;">
+            {{content}}
+        </div>
+    </section>
+    {% include footer.html %}
+    {% include externaljs.html %}
+</body>
+
+</html>
