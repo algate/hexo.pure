@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|目录分类</title>
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <title>Algate's Blog|iOS开发中的小问题记录</title>
+    <meta name="description" content="NSKeyedArchiver 自定义对象写文件">
     <meta name="author" content="algate">
     <link rel="alternate" type="application/rss+xml" title="Algate's Blog" href="http://localhost:4000/feed.xml">
     <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
@@ -297,303 +297,70 @@
 </div>
     <section class="container">
         <div class="excerpts-wrapper" style="margin-top:0;">
-            
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title">iOS开发中的小问题记录</h1>
+        <div class="post-meta">
+            <img src="/images/calendar.png" width="20px" />
+            <time datetime="2016-12-02 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-12-02</time>
+            <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+            </p>
+        </div>
+    </header>
+    <section class="post">
+        <h3 id="nskeyedarchiver-自定义对象写文件">NSKeyedArchiver 自定义对象写文件</h3>
 
-<ul class="tag_box inline">
-  
-  
+<p>如果存储的对象类名有变动，则需要设置clasName, 方法为：“setClassName:forClass:”      <br />
+使用 NSKeyedArchiver 进行数据持久化时, 系统会默认使用类名去建表，如果类名变了，那么使用新的类名肯定是从本地获取不到表的，代码执行崩溃。   <br />
+所以需要在 NSKeyedArchiver 或者 NSKeyedUnarchiver 时使用 “setClassName:forClass:” 指定类名。</p>
 
+<h3 id="断点配置generate-debug-symbols">断点配置：【Generate Debug Symbols】</h3>
 
-  <h3>快速导航</h3>
-  
-    
-    	<li>---- <a href="#技术-ref">技术 <span>3</span></a></li>
-    
-    	<li>---- <a href="#iOS-ref">iOS <span>8</span></a></li>
-    
-    	<li>---- <a href="#工具-ref">工具 <span>3</span></a></li>
-    
-    	<li>---- <a href="#博客-ref">博客 <span>3</span></a></li>
-    
-    	<li>---- <a href="#机器学习-ref">机器学习 <span>4</span></a></li>
-    
-    	<li>---- <a href="#python-ref">python <span>1</span></a></li>
-    
-  
+<p>描述: 用来控制断点是否生效,关闭此功能，打包 <code class="highlighter-rouge">.ipa</code> 时，包体积会小很多。  <br />
+配置路径:【project/TARGETS/Build Settings/Apple LLVM7.1 - Code Genneration/Generate Debug Symbols】</p>
 
+<h3 id="捕获全局异常all-exception">捕获全局异常：【All Exception】</h3>
 
+<p>描述: 用来捕捉整个项目在 Xcode 里执行时的异常。例如：try/catch 时 catch住的异常,【All Exception】可以直接定位到具体位置。   <br />
+配置路径: 异常捕捉(commod+7)/Xcode左下角点击+/Add Exception Breakpoint/完成(回车键)</p>
 
-</ul>
+<h3 id="ui相关">UI相关</h3>
 
-<div class = "card">
+<p>1、设置状态栏颜色：</p>
 
+<div class="highlighter-rouge"><pre class="highlight"><code>
+info.plist 添加 View controller-based status bar appearance - NO     
+代码里写 [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent]; 再次运行后状态栏就会变成白色。    
 
-  <h3 id="技术-ref">技术</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/07/15/Codeless.html">老司机带你剖析无码统计</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/06/iBeacon.html">我们日常生活中的 iBeacon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/hexo/update/study/2015/08/25/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2.html">HEXO搭建个人博客</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="iOS-ref">iOS</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2017/01/03/iOS_Wifilist.html">Wifi 定位原理及 iOS Wifi 列表获取</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/12/02/iOS_Dev_Note.html">iOS开发中的小问题记录</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/16/macTips.html">Mac知识整合</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/25/Xcode8.html">Xcode 8 使用笔记</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/09/23/iOSLowerLeftAppicon.html">iOS设备左下角出现Appicon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/02/CocoaPod_Use.html">CocoaPods使用心得</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/01/09/iOS_OTA.html">iOS动态更新</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2015/09/27/iOS9_Note.html">iOS 9 变化笔记</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="工具-ref">工具</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/markdownTool.html">Markdown工具集</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/13/GitTutorial.html">Git教程</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/02/Develop_Tool.html">开发常用工具</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="博客-ref">博客</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/jekyll/update/2018/01/15/welcome-to-jekyll.html">Welcome to Jekyll!</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/14/jekyll_tutorials1.html">Jekyll搭建个人博客</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/12/HEXO_Advanced.html">HEXO进阶</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="机器学习-ref">机器学习</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/neural_networks_using_TensorFlow.html">使用 TensorFlow 实现神经网络</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/03/TensorFlowOniOSUse1.html">TensorFlow 在 iOS 平台上的使用(一)</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/07/iOSMachineLearning_TensorFlow.html">iOS开发迎来机器学习的春天---TensorFlow</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/05/MachineLearning_introduce.html">机器学习入门（名词科普）</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="python-ref">python</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/08/04/PythonTestAutomationiOS.html">Python自动化测试iOS项目</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
+</code></pre>
 </div>
+
+<p>2、左滑返回手势失效了怎么办：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+设置 navigationItem.leftBarButtonItem 之后，左滑返回手势就会失效。设置一下 UIGestureRecognizerDelegate 代理即可：
+
+self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
+</code></pre>
+</div>
+
+<p>3、让 TableView的 下拉 和 上拉 显示不一样的背景颜色：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+给 TableView 上加一个 View，View 的 Frema：
+CGRectMake(0, -self.view.bounds.size.height, self.view.bounds.size.width, self.view.bounds.size.height + 2)，
+给变View的背景颜色就可以了。
+
+</code></pre>
+</div>
+
+<p><br />
+转载请注明：<a href="http://baixin">潘柏信的博客</a> » <a href="http://baixin.io/2016/12/iOS_Dev_Note/">iOS开发中的小问题记录</a></p>
+
+
+    </section>
+</article>
         </div>
     </section>
     <section class="footer">

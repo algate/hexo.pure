@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Algate's Blog|使用 TensorFlow 实现神经网络</title>
+    <meta name="description" content="介绍">
+    <meta name="author" content="algate">
+    <link rel="alternate" type="application/rss+xml" title="Algate's Blog" href="http://localhost:4000/feed.xml">
+    <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
+    <link href="/assets/icon/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="/assets/icon/favicon.svg" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?617bf75bfd954382202927d87bf48f13";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    
+    <script type="text/javascript">
+    window.google = {
+        kEI: "3TLKTfD9DsmxcNrP7aIG",
+        kEXPI: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205",
+        kCSI: {
+            e: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205",
+            ei: "3TLKTfD9DsmxcNrP7aIG",
+            expi: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205"
+        },
+        authuser: 0,
+        ml: function() {},
+        kHL: "zh-CN",
+        time: function() {
+            return (new Date).getTime()
+        },
+        log: function(c, d, b) {
+            var a = new Image,
+                e = google,
+                g = e.lc,
+                f = e.li;
+            a.onerror = (a.onload = (a.onabort = function() {
+                delete g[f]
+            }));
+            g[f] = a;
+            b = b || "/gen_204?atyp=i&ct=" + c + "&cad=" + d + "&zx=" + google.time();
+            a.src = b;
+            e.li = f + 1
+        },
+        lc: [],
+        li: 0,
+        Toolbelt: {}
+    };
+    </script>
+</head>
+
+<body class="nav-fixed-top">
+    <header class="header" style="z-index: 1;background: rgba(0,155,219,0.8)">
+    <div class="container">
+        <h1 class="logo"><a href="javascript:;"  style="font-size: 20px;color:#fff;">Algate's Blog</a></h1>
+        <div class="sitenav">
+            <ul>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-8"><a href="/">首页</a></li>
+                
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
+                    <a href="/archive" title="archive">
+                        所有文章
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
+                    <a href="/tags" title="tags">
+                        分类标签
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
+                    <a href="/notes" title="notes">
+                        日记
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
+                    <a href="/about" title="about">
+                        关于我的
+                    </a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+        <span class="sitenav-on"><i class="fa" style="color:#fff;"></i></span>
+        <span class="sitenav-mask"></span>
+    </div>
+</header>
+<style type="text/css">
+    .hdfocus {
+        height: 300px;
+        color: #fff;
+        background-color: #33383C;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        text-align: center;
+    }
+</style>
+<div class="focus-slider flexslider">
+    <canvas id="canvas" style="position: fixed;z-index: 0;top:0;"></canvas>
+    <!-- <div class="flex-viewport" style="position: relative;height:100%;">
+        <div class="hdfocus" style="background-image: url(/assets/images/fantasy-3077928_1920.jpg);">
+        </div>
+    </div> -->
+    <!-- <div class="flex-viewport" style="background:rgba(0,0,0,0.4);width:100%;height:100%;position: absolute;top:0;"></div> -->
+    <center>
+        <div id="lga">
+            <style>
+            #hplogo {
+                background: white;
+                cursor: pointer;
+                height: 156px;
+                position: relative;
+                width: 403px;
+            }
+
+            #hplogo div {
+                pointer-events: none;
+                position: absolute;
+            }
+            </style>
+            <div id="hplogo">
+                <a href="http://hovertree.com/texiao/js/5/logoinfo.htm"><img src="http://hovertree.com/texiao/js/5/images/graham11-hp-start.png" alt="现代舞先驱玛莎·葛兰姆 117 周年诞辰" title="现代舞先驱玛莎·葛兰姆 117 周年诞辰" border="0"></a>
+                <div style="left: 307px; top: 48px; width: 88px; height: 89px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px 0px transparent;" id="hplogo0"></div>
+                <div style="left: 307px; top: 48px; width: 89px; height: 89px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -88px 0px transparent;" id="hplogo1"></div>
+                <div style="left: 307px; top: 48px; width: 91px; height: 89px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -177px 0px transparent;" id="hplogo2"></div>
+                <div style="left: 305px; top: 49px; width: 93px; height: 89px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -268px 0px transparent;" id="hplogo3"></div>
+                <div style="left: 305px; top: 50px; width: 93px; height: 88px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -361px 0px transparent;" id="hplogo4"></div>
+                <div style="left: 305px; top: 50px; width: 93px; height: 88px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -454px 0px transparent;" id="hplogo5"></div>
+                <div style="left: 306px; top: 52px; width: 92px; height: 86px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -547px 0px transparent;" id="hplogo6"></div>
+                <div style="left: 305px; top: 53px; width: 93px; height: 84px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -639px 0px transparent;" id="hplogo7"></div>
+                <div style="left: 305px; top: 54px; width: 94px; height: 83px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -732px 0px transparent;" id="hplogo8"></div>
+                <div style="left: 306px; top: 54px; width: 93px; height: 83px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -826px 0px transparent;" id="hplogo9"></div>
+                <div style="left: 307px; top: 54px; width: 92px; height: 83px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -919px 0px transparent;" id="hplogo10"></div>
+                <div style="left: 307px; top: 54px; width: 92px; height: 83px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1011px 0px transparent;" id="hplogo11"></div>
+                <div style="left: 308px; top: 54px; width: 90px; height: 83px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1103px 0px transparent;" id="hplogo12"></div>
+                <div style="left: 308px; top: 54px; width: 90px; height: 83px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1193px 0px transparent;" id="hplogo13"></div>
+                <div style="left: 306px; top: 53px; width: 91px; height: 84px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1283px 0px transparent;" id="hplogo14"></div>
+                <div style="left: 306px; top: 53px; width: 91px; height: 84px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1374px 0px transparent;" id="hplogo15"></div>
+                <div style="left: 308px; top: 53px; width: 90px; height: 84px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1465px 0px transparent;" id="hplogo16"></div>
+                <div style="left: 308px; top: 53px; width: 90px; height: 84px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1555px 0px transparent;" id="hplogo17"></div>
+                <div style="left: 305px; top: 53px; width: 92px; height: 84px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1645px 0px transparent;" id="hplogo18"></div>
+                <div style="left: 305px; top: 52px; width: 92px; height: 85px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1737px 0px transparent;" id="hplogo19"></div>
+                <div style="left: 306px; top: 52px; width: 91px; height: 85px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1829px 0px transparent;" id="hplogo20"></div>
+                <div style="left: 308px; top: 51px; width: 88px; height: 87px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1920px 0px transparent;" id="hplogo21"></div>
+                <div style="left: 308px; top: 50px; width: 88px; height: 88px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -89px transparent;" id="hplogo22"></div>
+                <div style="left: 308px; top: 49px; width: 88px; height: 88px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -88px -89px transparent;" id="hplogo23"></div>
+                <div style="left: 307px; top: 49px; width: 89px; height: 88px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -176px -89px transparent;" id="hplogo24"></div>
+                <div style="left: 307px; top: 50px; width: 89px; height: 87px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -265px -89px transparent;" id="hplogo25"></div>
+                <div style="left: 308px; top: 51px; width: 89px; height: 86px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -354px -89px transparent;" id="hplogo26"></div>
+                <div style="left: 307px; top: 54px; width: 90px; height: 83px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -443px -89px transparent;" id="hplogo27"></div>
+                <div style="left: 307px; top: 57px; width: 90px; height: 80px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -533px -89px transparent;" id="hplogo28"></div>
+                <div style="left: 306px; top: 58px; width: 92px; height: 79px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -623px -89px transparent;" id="hplogo29"></div>
+                <div style="left: 306px; top: 58px; width: 92px; height: 79px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -715px -89px transparent;" id="hplogo30"></div>
+                <div style="left: 305px; top: 60px; width: 92px; height: 77px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -807px -89px transparent;" id="hplogo31"></div>
+                <div style="left: 302px; top: 61px; width: 95px; height: 76px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -899px -89px transparent;" id="hplogo32"></div>
+                <div style="left: 302px; top: 63px; width: 95px; height: 74px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -994px -89px transparent;" id="hplogo33"></div>
+                <div style="left: 302px; top: 51px; width: 96px; height: 86px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1089px -89px transparent;" id="hplogo34"></div>
+                <div style="left: 302px; top: 66px; width: 98px; height: 71px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1185px -89px transparent;" id="hplogo35"></div>
+                <div style="left: 304px; top: 67px; width: 96px; height: 69px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1283px -89px transparent;" id="hplogo36"></div>
+                <div style="left: 301px; top: 63px; width: 96px; height: 74px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1379px -89px transparent;" id="hplogo37"></div>
+                <div style="left: 301px; top: 58px; width: 93px; height: 79px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1475px -89px transparent;" id="hplogo38"></div>
+                <div style="left: 291px; top: 52px; width: 94px; height: 85px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1568px -89px transparent;" id="hplogo39"></div>
+                <div style="left: 288px; top: 50px; width: 71px; height: 88px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1662px -89px transparent;" id="hplogo40"></div>
+                <div style="left: 285px; top: 43px; width: 76px; height: 95px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1733px -89px transparent;" id="hplogo41"></div>
+                <div style="left: 285px; top: 37px; width: 70px; height: 101px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1809px -89px transparent;" id="hplogo42"></div>
+                <div style="left: 281px; top: 29px; width: 55px; height: 109px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1879px -89px transparent;" id="hplogo43"></div>
+                <div style="left: 278px; top: 20px; width: 58px; height: 119px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1934px -89px transparent;" id="hplogo44"></div>
+                <div style="left: 278px; top: 20px; width: 55px; height: 119px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1992px -89px transparent;" id="hplogo45"></div>
+                <div style="left: 277px; top: 12px; width: 121px; height: 127px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -208px transparent;" id="hplogo46"></div>
+                <div style="left: 271px; top: 2px; width: 122px; height: 138px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -121px -208px transparent;" id="hplogo47"></div>
+                <div style="left: 267px; top: 1px; width: 126px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -243px -208px transparent;" id="hplogo48"></div>
+                <div style="left: 264px; top: 0px; width: 136px; height: 140px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -369px -208px transparent;" id="hplogo49"></div>
+                <div style="left: 260px; top: 0px; width: 141px; height: 140px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -505px -208px transparent;" id="hplogo50"></div>
+                <div style="left: 255px; top: 0px; width: 148px; height: 140px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -646px -208px transparent;" id="hplogo51"></div>
+                <div style="left: 252px; top: 0px; width: 151px; height: 140px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -794px -208px transparent;" id="hplogo52"></div>
+                <div style="left: 249px; top: 2px; width: 121px; height: 138px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -945px -208px transparent;" id="hplogo53"></div>
+                <div style="left: 247px; top: 3px; width: 123px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1066px -208px transparent;" id="hplogo54"></div>
+                <div style="left: 246px; top: 3px; width: 123px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1189px -208px transparent;" id="hplogo55"></div>
+                <div style="left: 246px; top: 2px; width: 124px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1312px -208px transparent;" id="hplogo56"></div>
+                <div style="left: 258px; top: 2px; width: 112px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1436px -208px transparent;" id="hplogo57"></div>
+                <div style="left: 263px; top: 2px; width: 106px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1548px -208px transparent;" id="hplogo58"></div>
+                <div style="left: 263px; top: 2px; width: 106px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1654px -208px transparent;" id="hplogo59"></div>
+                <div style="left: 262px; top: 2px; width: 103px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1760px -208px transparent;" id="hplogo60"></div>
+                <div style="left: 260px; top: 2px; width: 104px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1863px -208px transparent;" id="hplogo61"></div>
+                <div style="left: 260px; top: 2px; width: 104px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1967px -208px transparent;" id="hplogo62"></div>
+                <div style="left: 268px; top: 2px; width: 98px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -348px transparent;" id="hplogo63"></div>
+                <div style="left: 267px; top: 2px; width: 99px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -98px -348px transparent;" id="hplogo64"></div>
+                <div style="left: 266px; top: 2px; width: 97px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -197px -348px transparent;" id="hplogo65"></div>
+                <div style="left: 266px; top: 3px; width: 96px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -294px -348px transparent;" id="hplogo66"></div>
+                <div style="left: 264px; top: 3px; width: 99px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -390px -348px transparent;" id="hplogo67"></div>
+                <div style="left: 263px; top: 3px; width: 100px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -489px -348px transparent;" id="hplogo68"></div>
+                <div style="left: 261px; top: 3px; width: 100px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -589px -348px transparent;" id="hplogo69"></div>
+                <div style="left: 259px; top: 2px; width: 138px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -689px -348px transparent;" id="hplogo70"></div>
+                <div style="left: 254px; top: 2px; width: 126px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -827px -348px transparent;" id="hplogo71"></div>
+                <div style="left: 247px; top: 2px; width: 101px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -953px -348px transparent;" id="hplogo72"></div>
+                <div style="left: 240px; top: 2px; width: 108px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1054px -348px transparent;" id="hplogo73"></div>
+                <div style="left: 238px; top: 1px; width: 110px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1162px -348px transparent;" id="hplogo74"></div>
+                <div style="left: 230px; top: 1px; width: 118px; height: 138px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1272px -348px transparent;" id="hplogo75"></div>
+                <div style="left: 220px; top: 15px; width: 128px; height: 124px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1390px -348px transparent;" id="hplogo76"></div>
+                <div style="left: 211px; top: 18px; width: 137px; height: 121px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1518px -348px transparent;" id="hplogo77"></div>
+                <div style="left: 205px; top: 43px; width: 102px; height: 96px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1655px -348px transparent;" id="hplogo78"></div>
+                <div style="left: 202px; top: 45px; width: 104px; height: 93px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1757px -348px transparent;" id="hplogo79"></div>
+                <div style="left: 200px; top: 38px; width: 97px; height: 101px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1861px -348px transparent;" id="hplogo80"></div>
+                <div style="left: 198px; top: 38px; width: 104px; height: 101px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1958px -348px transparent;" id="hplogo81"></div>
+                <div style="left: 197px; top: 39px; width: 107px; height: 100px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -486px transparent;" id="hplogo82"></div>
+                <div style="left: 197px; top: 39px; width: 112px; height: 100px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -107px -486px transparent;" id="hplogo83"></div>
+                <div style="left: 213px; top: 39px; width: 94px; height: 110px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -219px -486px transparent;" id="hplogo84"></div>
+                <div style="left: 212px; top: 40px; width: 95px; height: 111px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -313px -486px transparent;" id="hplogo85"></div>
+                <div style="left: 211px; top: 41px; width: 97px; height: 111px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -408px -486px transparent;" id="hplogo86"></div>
+                <div style="left: 209px; top: 42px; width: 99px; height: 112px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -505px -486px transparent;" id="hplogo87"></div>
+                <div style="left: 209px; top: 43px; width: 98px; height: 112px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -604px -486px transparent;" id="hplogo88"></div>
+                <div style="left: 213px; top: 43px; width: 87px; height: 112px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -702px -486px transparent;" id="hplogo89"></div>
+                <div style="left: 213px; top: 42px; width: 83px; height: 113px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -789px -486px transparent;" id="hplogo90"></div>
+                <div style="left: 211px; top: 40px; width: 86px; height: 109px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -872px -486px transparent;" id="hplogo91"></div>
+                <div style="left: 211px; top: 38px; width: 86px; height: 103px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -958px -486px transparent;" id="hplogo92"></div>
+                <div style="left: 211px; top: 37px; width: 88px; height: 112px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1044px -486px transparent;" id="hplogo93"></div>
+                <div style="left: 211px; top: 20px; width: 186px; height: 131px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1132px -486px transparent;" id="hplogo94"></div>
+                <div style="left: 213px; top: 27px; width: 167px; height: 122px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1318px -486px transparent;" id="hplogo95"></div>
+                <div style="left: 212px; top: 44px; width: 87px; height: 105px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1485px -486px transparent;" id="hplogo96"></div>
+                <div style="left: 210px; top: 44px; width: 88px; height: 98px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1572px -486px transparent;" id="hplogo97"></div>
+                <div style="left: 195px; top: 44px; width: 106px; height: 98px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1660px -486px transparent;" id="hplogo98"></div>
+                <div style="left: 189px; top: 44px; width: 110px; height: 98px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1766px -486px transparent;" id="hplogo99"></div>
+                <div style="left: 182px; top: 46px; width: 117px; height: 99px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1876px -486px transparent;" id="hplogo100"></div>
+                <div style="left: 173px; top: 44px; width: 118px; height: 96px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1993px -486px transparent;" id="hplogo101"></div>
+                <div style="left: 161px; top: 43px; width: 130px; height: 99px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -617px transparent;" id="hplogo102"></div>
+                <div style="left: 154px; top: 42px; width: 137px; height: 97px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -130px -617px transparent;" id="hplogo103"></div>
+                <div style="left: 153px; top: 42px; width: 137px; height: 97px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -267px -617px transparent;" id="hplogo104"></div>
+                <div style="left: 153px; top: 42px; width: 137px; height: 97px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -404px -617px transparent;" id="hplogo105"></div>
+                <div style="left: 152px; top: 41px; width: 137px; height: 98px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -541px -617px transparent;" id="hplogo106"></div>
+                <div style="left: 151px; top: 41px; width: 137px; height: 97px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -678px -617px transparent;" id="hplogo107"></div>
+                <div style="left: 149px; top: 41px; width: 145px; height: 97px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -815px -617px transparent;" id="hplogo108"></div>
+                <div style="left: 148px; top: 25px; width: 144px; height: 114px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -960px -617px transparent;" id="hplogo109"></div>
+                <div style="left: 148px; top: 13px; width: 144px; height: 126px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1104px -617px transparent;" id="hplogo110"></div>
+                <div style="left: 141px; top: 12px; width: 153px; height: 127px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1248px -617px transparent;" id="hplogo111"></div>
+                <div style="left: 115px; top: 11px; width: 173px; height: 128px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1401px -617px transparent;" id="hplogo112"></div>
+                <div style="left: 108px; top: 7px; width: 180px; height: 133px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1574px -617px transparent;" id="hplogo113"></div>
+                <div style="left: 108px; top: 4px; width: 180px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1754px -617px transparent;" id="hplogo114"></div>
+                <div style="left: 108px; top: 3px; width: 176px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1934px -617px transparent;" id="hplogo115"></div>
+                <div style="left: 108px; top: 1px; width: 161px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -754px transparent;" id="hplogo116"></div>
+                <div style="left: 105px; top: 1px; width: 235px; height: 138px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -161px -754px transparent;" id="hplogo117"></div>
+                <div style="left: 103px; top: 1px; width: 295px; height: 148px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -396px -754px transparent;" id="hplogo118"></div>
+                <div style="left: 103px; top: 0px; width: 277px; height: 149px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -691px -754px transparent;" id="hplogo119"></div>
+                <div style="left: 108px; top: 0px; width: 234px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -968px -754px transparent;" id="hplogo120"></div>
+                <div style="left: 101px; top: 0px; width: 232px; height: 137px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1202px -754px transparent;" id="hplogo121"></div>
+                <div style="left: 99px; top: 0px; width: 135px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1434px -754px transparent;" id="hplogo122"></div>
+                <div style="left: 95px; top: 0px; width: 244px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1569px -754px transparent;" id="hplogo123"></div>
+                <div style="left: 81px; top: 0px; width: 152px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1813px -754px transparent;" id="hplogo124"></div>
+                <div style="left: 69px; top: 0px; width: 164px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1965px -754px transparent;" id="hplogo125"></div>
+                <div style="left: 66px; top: 0px; width: 169px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -903px transparent;" id="hplogo126"></div>
+                <div style="left: 65px; top: 0px; width: 170px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -169px -903px transparent;" id="hplogo127"></div>
+                <div style="left: 63px; top: 0px; width: 168px; height: 138px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -339px -903px transparent;" id="hplogo128"></div>
+                <div style="left: 61px; top: 0px; width: 159px; height: 138px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -507px -903px transparent;" id="hplogo129"></div>
+                <div style="left: 35px; top: 0px; width: 304px; height: 139px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -666px -903px transparent;" id="hplogo130"></div>
+                <div style="left: 19px; top: 0px; width: 189px; height: 140px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -970px -903px transparent;" id="hplogo131"></div>
+                <div style="left: 18px; top: 11px; width: 138px; height: 129px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1159px -903px transparent;" id="hplogo132"></div>
+                <div style="left: 18px; top: 11px; width: 137px; height: 129px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1297px -903px transparent;" id="hplogo133"></div>
+                <div style="left: 18px; top: 11px; width: 137px; height: 128px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1434px -903px transparent;" id="hplogo134"></div>
+                <div style="left: 18px; top: 6px; width: 135px; height: 133px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1571px -903px transparent;" id="hplogo135"></div>
+                <div style="left: 7px; top: 4px; width: 146px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1706px -903px transparent;" id="hplogo136"></div>
+                <div style="left: 6px; top: 4px; width: 147px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1852px -903px transparent;" id="hplogo137"></div>
+                <div style="left: 3px; top: 4px; width: 150px; height: 136px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1999px -903px transparent;" id="hplogo138"></div>
+                <div style="left: 3px; top: 5px; width: 150px; height: 135px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -1043px transparent;" id="hplogo139"></div>
+                <div style="left: 3px; top: 8px; width: 150px; height: 132px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -150px -1043px transparent;" id="hplogo140"></div>
+                <div style="left: 4px; top: 6px; width: 394px; height: 145px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -300px -1043px transparent;" id="hplogo141"></div>
+                <div style="left: 12px; top: 6px; width: 388px; height: 145px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -694px -1043px transparent;" id="hplogo142"></div>
+                <div style="left: 11px; top: 8px; width: 389px; height: 144px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1082px -1043px transparent;" id="hplogo143"></div>
+                <div style="left: 11px; top: 8px; width: 387px; height: 144px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1471px -1043px transparent;" id="hplogo144"></div>
+                <div style="left: 11px; top: 8px; width: 387px; height: 143px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -1858px -1043px transparent;" id="hplogo145"></div>
+                <div style="left: 10px; top: 8px; width: 113px; height: 131px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll 0px -1188px transparent;" id="hplogo146"></div>
+                <div style="left: 11px; top: 8px; width: 111px; height: 131px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -113px -1188px transparent;" id="hplogo147"></div>
+                <div style="left: 10px; top: 9px; width: 112px; height: 130px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -224px -1188px transparent;" id="hplogo148"></div>
+                <div style="left: 12px; top: 9px; width: 116px; height: 130px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -336px -1188px transparent;" id="hplogo149"></div>
+                <div style="left: 12px; top: 9px; width: 111px; height: 130px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -452px -1188px transparent;" id="hplogo150"></div>
+                <div style="left: 12px; top: 9px; width: 111px; height: 130px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -563px -1188px transparent;" id="hplogo151"></div>
+                <div style="left: 12px; top: 9px; width: 110px; height: 131px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -674px -1188px transparent;" id="hplogo152"></div>
+                <div style="left: 12px; top: 34px; width: 113px; height: 106px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -784px -1188px transparent;" id="hplogo153"></div>
+                <div style="left: 13px; top: 35px; width: 110px; height: 104px; background: url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat scroll -897px -1188px transparent;" id="hplogo154"></div>
+            </div>
+        </div>
+    </center>
+</div>
+    <section class="container">
+        <div class="excerpts-wrapper" style="margin-top:0;">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title">使用 TensorFlow 实现神经网络</h1>
+        <div class="post-meta">
+            <img src="/images/calendar.png" width="20px" />
+            <time datetime="2016-11-20 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-20</time>
+            <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+            </p>
+        </div>
+    </header>
+    <section class="post">
+        <h2 id="介绍">介绍</h2>
+
+<p>　　一直关注 <code class="highlighter-rouge">数据科学</code> 、 <code class="highlighter-rouge">机器学习</code> 的同学，一定会经常看到或听到关于 <code class="highlighter-rouge">深度学习</code> 和 <code class="highlighter-rouge">神经网络</code> 相关信息。如果你对 <code class="highlighter-rouge">深度学习</code> 感兴趣，但却还没有实际动手操作过，你可以从这里得到实践。</p>
+
+<p>　　在本文中，我将介绍 <code class="highlighter-rouge">TensorFlow</code> , 帮你了解 <code class="highlighter-rouge">神经网络</code> 的实际作用，并使用 <code class="highlighter-rouge">TensorFlow</code> 来解决现实生活中的问题。 读这篇文章前，需要知道 <code class="highlighter-rouge">神经网络</code> 的基础知识和一些熟悉编程理念，文章中的代码是使用 <code class="highlighter-rouge">Pyhton</code> 编写的，所以还需要了解一些 <code class="highlighter-rouge">Python</code> 的基本语法，才能更有利对于文章的理解。</p>
+
+<div align="center">
+	<img src="/images/posts/tfimg/logo.jpg" height="300" width="500" />  
+</div>
+
+<h3 id="目录">目录</h3>
+
+<ul>
+  <li><a href="#When-to-apply-neural-net">什么时候应用神经网络？</a></li>
+  <li><a href="#solve-problems">通常神经网络能解决的问题</a></li>
+  <li><a href="#popular-libraries">了解图像数据和主流的库来解决问题</a></li>
+  <li><a href="#What-is-TensorFlow">什么是 TensorFlow？</a></li>
+  <li><a href="#A-typical-flow">TensorFlow 一个 典型 的 “ 流 ”</a></li>
+  <li><a href="#MLP">在 TensorFlow 中实现 MLP</a></li>
+  <li><a href="#Limitations-of-TensorFlow">TensorFlow 的限制</a></li>
+  <li><a href="#vs-libraries">TensorFlow 与其他库</a></li>
+  <li><a href="#Where-to-go-from-here">从这里去哪里？</a></li>
+</ul>
+
+<h3 id="什么时候用神经网络"><a name="When-to-apply-neural-net"></a>什么时候用神经网络？</h3>
+
+<p>　　<code class="highlighter-rouge">神经网络</code> 已经在相当一段时间成为机器学习中的焦点。 对于 <code class="highlighter-rouge">神经网络</code> 和 <code class="highlighter-rouge">深度学习</code> 上这里有更详细的解释 <a href="https://www.analyticsvidhya.com/blog/2016/08/evolution-core-concepts-deep-learning-neural-networks/">点击阅读</a> 。 其 “更深” 的功能在许多领域都有取得巨大的突破，如图像识别，语音和自然语言处理等。</p>
+
+<p>　　主要的问题在于如何用好 <code class="highlighter-rouge">神经网络</code> ？现在，每天都会有许多新发现，这个领域就像一个金矿，为了成为这个 “淘金热” 的一部分，必须记住几件事：</p>
+
+<ul>
+  <li>
+    <p><strong>首先，<code class="highlighter-rouge">神经网络</code> 需要有明确和翔实的数据（主要是大数据）训练</strong>， 试着想象 <code class="highlighter-rouge">神经网络</code> 作为一个孩子，它一开始会观察它父母走路，然后它试图自己走，每一步就像学习执行一个特定的任务。 它可能会失败几次，但经过几次失败的尝试，它将会如何走路。所以需要为孩子提供更多的机会，如果不让它走，它可能永远不会学习如何走路。</p>
+  </li>
+  <li>
+    <p><strong>一些人会利用 <code class="highlighter-rouge">神经网络</code> 解决复杂的问题，如图像处理，</strong>  <code class="highlighter-rouge">神经网络</code> 属于一类代表学习的算法，这些算法可以把复杂的问题分解为简单的形式，使他们成为可以理解的（或 “可表示”），就像吞咽食物之前的咀嚼，让我们更容易吸收和消化。这个分解的过程如果使用传统的算法来实现也可以，但是实现过程将会很困难。</p>
+  </li>
+  <li>
+    <p><strong>选择适当类型的 <code class="highlighter-rouge">神经网络</code> ，来解决问题，</strong>  每个问题的复杂情况都不一样，所以数据决定你解决问题的方式。 例如，如果问题是序列生成的问题，<code class="highlighter-rouge">递归神经网络</code> 更合适。如果它是图像相关的问题，想更好地解决可以采取 <code class="highlighter-rouge">卷积神经网络</code>。</p>
+  </li>
+  <li>
+    <p><strong>最后最重要的就是 <code class="highlighter-rouge">硬件</code> 要求了，硬件是运行 <code class="highlighter-rouge">神经网络</code> 模型的关键。</strong> 神经网被 “发现” 很久以前，他们在近年来得到推崇的主要的原因就是计算资源更好，能更大发挥它的光芒，如果你想使用 <code class="highlighter-rouge">神经网络</code> 解决这些现实生活中的问题，那么你得准备购买一些高端的硬件了😆！</p>
+  </li>
+</ul>
+
+<h3 id="通常神经网络解决的问题"><a name="solve-problems"></a>通常神经网络解决的问题</h3>
+
+<p>　　神经网络是一种特殊类型的 机器学习（ML）算法。 因此，作为每个 ML 算法都遵循 数据预处理 、模型建立 和 模型评估 的工作流流程。为了简明起见，下面列出了如何处理 <code class="highlighter-rouge">神经网络</code> 问题的 TODO 列表。</p>
+
+<ul>
+  <li>检查它是否为 神经网络 ，把它看成一个传统的算法问题</li>
+  <li>做一个调查，哪个 神经网络 框架最适合解决这个问题</li>
+  <li>定义 神经网络 框架，通过它选择对应的 编程语言 和 库</li>
+  <li>将数据转换为正确的格式并分批分割</li>
+  <li>根据您的需要预处理数据</li>
+  <li>增强数据以增加大小并制作更好的训练模型</li>
+  <li>批次供给到 神经网络</li>
+  <li>训练和监测，培训和验证数据集的变化</li>
+  <li>测试你的模型，并保存以备将来使用</li>
+</ul>
+
+<p>　　本文将专注于图像数据，我们从 TensorFlow 入手。</p>
+
+<h3 id="了解图像数据和主流的库来解决问题"><a name="popular-libraries"></a>了解图像数据和主流的库来解决问题</h3>
+
+<p>　　图像大多排列为 3-D 阵列，具体指 高度、宽度 和 颜色通道。例如，如果你使用电脑截屏，它将首先转换成一个 3-D 数组，然后压缩它为 ‘.jpeg’ 或 ‘.png’ 文件格式。</p>
+
+<p>　　虽然这些图像对于人类来说很容易理解，但计算机很难理解它们。 这种现象称为“语义空隙”。我们的大脑可以看看图像，并在几秒钟内读懂完整的图片。但计算机会将图像看作一个数字数组，问题来了，它想知道这是一张什么样的图像，我们应该怎么样把图像解释给机器它才能读懂？</p>
+
+<p>　　在早期，人们试图将图像分解为机器的 “可理解” 格式，如“模板”。例如，面部总是具有在每个人中有所保留的特定结构，例如眼睛，鼻子或我们的脸的形状。 但是这种方法将是有缺陷的，因为当要识别的对象的数量将增加到一定量级时，“模板” 将不成立。</p>
+
+<p>　　2012年一个深层神经网络架构赢得了 ImageNet 的挑战，从自然场景中识别对象，它在即将到来的 ImageNet 挑战中继续统治其主权，从而证明了解决图像问题的有用性。
+人们通常使用哪些 库 / 语言 来解决图像识别问题？<a href="https://www.analyticsvidhya.com/blog/2016/08/deep-learning-path/">最近的一次调查</a>中，最流行的深度学习库，支持的最友好的语言有 Python ，其次是 Lua ，对 Java 和 Matlab 支持的也有。最流行的库举几个例子：</p>
+
+<ul>
+  <li><a href="http://caffe.berkeleyvision.org/">Caffe</a></li>
+  <li><a href="http://deeplearning4j.org/">DeepLearning4j</a></li>
+  <li><a href="https://www.tensorflow.org/">TensorFlow</a></li>
+  <li><a href="http://www.deeplearning.net/software/theano">Theano</a></li>
+  <li><a href="http://torch.ch/">Torch</a></li>
+</ul>
+
+<p>现在，我们了解了图像的存储方式以及使用的常用库，让我们看看 <code class="highlighter-rouge">TensorFlow</code> 提供的功能。</p>
+
+<h3 id="什么是-tensorflow-"><a name="What-is-TensorFlow"></a>什么是 TensorFlow ？</h3>
+
+<p>让我们从官方定义开始.</p>
+
+<p>　　“<code class="highlighter-rouge">TensorFlow</code> 是一个开源软件库，用于使用数据流图进行数值计算。图中的节点表示数学运算，而图边表示在它们之间传递的多维数据阵列（也称为张量）。 灵活的架构允许您使用单一 API 将计算部署到桌面、服务器或移动设备中的一个或多个的 CPU 或 GPU 中。</p>
+
+<p><img src="http://www.tensorfly.cn/images/tensors_flowing.gif" alt="" /></p>
+
+<p>　　如果感觉这听起来太高大上，不要担心。这里有我简单的定义，<code class="highlighter-rouge">TensorFlow</code> 看起来没什么，只是 numpy 有些难以理解。如果你以前使用过 numpy ，理解 TensorFlow 将是手到擒来！ numpy 和 TensorFlow 之间的主要区别是 TensorFlow 遵循惰性编程范例。 TensorFlow 的操作基本上都是对 session 的操作，它首先构建一个所有操作的图形，当我们调用 session 时 TensorFlow 就开始工作了。它通过将内部数据表示转换为张量（Tensor，也称为多维数组）来构建为可扩展的。 构建计算图可以被认为是 TensorFlow 的主要成分。想更多地了解一个计算图形的数学结构，可以阅读 <a href="http://colah.github.io/posts/2015-08-Backprop/">这篇文章</a> 。</p>
+
+<p>　　通过上面的介绍，很容易将 TensorFlow 分类为神经网络库，但它不仅仅是如此。它被设计成一个强大的神经网络库， 但它有能力做更多的事情。可以构建它为其他机器学习算法，如 决策树 或 k-最近邻，你可以从字面上理解，你可以做一切你在 numpy 上能做的事情！我们暂且称它为 “全能的 numpy” 。</p>
+
+<p><strong>使用 TensorFlow 的优点是：</strong></p>
+
+<ul>
+  <li><strong>它有一个直观的结构</strong> ，顾名思义它有 “张量流”，你可以轻松地可视每个图中的每一个部分。</li>
+  <li><strong>轻松地在 cpu / gpu 上进行分布式计算</strong></li>
+  <li><strong>平台的灵活性</strong>  。可以随时随地运行模型，无论是在移动端、服务器还是 PC 上。</li>
+</ul>
+
+<h3 id="tensorflow-的典型-流"><a name="A-typical-flow"></a>TensorFlow 的典型 “流”</h3>
+
+<p>　　每个库都有自己的“实现细节”，即一种写其遵循其编码范例的方式。 例如，当实现 scikit-learn 时，首先创建所需算法的对象，然后在训练和测试集上构建一个模型获得预测，如下所示：</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="c"># define hyperparamters of ML algorithm</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
+<span class="c"># train </span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="c"># test </span>
+<span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>正如我前面所说，TensorFlow 遵循一种懒惰的方法。 在 TensorFlow 中运行程序的通常工作流程如下：</p>
+
+<ul>
+  <li><strong>建立一个计算图</strong>， 任何的数学运算可以使用 TensorFlow 支撑。</li>
+  <li><strong>初始化变量</strong>， 编译预先定义的变量</li>
+  <li><strong>创建 session</strong>， 这是神奇的开始的地方 ！</li>
+  <li><strong>在 session 中运行图</strong>， 编译图形被传递到 session ，它开始执行它。</li>
+  <li><strong>关闭 session</strong>， 结束这次使用。</li>
+</ul>
+
+<p>TensoFlow 中使用的术语很少</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>placeholder：将数据输入图形的一种方法
+feed_dict：将数值传递到计算图的字典
+</code></pre>
+</div>
+
+<p>让我们写一个小程序来添加两个数字！</p>
+
+<pre><code class="language-pyhton">
+# import tensorflow
+import tensorflow as tf
+
+# build computational graph
+a = tf.placeholder(tf.int16)
+b = tf.placeholder(tf.int16)
+
+addition = tf.add(a, b)
+
+# initialize variables
+init = tf.initialize_all_variables()
+
+# create session and run the graph
+with tf.Session() as sess:
+    sess.run(init)
+    print "Addition: %i" % sess.run(addition, feed_dict={a: 2, b: 3})
+
+# close session
+sess.close()
+</code></pre>
+
+<h3 id="在-tensorflow-中实现神经网络"><a name="MLP"></a>在 TensorFlow 中实现神经网络</h3>
+
+<p><em>注意：我们可以使用不同的神经网络体系结构来解决这个问题，但是为了简单起见，我们在深入实施中讨论 <code class="highlighter-rouge">前馈多层感知器</code>。</em></p>
+
+<p>让我们记住对神经网络的了解。</p>
+
+<p>神经网络的典型实现如下：</p>
+
+<ul>
+  <li>定义要编译的神经网络体系结构</li>
+  <li>将数据传输到模型</li>
+  <li>整个运行中，数据首先被分成批次，以便它可以被摄取。首先对批次进行预处理，扩增，然后送入神经网络进行训练</li>
+  <li>然后，模型被逐步地训练</li>
+  <li>显示特定数量的时间步长的精度</li>
+  <li>训练后保存模型供将来使用</li>
+  <li>在新数据上测试模型并检查其运行方式</li>
+</ul>
+
+<p>在这里，我们解决了我们深刻的学习实践中的问题 - [识别数字]，让再我们花一点时间看看问题陈述。</p>
+
+<p>　　我们的问题是图像识别，以识别来自给定的 28×28 图像的数字。 我们有一个图像子集用于训练，其余的用于测试我们的模型。首先下载训练和测试文件。数据集包含数据集中所有图像的压缩文件， train.csv 和 test.csv 都有相应的训练和测试图像的名称。数据集中不提供任何其他功能，只是原始图像以 “.png” 格式提供。</p>
+
+<p>　　如之前说的，我们将使用 TensorFlow 来创建一个神经网络模型。 所以首先在你的系统中安装 TensorFlow 。 请参考 <a href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/g3doc/get_started/os_setup.md">官方的安装指南</a> 进行安装，按您的系统规格。</p>
+
+<p>我们将按照上述模板</p>
+
+<ul>
+  <li>让我们来 导入所有需要的模块</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="o">%</span><span class="n">pylab</span> <span class="n">inline</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">imread</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>让我们来 设置一个种子值，这样我们就可以控制我们的模型随机性</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="c"># To stop potential randomness</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>第一步是设置目录路径，以便保管！</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">root_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s">'../..'</span><span class="p">)</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">'data'</span><span class="p">)</span>
+<span class="n">sub_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root_dir</span><span class="p">,</span> <span class="s">'sub'</span><span class="p">)</span>
+
+<span class="c"># check for existence</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">root_dir</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">sub_dir</span><span class="p">)</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>现在让我们读取我们的数据集，这些是 .csv 格式，并有一个文件名以及相应的标签</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="err">，</span><span class="s">'Train'</span><span class="err">，</span><span class="s">'train.csv'</span><span class="p">))</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="err">（</span><span class="n">data_dir</span><span class="err">，</span><span class="s">'Test.csv'</span><span class="p">))</span>
+<span class="n">sample_submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="err">，</span><span class="s">'Sample_Submission.csv'</span><span class="p">))</span>
+<span class="n">train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+</code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th style="text-align: center">文件名</th>
+      <th style="text-align: right">标签</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td style="text-align: center">0.png</td>
+      <td style="text-align: right">4</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td style="text-align: center">1.png</td>
+      <td style="text-align: right">9</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align: center">2.png</td>
+      <td style="text-align: right">1</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align: center">3.png</td>
+      <td style="text-align: right">7</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align: center">4.png</td>
+      <td style="text-align: right">3</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>让我们看看我们的数据是什么样子！我们读取我们的形象并显示出来。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">img_name</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s">'Train'</span><span class="p">,</span> <span class="s">'Images'</span><span class="p">,</span> <span class="s">'train'</span><span class="p">,</span> <span class="n">img_name</span><span class="p">)</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">pylab</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'off'</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</code></pre>
+</div>
+
+<p><img src="https://www.analyticsvidhya.com/wp-content/uploads/2016/10/3.png" alt="" /></p>
+
+<p>上面的图像表示为 numpy 数组，如下所示</p>
+
+<p><img src="https://www.analyticsvidhya.com/wp-content/uploads/2016/10/one.png" alt="" /></p>
+
+<ul>
+  <li>为了方便数据操作，让我们 的存储作为 numpy 的阵列的所有图片</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">img_name</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">filename</span><span class="p">:</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s">'Train'</span><span class="p">,</span> <span class="s">'Images'</span><span class="p">,</span> <span class="s">'train'</span><span class="p">,</span> <span class="n">img_name</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    
+<span class="n">train_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+<span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">img_name</span> <span class="ow">in</span> <span class="n">test</span><span class="o">.</span><span class="n">filename</span><span class="p">:</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s">'Train'</span><span class="p">,</span> <span class="s">'Images'</span><span class="p">,</span> <span class="s">'test'</span><span class="p">,</span> <span class="n">img_name</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span>
+    <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>由于这是典型的 ML 问题，为了测试我们的模型的正确功能，我们创建一个验证集，让我们以 70:30 的分割训练集 和 验证集</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">split_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">train_x</span><span class="p">,</span> <span class="n">val_x</span> <span class="o">=</span> <span class="n">train_x</span><span class="p">[:</span><span class="n">split_size</span><span class="p">],</span> <span class="n">train_x</span><span class="p">[</span><span class="n">split_size</span><span class="p">:]</span>
+<span class="n">train_y</span><span class="p">,</span> <span class="n">val_y</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">split_size</span><span class="p">],</span> <span class="n">train</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">split_size</span><span class="p">:]</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>我们定义一些辅助函数，我们稍后在我们的程序中使用</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">dense_to_one_hot</span><span class="p">(</span><span class="n">labels_dense</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="s">"""Convert class labels from scalars to one-hot vectors"""</span>
+    <span class="n">num_labels</span> <span class="o">=</span> <span class="n">labels_dense</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">index_offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_labels</span><span class="p">)</span> <span class="o">*</span> <span class="n">num_classes</span>
+    <span class="n">labels_one_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_labels</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">))</span>
+    <span class="n">labels_one_hot</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">index_offset</span> <span class="o">+</span> <span class="n">labels_dense</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">labels_one_hot</span>
+
+<span class="k">def</span> <span class="nf">preproc</span><span class="p">(</span><span class="n">unclean_batch_x</span><span class="p">):</span>
+    <span class="s">"""Convert values to range 0-1"""</span>
+    <span class="n">temp_batch</span> <span class="o">=</span> <span class="n">unclean_batch_x</span> <span class="o">/</span> <span class="n">unclean_batch_x</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">temp_batch</span>
+
+<span class="k">def</span> <span class="nf">batch_creator</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">dataset_length</span><span class="p">,</span> <span class="n">dataset_name</span><span class="p">):</span>
+    <span class="s">"""Create batch with random samples and return appropriate format"""</span>
+    <span class="n">batch_mask</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">dataset_length</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
+    
+    <span class="n">batch_x</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">dataset_name</span> <span class="o">+</span> <span class="s">'_x'</span><span class="p">)[[</span><span class="n">batch_mask</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+    <span class="n">batch_x</span> <span class="o">=</span> <span class="n">preproc</span><span class="p">(</span><span class="n">batch_x</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">dataset_name</span> <span class="o">==</span> <span class="s">'train'</span><span class="p">:</span>
+        <span class="n">batch_y</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="n">batch_mask</span><span class="p">,</span> <span class="s">'label'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">batch_y</span> <span class="o">=</span> <span class="n">dense_to_one_hot</span><span class="p">(</span><span class="n">batch_y</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">batch_x</span><span class="p">,</span> <span class="n">batch_y</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>主要部分！ 让我们定义我们的神经网络架构。 我们定义一个神经网络具有 3 层，输入、隐藏 和 输出， 输入和输出中的神经元数目是固定的，因为输入是我们的 28×28 图像，并且输出是表示类的 10×1 向量。 我们在隐藏层中取 500 神经元。这个数字可以根据你的需要变化。我们把值 赋给 其余变量。 可以阅读 <a href="https://www.analyticsvidhya.com/blog/2016/03/introduction-deep-learning-fundamentals-neural-networks/">神经网络的基础知识的文章</a> ，以更深的了解它是如何工作。</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="c">### set all variables</span>
+
+<span class="c"># number of neurons in each layer</span>
+
+<span class="n">input_num_units</span> <span class="o">=</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span>
+
+<span class="n">hidden_num_units</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="n">output_num_units</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c"># define placeholders</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="n">input_num_units</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="n">output_num_units</span><span class="p">])</span>
+
+<span class="c"># set remaining variables</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="c">### define weights and biases of the neural network (refer this article if you don't understand the terminologies)</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'hidden'</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">([</span><span class="n">input_num_units</span><span class="p">,</span> <span class="n">hidden_num_units</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)),</span>
+    <span class="s">'output'</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">([</span><span class="n">hidden_num_units</span><span class="p">,</span> <span class="n">output_num_units</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="n">biases</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'hidden'</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">([</span><span class="n">hidden_num_units</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)),</span>
+    <span class="s">'output'</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_normal</span><span class="p">([</span><span class="n">output_num_units</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">))</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>现在创建我们的神经网络计算图</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">hidden_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="p">[</span><span class="s">'hidden'</span><span class="p">]),</span> <span class="n">biases</span><span class="p">[</span><span class="s">'hidden'</span><span class="p">])</span>
+<span class="n">hidden_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">hidden_layer</span><span class="p">)</span>
+
+<span class="n">output_layer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">hidden_layer</span><span class="p">,</span> <span class="n">weights</span><span class="p">[</span><span class="s">'output'</span><span class="p">])</span> <span class="o">+</span> <span class="n">biases</span><span class="p">[</span><span class="s">'output'</span><span class="p">]</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>此外，我们需要定义神经网络的成本</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">cost</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax_cross_entropy_with_logits</span><span class="p">(</span><span class="n">output_layer</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>设置优化器，即我们的反向传播算法。 这里我们使用 <a href="https://arxiv.org/abs/1412.6980">Adam</a> ，这是梯度下降算法的高效变体。 有在 tensorflow 可用许多其它优化（参照 <a href="https://www.tensorflow.org/versions/r0.11/api_docs/python/train.html#optimizers">此处</a> ）</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">AdamOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
+
+</code></pre>
+</div>
+<ul>
+  <li>定义我们的神经网络结构后，让我们来 初始化所有的变量</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">initialize_all_variables</span><span class="p">()</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>现在让我们创建一个 Session ，并在 Session 中运行我们的神经网络。我们还验证我们创建的验证集的模型准确性</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="c"># create initialized variables</span>
+    <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+    
+    <span class="c">### for each epoch, do:</span>
+    <span class="c">###   for each batch, do:</span>
+    <span class="c">###     create pre-processed batch</span>
+    <span class="c">###     run optimizer by feeding batch</span>
+    <span class="c">###     find cost and reiterate to minimize</span>
+    
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">avg_cost</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_batch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_batch</span><span class="p">):</span>
+            <span class="n">batch_x</span><span class="p">,</span> <span class="n">batch_y</span> <span class="o">=</span> <span class="n">batch_creator</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">'train'</span><span class="p">)</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">cost</span><span class="p">],</span> <span class="n">feed_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">batch_x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">batch_y</span><span class="p">})</span>
+            
+            <span class="n">avg_cost</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">/</span> <span class="n">total_batch</span>
+            
+        <span class="k">print</span> <span class="s">"Epoch:"</span><span class="p">,</span> <span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s">"cost ="</span><span class="p">,</span> <span class="s">"{:.5f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">avg_cost</span><span class="p">)</span>
+    
+    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">Training complete!"</span>
+    
+    
+    <span class="c"># find predictions on val set</span>
+    <span class="n">pred_temp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">output_layer</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">pred_temp</span><span class="p">,</span> <span class="s">"float"</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">"Validation Accuracy:"</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">.</span><span class="nb">eval</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">val_x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">),</span> <span class="n">y</span><span class="p">:</span> <span class="n">dense_to_one_hot</span><span class="p">(</span><span class="n">val_y</span><span class="o">.</span><span class="n">values</span><span class="p">)})</span>
+    
+    <span class="n">predict</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">output_layer</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">predict</span><span class="o">.</span><span class="nb">eval</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">test_x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">784</span><span class="p">)})</span>
+</code></pre>
+</div>
+
+<p>这将是上面代码的输出</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">1</span> <span class="n">cost</span> <span class="o">=</span> <span class="mf">8.93566</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">2</span> <span class="n">cost</span> <span class="o">=</span> <span class="mf">1.82103</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">3</span> <span class="n">cost</span> <span class="o">=</span> <span class="mf">0.98648</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">4</span> <span class="n">cost</span> <span class="o">=</span> <span class="mf">0.57141</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">5</span> <span class="n">cost</span> <span class="o">=</span> <span class="mf">0.44550</span>
+
+<span class="n">Training</span> <span class="n">complete</span><span class="err">!</span>
+<span class="n">Validation</span> <span class="n">Accuracy</span><span class="p">:</span> <span class="mf">0.952823</span>	
+
+</code></pre>
+</div>
+
+<ul>
+  <li>验证我们自己的眼睛，让我们来 想象它的预言</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">img_name</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s">'Train'</span><span class="p">,</span> <span class="s">'Images'</span><span class="p">,</span> <span class="s">'test'</span><span class="p">,</span> <span class="n">img_name</span><span class="p">)</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+ 
+<span class="n">test_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">img_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'.'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">49000</span>
+
+<span class="k">print</span> <span class="s">"Prediction is: "</span><span class="p">,</span> <span class="n">pred</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+
+<span class="n">pylab</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s">'off'</span><span class="p">)</span>
+<span class="n">pylab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</code></pre>
+</div>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">Prediction</span> <span class="ow">is</span><span class="p">:</span>  <span class="mi">8</span>
+
+</code></pre>
+</div>
+
+<p><img src="https://www.analyticsvidhya.com/wp-content/uploads/2016/10/8.png" alt="" /></p>
+
+<ul>
+  <li>我们看到的模型性能是相当不错！ 现在让我们 创建一个提交</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">sample_submission</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">filename</span>
+ 
+<span class="n">sample_submission</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">pred</span>
+
+<span class="n">sample_submission</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_dir</span><span class="p">,</span> <span class="s">'sub01.csv'</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+</code></pre>
+</div>
+
+<p>　　终于完成了！ 我们刚刚创建了自己的训练神经网络！</p>
+
+<h3 id="tensorflow-的限制"><a name="Limitations-of-TensorFlow"></a>TensorFlow 的限制</h3>
+
+<ul>
+  <li>尽管 TensorFlow 是强大的，它仍然是一个低水平库，例如，它可以被认为是机器级语言，但对于大多数功能，您需要自己去模块化和高级接口，如 keras</li>
+  <li>它仍然在继续开发和维护，这是多么👍啊！</li>
+  <li>它取决于你的硬件规格，配置越高越好</li>
+  <li>不是所有变成语言能使用它的 API 。</li>
+  <li>TensorFlow 中仍然有很多库需要手动导入，比如 OpenCL 支持。</li>
+</ul>
+
+<p>上面提到的大多数是在 TensorFlow 开发人员的愿景，他们已经制定了一个路线图，计划库未来应该如何开发。</p>
+
+<h3 id="tensorflow-与其他库"><a name="vs-libraries"></a>TensorFlow 与其他库</h3>
+
+<p>　　TensorFlow 建立在类似的原理，如使用数学计算图表的 Theano 和 Torch，但是随着分布式计算的额外支持，TensorFlow 更好地解决复杂的问题。 此外，TensorFlow 模型的部署已经被支持，这使得它更容易用于工业目的，打开一些商业的三方库，如 Deeplearning4j ，H2O 和 Turi。 TensorFlow 有用于 Python，C ++ 和 Matlab 的 API 。 最近还出现了对 Ruby 和 R 等其他语言的支持。因此，TensorFlow 试图获得通用语言支持。</p>
+
+<h3 id="从这里去哪里"><a name="Where-to-go-from-here"></a>从这里去哪里？</h3>
+
+<p>　　以上你看到了如何用 TensorFlow 构建一个简单的神经网络，这段代码是为了让人们了解如何开始实现 TensorFlow。 要解决更复杂的现实生活中的问题，你必须在这篇文章的基础上在调整一些代码才行。</p>
+
+<p>　　许多上述功能可以被抽象为给出无缝的端到端工作流，如果你使用 scikit-learn ，你可能知道一个高级库如何抽象“底层”实现，给终端用户一个更容易的界面。尽管 TensorFlow 已经提取了大多数实现，但是也有更高级的库，如 TF-slim 和 TFlearn。</p>
+
+<h3 id="参考资源">参考资源</h3>
+<ul>
+  <li><a href="https://github.com/tensorflow/tensorflow">TensorFlow 官方库</a></li>
+  <li>Rajat Monga（TensorFlow技术负责人） <a href="https://youtu.be/wmw8Bbb_eIE">“TensorFlow为大家”</a>  的视频</li>
+  <li><a href="https://github.com/jtoy/awesome-tensorflow/#github-projects">一个专用资源的策划列表</a></li>
+</ul>
+
+<h3 id="关于原文">关于原文</h3>
+
+<p>感谢原文作者 <a href="https://www.analyticsvidhya.com/blog/author/jalfaizy/">Faizan Shaikh</a> 的分享，
+这篇文章是在 <a href="https://www.analyticsvidhya.com/blog/2016/10/an-introduction-to-implementing-neural-networks-using-tensorflow/">An Introduction to Implementing Neural Networks using TensorFlow</a> 的基础上做的翻译和局部调整，如果发现翻译中有不对或者歧义的的地方欢迎在下面评论里提问，我会加以修正 。</p>
+
+<p><br />
+转载请注明：<a href="http://baixin">潘柏信的博客</a> » <a href="http://baixin.io/2016/11/neural_networks_using_TensorFlow/">使用 TensorFlow 实现神经网络</a></p>
+
+
+    </section>
+</article>
+        </div>
+    </section>
+    <section class="footer">
+    <footer>
+        <div class = "footer_div">
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+
+          
+
+          
+
+          
+
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <i class='social fa fa-rss fa-2x'></i>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">
+           <p class="copyright text-muted">
+            Copyright &copy; Algate's Blog 2018 Theme by <a href="http://algate.github.io/">Algate</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+    <script type="text/javascript">
+    var sitenavOn = document.getElementsByClassName('sitenav-on')[0];
+    sitenavOn.addEventListener('click',function(e){
+        document.body.classList.add('sitenav-active');
+        e.stopPropagation();
+    },false);
+    document.getElementsByClassName('sitenav-mask')[0].addEventListener('click',function(e){
+        var str = document.body.classList;
+        if(str && str[1] == 'sitenav-active'){
+            document.body.classList.remove('sitenav-active');
+        }
+    })
+</script>
+<script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/js/main.js"></script>
+<script type="text/javascript">
+(function() {
+    try {
+        if (!google.doodle) google.doodle = {};
+        var d = [
+                [307, 48, 88, 89],
+                [307, 48, 89, 89],
+                [307, 48, 91, 89],
+                [305, 49, 93, 89],
+                [305, 50, 93, 88],
+                [305, 50, 93, 88],
+                [306, 52, 92, 86],
+                [305, 53, 93, 84],
+                [305, 54, 94, 83],
+                [306, 54, 93, 83],
+                [307, 54, 92, 83],
+                [307, 54, 92, 83],
+                [308, 54, 90, 83],
+                [308, 54, 90, 83],
+                [306, 53, 91, 84],
+                [306, 53, 91, 84],
+                [308, 53, 90, 84],
+                [308, 53, 90, 84],
+                [305, 53, 92, 84],
+                [305, 52, 92, 85],
+                [306, 52, 91, 85],
+                [308, 51, 88, 87, 1],
+                [308, 50, 88, 88],
+                [308, 49, 88, 88],
+                [307, 49, 89, 88],
+                [307, 50, 89, 87],
+                [308, 51, 89, 86],
+                [307, 54, 90, 83],
+                [307, 57, 90, 80],
+                [306, 58, 92, 79],
+                [306, 58, 92, 79],
+                [305, 60, 92, 77],
+                [302, 61, 95, 76],
+                [302, 63, 95, 74],
+                [302, 51, 96, 86],
+                [302, 66, 98, 71],
+                [304, 67, 96, 69],
+                [301, 63, 96, 74],
+                [301, 58, 93, 79],
+                [291, 52, 94, 85],
+                [288, 50, 71, 88],
+                [285, 43, 76, 95],
+                [285, 37, 70, 101],
+                [281, 29, 55, 109],
+                [278, 20, 58, 119],
+                [278, 20, 55, 119, 1],
+                [277, 12, 121, 127],
+                [271, 2, 122, 138],
+                [267, 1, 126, 139],
+                [264, 0, 136, 140],
+                [260, 0, 141, 140],
+                [255, 0, 148, 140],
+                [252, 0, 151, 140],
+                [249, 2, 121, 138],
+                [247, 3, 123, 137],
+                [246, 3, 123, 137],
+                [246, 2, 124, 137],
+                [258, 2, 112, 137],
+                [263, 2, 106, 137],
+                [263, 2, 106, 137],
+                [262, 2, 103, 137],
+                [260, 2, 104, 136],
+                [260, 2, 104, 137, 1],
+                [268, 2, 98, 137],
+                [267, 2, 99, 137],
+                [266, 2, 97, 137],
+                [266, 3, 96, 136],
+                [264, 3, 99, 136],
+                [263, 3, 100, 136],
+                [261, 3, 100, 136],
+                [259, 2, 138, 137],
+                [254, 2, 126, 137],
+                [247, 2, 101, 136],
+                [240, 2, 108, 136],
+                [238, 1, 110, 137],
+                [230, 1, 118, 138],
+                [220, 15, 128, 124],
+                [211, 18, 137, 121],
+                [205, 43, 102, 96],
+                [202, 45, 104, 93],
+                [200, 38, 97, 101],
+                [198, 38, 104, 101, 1],
+                [197, 39, 107, 100],
+                [197, 39, 112, 100],
+                [213, 39, 94, 110],
+                [212, 40, 95, 111],
+                [211, 41, 97, 111],
+                [209, 42, 99, 112],
+                [209, 43, 98, 112],
+                [213, 43, 87, 112],
+                [213, 42, 83, 113],
+                [211, 40, 86, 109],
+                [211, 38, 86, 103],
+                [211, 37, 88, 112],
+                [211, 20, 186, 131],
+                [213, 27, 167, 122],
+                [212, 44, 87, 105],
+                [210, 44, 88, 98],
+                [195, 44, 106, 98],
+                [189, 44, 110, 98],
+                [182, 46, 117, 99],
+                [173, 44, 118, 96, 1],
+                [161, 43, 130, 99],
+                [154, 42, 137, 97],
+                [153, 42, 137, 97],
+                [153, 42, 137, 97],
+                [152, 41, 137, 98],
+                [151, 41, 137, 97],
+                [149, 41, 145, 97],
+                [148, 25, 144, 114],
+                [148, 13, 144, 126],
+                [141, 12, 153, 127],
+                [115, 11, 173, 128],
+                [108, 7, 180, 133],
+                [108, 4, 180, 136],
+                [108, 3, 176, 137, 1],
+                [108, 1, 161, 139],
+                [105, 1, 235, 138],
+                [103, 1, 295, 148],
+                [103, 0, 277, 149],
+                [108, 0, 234, 137],
+                [101, 0, 232, 137],
+                [99, 0, 135, 139],
+                [95, 0, 244, 139],
+                [81, 0, 152, 139],
+                [69, 0, 164, 139, 1],
+                [66, 0, 169, 139],
+                [65, 0, 170, 139],
+                [63, 0, 168, 138],
+                [61, 0, 159, 138],
+                [35, 0, 304, 139],
+                [19, 0, 189, 140],
+                [18, 11, 138, 129],
+                [18, 11, 137, 129],
+                [18, 11, 137, 128],
+                [18, 6, 135, 133],
+                [7, 4, 146, 136],
+                [6, 4, 147, 136],
+                [3, 4, 150, 136, 1],
+                [3, 5, 150, 135],
+                [3, 8, 150, 132],
+                [4, 6, 394, 145],
+                [12, 6, 388, 145],
+                [11, 8, 389, 144],
+                [11, 8, 387, 144],
+                [11, 8, 387, 143, 1],
+                [10, 8, 113, 131],
+                [11, 8, 111, 131],
+                [10, 9, 112, 130],
+                [12, 9, 116, 130],
+                [12, 9, 111, 130],
+                [12, 9, 111, 130],
+                [12, 9, 110, 131],
+                [12, 34, 113, 106],
+                [13, 35, 110, 104]
+            ],
+            e = d.length,
+            f, g, h, i, j = -1,
+            k = function() {
+                google.nav && google.nav.go ? google.nav.go("http://www.google.com.hk//search?q=%E7%8E%9B%E8%8E%8E%C2%B7%E8%91%9B%E5%85%B0%E5%A7%86&ct=graham11-hp&oi=ddle&hl=zh-CN") : window.location.href = "http://www.google.com.hk//search?q=%E7%8E%9B%E8%8E%8E%C2%B7%E8%91%9B%E5%85%B0%E5%A7%86&ct=graham11-hp&oi=ddle&hl=zh-CN"
+            },
+            l = function() {
+                var a = d[f],
+                    c = document.getElementById("hplogo");
+                if (c && a[0]) {
+                    var b = document.createElement("div");
+                    b.id = "hplogo" + f;
+                    b.style.left = a[0] + "px";
+                    b.style.top = a[1] + "px";
+                    b.style.width = a[2] + "px";
+                    b.style.height = a[3] + "px";
+                    b.style.background = "url(http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png) no-repeat " + -g + "px " + -h + "px";
+                    b.onmousedown = k;
+                    a[3] > i && (i = a[3]);
+                    a[4] ? (g = 0, h += i, i = 0) : g += a[2];
+                    c.appendChild(b);
+                    ++f;
+                    f < e && (j = window.setTimeout(l, 83))
+                }
+            },
+            m = function() {
+                google.doodle.a = !1;
+                i = h = g = f = 0;
+                j != -1 && (window.clearTimeout(j), j = -1);
+                for (var a = 0; a < e; ++a) {
+                    var c = document.getElementById("hplogo" + a);
+                    c && c.parentNode && c.parentNode.removeChild(c)
+                }
+                j = window.setTimeout(l, 83)
+            };
+        if (!google.doodle.a) {
+            google.doodle.a = !0;
+            var n = document.createElement("img");
+            n.addEventListener ? n.addEventListener("load", m, !1) : n.attachEvent("onload", m);
+            n.src = "http://hovertree.com/texiao/js/5/images/graham11-hp-sprite.png"
+        }
+    } catch (o) {
+        google.ml(o, !1, {
+            cause: "DOODLE"
+        })
+    };
+})();
+</script>
+
+
+
+</body>
+
+</html>

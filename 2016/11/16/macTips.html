@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|目录分类</title>
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <title>Algate's Blog|Mac知识整合</title>
+    <meta name="description" content=".DS_Store 文件是什么？">
     <meta name="author" content="algate">
     <link rel="alternate" type="application/rss+xml" title="Algate's Blog" href="http://localhost:4000/feed.xml">
     <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
@@ -297,303 +297,122 @@
 </div>
     <section class="container">
         <div class="excerpts-wrapper" style="margin-top:0;">
-            
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title">Mac知识整合</h1>
+        <div class="post-meta">
+            <img src="/images/calendar.png" width="20px" />
+            <time datetime="2016-11-16 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-16</time>
+            <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+            </p>
+        </div>
+    </header>
+    <section class="post">
+        <h3 id="ds_store-文件是什么">.DS_Store 文件是什么？</h3>
 
-<ul class="tag_box inline">
-  
-  
+<p>.DS_Store 是 Mac OS 保存文件夹的自定义属性的隐藏文件，如文件的图标位置或背景色，相当于 Windows 的 desktop.ini。</p>
 
+<p>1，禁止.DS_store 生成：           <br />
+打开 “终端” ，复制黏贴下面的命令，回车执行，重启Mac即可生效。</p>
 
-  <h3>快速导航</h3>
-  
-    
-    	<li>---- <a href="#技术-ref">技术 <span>3</span></a></li>
-    
-    	<li>---- <a href="#iOS-ref">iOS <span>8</span></a></li>
-    
-    	<li>---- <a href="#工具-ref">工具 <span>3</span></a></li>
-    
-    	<li>---- <a href="#博客-ref">博客 <span>3</span></a></li>
-    
-    	<li>---- <a href="#机器学习-ref">机器学习 <span>4</span></a></li>
-    
-    	<li>---- <a href="#python-ref">python <span>1</span></a></li>
-    
-  
+<div class="highlighter-rouge"><pre class="highlight"><code>defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+</code></pre>
+</div>
 
+<p>2，恢复.DS_store生成：</p>
 
+<div class="highlighter-rouge"><pre class="highlight"><code>defaults delete com.apple.desktopservices DSDontWriteNetworkStores
+</code></pre>
+</div>
 
+<h3 id="显示隐藏文件">显示隐藏文件</h3>
+
+<p>在终端执行命令，显示隐藏文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>defaults write com.apple.finder AppleShowAllFiles -bool true
+</code></pre>
+</div>
+
+<p>恢复隐藏</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>defaults write com.apple.finder AppleShowAllFiles -bool false
+</code></pre>
+</div>
+
+<p>执行命令后需要重新打开能看到效果。</p>
+
+<h3 id="切换-pyhton-环境">切换 Pyhton 环境</h3>
+
+<p>我本地之前 Python 环境是 2.7.10 ，然后学习 Tensorflow 的时候，安装了 Python 3.5.2 ，把系统默认 Pyton 环境也设置成了 3.5.2 版本，今天运行以前写的 python 脚本发现运行不了了，因为python 2.7 和 3.5 的 语法有挺多改动，现在我需要把系统的 python 环境回退到 2.7。</p>
+
+<p>可以直接修改 <code class="highlighter-rouge">~/.bash_profile</code> 文件。</p>
+
+<ul>
+  <li>1、修改 <code class="highlighter-rouge">vim ~/.bash_profile</code></li>
 </ul>
 
-<div class = "card">
-
-
-  <h3 id="技术-ref">技术</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/07/15/Codeless.html">老司机带你剖析无码统计</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/06/iBeacon.html">我们日常生活中的 iBeacon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/hexo/update/study/2015/08/25/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2.html">HEXO搭建个人博客</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="iOS-ref">iOS</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2017/01/03/iOS_Wifilist.html">Wifi 定位原理及 iOS Wifi 列表获取</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/12/02/iOS_Dev_Note.html">iOS开发中的小问题记录</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/16/macTips.html">Mac知识整合</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/25/Xcode8.html">Xcode 8 使用笔记</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/09/23/iOSLowerLeftAppicon.html">iOS设备左下角出现Appicon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/02/CocoaPod_Use.html">CocoaPods使用心得</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/01/09/iOS_OTA.html">iOS动态更新</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2015/09/27/iOS9_Note.html">iOS 9 变化笔记</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="工具-ref">工具</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/markdownTool.html">Markdown工具集</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/13/GitTutorial.html">Git教程</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/02/Develop_Tool.html">开发常用工具</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="博客-ref">博客</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/jekyll/update/2018/01/15/welcome-to-jekyll.html">Welcome to Jekyll!</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/14/jekyll_tutorials1.html">Jekyll搭建个人博客</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/12/HEXO_Advanced.html">HEXO进阶</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="机器学习-ref">机器学习</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/neural_networks_using_TensorFlow.html">使用 TensorFlow 实现神经网络</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/03/TensorFlowOniOSUse1.html">TensorFlow 在 iOS 平台上的使用(一)</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/07/iOSMachineLearning_TensorFlow.html">iOS开发迎来机器学习的春天---TensorFlow</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/05/MachineLearning_introduce.html">机器学习入门（名词科普）</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="python-ref">python</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/08/04/PythonTestAutomationiOS.html">Python自动化测试iOS项目</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
+<div class="highlighter-rouge"><pre class="highlight"><code>修改方式有很多种，使用 vim  ，或者 cd ~/ 然后 open . 打开文件夹，找到 .bash_profile 文件，双击打开。
+</code></pre>
 </div>
+
+<ul>
+  <li>2、在<code class="highlighter-rouge">.bash_profile</code> 文件里添加下面参数</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alias python="/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7"
+</code></pre>
+</div>
+
+<ul>
+  <li>3、使用命令 <code class="highlighter-rouge">source ~/.bash_profile</code> 或者重启 终端 就 OK 了 。</li>
+</ul>
+
+<p>现在你再在终端输入 <code class="highlighter-rouge">python</code> 就会发现，显示的信息为 2.7 了</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>
+Python 2.7.10 <span class="o">(</span>default, Oct 23 2015, 19:19:21<span class="o">)</span> 
+<span class="o">[</span>GCC 4.2.1 Compatible Apple LLVM 7.0.0 <span class="o">(</span>clang-700.0.59.5<span class="o">)]</span> on darwin
+Type <span class="s2">"help"</span>, <span class="s2">"copyright"</span>, <span class="s2">"credits"</span> or <span class="s2">"license"</span> <span class="k">for </span>more information.
+
+</code></pre>
+</div>
+
+<h3 id="生成sshkey过程">生成SSHKey过程</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+1.查看是否已经有了ssh密钥：`cd ~/.ssh` ，如果没有密钥则不会有此文件夹，有则备份删除。    
+2.生存密钥：ssh-keygen -t rsa -C “test@gmail.com”。   按3个回车，密码为空。       
+
+Your identification has been saved in /home/tekkub/.ssh/id_rsa.
+Your public key has been saved in /home/tekkub/.ssh/id_rsa.pub.
+The key fingerprint is:
+………………    
+最后得到了两个文件：id_rsa和id_rsa.pub  
+
+</code></pre>
+</div>
+
+<h3 id="使用版本控制器-svn-versions-添加a库">使用版本控制器 SVN (versions) 添加.a库</h3>
+
+<p>Xcode 自带的 svn 和 Versions 以及一些其它工具都不能上传”.a”文件</p>
+
+<p>下面是在 Mac 上如何把 .a 添加到 SVN 里面的</p>
+
+<p>1、打开终端，输入cd，空格，然后将需要上传的 .a 文件所在的文件夹（不是.a文件） 拖拽到终端（此办法无需输入繁琐的路径，快捷方便） 回车</p>
+
+<p>2、之后再输入如下命令：<code class="highlighter-rouge">svn add libGoogleAnalytics.a</code> ，回车</p>
+
+<p>之后会出现：A (bin) libGoogleAnalytics.a</p>
+
+<p>表示添加成功，打开 Versions 就可以看到，刚才添加的 .a 文件，此时就可以手动上传了。</p>
+
+<p>另外，请注意路径的正确性。</p>
+
+<p>转载请注明：<a href="http://baixin">潘柏信的博客</a> » <a href="http://baixin.io/2016/11/macTips/">点击阅读原文</a></p>
+
+
+    </section>
+</article>
         </div>
     </section>
     <section class="footer">

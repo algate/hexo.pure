@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|目录分类</title>
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <title>Algate's Blog|iOS设备左下角出现Appicon</title>
+    <meta name="description" content="最近发现我设备锁屏后，按Home屏幕变亮的时候，左下角出现一个灰色的Appicon （应用图标），关于这个应用图标的出现做了一些调研，下面是应用图标出现的几种情况。">
     <meta name="author" content="algate">
     <link rel="alternate" type="application/rss+xml" title="Algate's Blog" href="http://localhost:4000/feed.xml">
     <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
@@ -297,303 +297,76 @@
 </div>
     <section class="container">
         <div class="excerpts-wrapper" style="margin-top:0;">
-            
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title">iOS设备左下角出现Appicon</h1>
+        <div class="post-meta">
+            <img src="/images/calendar.png" width="20px" />
+            <time datetime="2016-09-23 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-09-23</time>
+            <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+            </p>
+        </div>
+    </header>
+    <section class="post">
+        <p>最近发现我设备锁屏后，按Home屏幕变亮的时候，左下角出现一个灰色的Appicon （应用图标），关于这个应用图标的出现做了一些调研，下面是应用图标出现的几种情况。</p>
 
-<ul class="tag_box inline">
-  
-  
+<p>图一 iOS 系统自带的 App icon , 图二 第三方 App icon , 图三 通过 iBeacon 信号激活的 demo icon</p>
 
+<p><img src="/images/posts/icon/image01.png" alt="" /></p>
 
-  <h3>快速导航</h3>
-  
-    
-    	<li>---- <a href="#技术-ref">技术 <span>3</span></a></li>
-    
-    	<li>---- <a href="#iOS-ref">iOS <span>8</span></a></li>
-    
-    	<li>---- <a href="#工具-ref">工具 <span>3</span></a></li>
-    
-    	<li>---- <a href="#博客-ref">博客 <span>3</span></a></li>
-    
-    	<li>---- <a href="#机器学习-ref">机器学习 <span>4</span></a></li>
-    
-    	<li>---- <a href="#python-ref">python <span>1</span></a></li>
-    
-  
+<h2 id="结论有三种情况导致设备的左下角出现灰色的-app-icon">结论：有三种情况导致设备的左下角出现灰色的 App icon</h2>
 
-
-
+<h3 id="1appstore根据地点对app-推荐">1、AppStore根据地点对App 推荐</h3>
+<ul>
+  <li><strong>简介</strong>
+    <ul>
+      <li>iOS 8会基于你的位置在锁屏界面上展示一个app快捷打开方式。比如你正在星巴克附近，那iOS 8会在锁屏界面上展示星巴克应用的icon，方便你快速打开。一些用户也表示会在锁屏界面收到app推荐，比如你在Costco和Apple Store附近，即便你之前没有安装过这些应用。</li>
+    </ul>
+  </li>
 </ul>
 
-<div class = "card">
+<h3 id="2app实现了handoff功能">2、App实现了handoff功能</h3>
+<ul>
+  <li><strong><a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/Handoff/HandoffFundamentals/HandoffFundamentals.html">handoff简介</a>：</strong>
+    <ul>
+      <li><code class="highlighter-rouge">OS X 10.10 Yosemite</code> 新增了一个酷炫的功能 “Hand Off”，打开这个功能之后，用户可以在 Mac 上对 iPad 和 iPhone 进行操作，比如能够编写 iPhone 上未完成的邮件，并且可以在Mac上打开 iPhone 的热点等等， Mac 的 Hand Off 功能只能识别 Mac 周围的 iPhone 手机。</li>
+    </ul>
+  </li>
+  <li><strong>handoff有几个要求：</strong>
+    <ul>
+      <li>1 两台设备都要登录同一个 iCloud 账号。</li>
+      <li>2 两台设备上的app有相同的 TeamID 。</li>
+      <li>3 锁屏（或dock）设备上的app支持的 <code class="highlighter-rouge">NSUserActivityTypes</code> 包含活动设备上的app当前的UserActivityType。</li>
+    </ul>
+  </li>
+</ul>
 
+<h3 id="3app内有ibeacon信号接收功能app被ibeacon信号唤醒">3、App内有iBeacon信号接收功能，App被iBeacon信号唤醒</h3>
+<ul>
+  <li><strong><a href="https://developer.apple.com/ibeacon/">iBeacon简介</a></strong>：
+    <ul>
+      <li>是苹果公司2013年9月发布的移动设备用OS（iOS7）上配备的新功能。工作原理类似之前的蓝牙技术，由 <code class="highlighter-rouge">iBeacon</code> 发射信号，iOS设备定位接受，反馈信号。根据这项简单的定位技术可以做出许多的相应技术应用,如：<code class="highlighter-rouge">室内定位</code> 、<code class="highlighter-rouge">商品推荐</code> 、<code class="highlighter-rouge">微信摇一摇</code> 等。</li>
+    </ul>
+  </li>
+  <li><strong>App icon出现的原因</strong>：
+    <ul>
+      <li><code class="highlighter-rouge">iBeacon</code> 具备后台定位的能力，只要用户把蓝牙(4.0或以后)开启 和 允许 App 访问位置信息。在有被 App 检测的 <code class="highlighter-rouge">iBeacon</code> 出现时，如果设备是锁屏状态，设备的左下角就会出现该 App 的 icon 。</li>
+    </ul>
+  </li>
+</ul>
 
-  <h3 id="技术-ref">技术</h3>
-  <ul>
-    
-    
+<p>参考链接:  <br />
+<a href="http://stackoverflow.com/questions/26082414/make-app-appear-as-ios-8-suggested-app-at-lockscreen/26676020#26676020">Make app appear as iOS 8 Suggested App at lockscreen</a>  <br />
+<a href="http://stackoverflow.com/questions/25897219/can-i-get-my-ios-app-to-appear-on-the-lower-left-corner-of-the-lock-screen/25898890#25898890">Can I get my iOS app to appear on the lower left corner of the lock screen?</a><br />
+<a href="https://www.zhihu.com/question/26653964">为什么 iOS 8 锁屏界面的左下角经常会出现某个应用的小图标？</a>  <br />
+<a href="https://www.v2ex.com/t/142320">关于 IOS8 锁屏左下方出现的 APP ICON</a></p>
 
+<p><br /></p>
 
-  
-    
-      
-      	
-      	<li><a href="/2016/07/15/Codeless.html">老司机带你剖析无码统计</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/06/iBeacon.html">我们日常生活中的 iBeacon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/hexo/update/study/2015/08/25/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2.html">HEXO搭建个人博客</a></li>
-      	
-      
-    
-  
+<p>转载请注明：<a href="http://baixin">潘柏信的博客</a> » <a href="http://baixin.io/2016/09/iOSLowerLeftAppicon/">点击阅读原文</a></p>
 
-
-
-  </ul>
-
-
-
-
-  <h3 id="iOS-ref">iOS</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2017/01/03/iOS_Wifilist.html">Wifi 定位原理及 iOS Wifi 列表获取</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/12/02/iOS_Dev_Note.html">iOS开发中的小问题记录</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/16/macTips.html">Mac知识整合</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/25/Xcode8.html">Xcode 8 使用笔记</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/09/23/iOSLowerLeftAppicon.html">iOS设备左下角出现Appicon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/02/CocoaPod_Use.html">CocoaPods使用心得</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/01/09/iOS_OTA.html">iOS动态更新</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2015/09/27/iOS9_Note.html">iOS 9 变化笔记</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="工具-ref">工具</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/markdownTool.html">Markdown工具集</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/13/GitTutorial.html">Git教程</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/02/Develop_Tool.html">开发常用工具</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="博客-ref">博客</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/jekyll/update/2018/01/15/welcome-to-jekyll.html">Welcome to Jekyll!</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/14/jekyll_tutorials1.html">Jekyll搭建个人博客</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/12/HEXO_Advanced.html">HEXO进阶</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="机器学习-ref">机器学习</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/neural_networks_using_TensorFlow.html">使用 TensorFlow 实现神经网络</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/03/TensorFlowOniOSUse1.html">TensorFlow 在 iOS 平台上的使用(一)</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/07/iOSMachineLearning_TensorFlow.html">iOS开发迎来机器学习的春天---TensorFlow</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/05/MachineLearning_introduce.html">机器学习入门（名词科普）</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="python-ref">python</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/08/04/PythonTestAutomationiOS.html">Python自动化测试iOS项目</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-</div>
+    </section>
+</article>
         </div>
     </section>
     <section class="footer">

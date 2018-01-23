@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|目录分类</title>
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <title>Algate's Blog|Git教程</title>
+    <meta name="description" content="介绍">
     <meta name="author" content="algate">
     <link rel="alternate" type="application/rss+xml" title="Algate's Blog" href="http://localhost:4000/feed.xml">
     <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
@@ -297,303 +297,100 @@
 </div>
     <section class="container">
         <div class="excerpts-wrapper" style="margin-top:0;">
-            
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title">Git教程</h1>
+        <div class="post-meta">
+            <img src="/images/calendar.png" width="20px" />
+            <time datetime="2016-07-13 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-07-13</time>
+            <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+            </p>
+        </div>
+    </header>
+    <section class="post">
+        <h3 id="介绍">介绍</h3>
 
-<ul class="tag_box inline">
-  
-  
+<p>　　Git是做项目的版本管理，你也可以称它们为版本管理工具。假如现在你有一个文件夹，里面可以是项目，也可以是你的个人笔记(如我这个博客)，或者是你的简历、毕业设计等等，都可以使用git来管理。</p>
 
+<p>　　目前常用的版本控制器有Git和SVN，即使这两个你没有全用过，至少也会听过，我这里以Git为例，个人比较喜欢Git，你也可以看看这篇文章：<a href="http://www.worldhello.net/2012/04/12/why-git-is-better-than-svn.html">为什么Git比SVN好</a>。我使用的是Mac，Mac上没自带Git环境，但是作为iOS开发者，我安装Xcode的时候，Xcode里是有自带Git的，所以我不需要考虑怎么去安装Git了。</p>
 
-  <h3>快速导航</h3>
-  
-    
-    	<li>---- <a href="#技术-ref">技术 <span>3</span></a></li>
-    
-    	<li>---- <a href="#iOS-ref">iOS <span>8</span></a></li>
-    
-    	<li>---- <a href="#工具-ref">工具 <span>3</span></a></li>
-    
-    	<li>---- <a href="#博客-ref">博客 <span>3</span></a></li>
-    
-    	<li>---- <a href="#机器学习-ref">机器学习 <span>4</span></a></li>
-    
-    	<li>---- <a href="#python-ref">python <span>1</span></a></li>
-    
-  
+<h3 id="安装git">安装Git</h3>
 
+<p><strong>在Mac OS X上安装Git</strong></p>
 
+<p>提供两种方法参考：</p>
 
-</ul>
+<blockquote>
+  <p>1、通过homebrew安装Git，具体方法请参考<a href="http://brew.sh/">homebrew的文档</a>
+2、直接从AppStore安装Xcode，Xcode集成了Git，不过默认没有安装，你需要运行Xcode。</p>
+</blockquote>
 
-<div class = "card">
+<p><strong>在Windows上安装Git</strong></p>
 
+<blockquote>
+  <p>从<a href="https://git-for-windows.github.io">https://git-for-windows.github.io</a> 下载，然后按默认选项安装即可，安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p>
+</blockquote>
 
-  <h3 id="技术-ref">技术</h3>
+<h3 id="配置git">配置Git</h3>
+
+<p>安装完成后，还需要最后一步设置，在命令行输入：</p>
+
+<blockquote>
   <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/07/15/Codeless.html">老司机带你剖析无码统计</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/06/iBeacon.html">我们日常生活中的 iBeacon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/hexo/update/study/2015/08/25/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2.html">HEXO搭建个人博客</a></li>
-      	
-      
-    
-  
-
-
-
+    <li>$ git config –global user.name “Your Name”</li>
+    <li>$ git config –global user.email “email@example.com”</li>
   </ul>
+</blockquote>
 
+<p>“Your Name”： 是每次提交时所显示的用户名，因为Git是分布式版本控制系统，当我们push到远端时，就需要区分每个提交记录具体是谁提交的，这个”Your Name”就是最好的区分。</p>
 
+<p>“email@example.com”： 是你远端仓库的email</p>
 
+<p>–global：用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然我们也可以对某个仓库指定不同的用户名和Email地址。</p>
 
-  <h3 id="iOS-ref">iOS</h3>
+<h3 id="开始使用-建立仓库">开始使用-建立仓库：</h3>
+
+<p>你在目标文件夹下使命令：</p>
+
+<blockquote>
   <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2017/01/03/iOS_Wifilist.html">Wifi 定位原理及 iOS Wifi 列表获取</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/12/02/iOS_Dev_Note.html">iOS开发中的小问题记录</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/16/macTips.html">Mac知识整合</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/25/Xcode8.html">Xcode 8 使用笔记</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/09/23/iOSLowerLeftAppicon.html">iOS设备左下角出现Appicon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/02/CocoaPod_Use.html">CocoaPods使用心得</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/01/09/iOS_OTA.html">iOS动态更新</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2015/09/27/iOS9_Note.html">iOS 9 变化笔记</a></li>
-      	
-      
-    
-  
-
-
-
+    <li>git init  （创建.git文件）</li>
   </ul>
+</blockquote>
 
+<p>就会创建一个 <code class="highlighter-rouge">.git</code> 隐藏文件，相当于已经建立了一个本地仓库。</p>
 
+<p><strong>添加到暂存区：</strong></p>
 
-
-  <h3 id="工具-ref">工具</h3>
+<blockquote>
   <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/markdownTool.html">Markdown工具集</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/13/GitTutorial.html">Git教程</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/02/Develop_Tool.html">开发常用工具</a></li>
-      	
-      
-    
-  
-
-
-
+    <li>git add .   （全部添加到暂存区）</li>
+    <li>git commit -m ‘ first commit’  （提交暂存区的记录到本地仓库）</li>
   </ul>
+</blockquote>
 
+<h3 id="其它">其它</h3>
 
+<p>git branc 查看时如出现</p>
 
-
-  <h3 id="博客-ref">博客</h3>
+<blockquote>
   <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/jekyll/update/2018/01/15/welcome-to-jekyll.html">Welcome to Jekyll!</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/14/jekyll_tutorials1.html">Jekyll搭建个人博客</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/12/HEXO_Advanced.html">HEXO进阶</a></li>
-      	
-      
-    
-  
-
-
-
+    <li>(HEAD detached at analytics_v2)</li>
+    <li>dev</li>
+    <li>master</li>
   </ul>
+</blockquote>
+
+<p>代表现在已经进入一个临时的HEAD，可以使用 <code class="highlighter-rouge">git checkout -b temp</code> 创建一个 temp branch，这样临时HEAD上修改的东西就不会被丢掉了。
+然后切换到 dev 分支上，在使用 git branch merge temp，就可以把 temp 分支上的代码合并到 dev 上了。</p>
+
+<p><br /></p>
+
+<p>转载请注明：<a href="http://baixin">潘柏信的博客</a> » <a href="http://baixin.io/2016/07/GitTutorial/">点击阅读原文</a></p>
 
 
-
-
-  <h3 id="机器学习-ref">机器学习</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/neural_networks_using_TensorFlow.html">使用 TensorFlow 实现神经网络</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/03/TensorFlowOniOSUse1.html">TensorFlow 在 iOS 平台上的使用(一)</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/07/iOSMachineLearning_TensorFlow.html">iOS开发迎来机器学习的春天---TensorFlow</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/05/MachineLearning_introduce.html">机器学习入门（名词科普）</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="python-ref">python</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/08/04/PythonTestAutomationiOS.html">Python自动化测试iOS项目</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-</div>
+    </section>
+</article>
         </div>
     </section>
     <section class="footer">

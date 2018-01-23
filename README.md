@@ -1,2 +1,0 @@
-# algate.io
-algate.io

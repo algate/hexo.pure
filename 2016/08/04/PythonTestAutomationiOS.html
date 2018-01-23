@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|目录分类</title>
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <title>Algate's Blog|Python自动化测试iOS项目</title>
+    <meta name="description" content="作为一个开发人员，为了保证自己的代码的健壮，写单元测试是必不可少的环节，然而最痛快的是每天去手动跑一遍所有的case。那么什么能帮我们解决这些繁琐的操作呢，大家应该会想到自动化测试脚本了，是的，我们可以借助脚本来完成全自动化测试，下面是我列的每天脚本自动执行流程：">
     <meta name="author" content="algate">
     <link rel="alternate" type="application/rss+xml" title="Algate's Blog" href="http://localhost:4000/feed.xml">
     <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
@@ -297,303 +297,173 @@
 </div>
     <section class="container">
         <div class="excerpts-wrapper" style="margin-top:0;">
-            
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <h1 class="post-title">Python自动化测试iOS项目</h1>
+        <div class="post-meta">
+            <img src="/images/calendar.png" width="20px" />
+            <time datetime="2016-08-04 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-08-04</time>
+            <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+            </p>
+        </div>
+    </header>
+    <section class="post">
+        <p>作为一个开发人员，为了保证自己的代码的健壮，写单元测试是必不可少的环节，然而最痛快的是每天去手动跑一遍所有的case。那么什么能帮我们解决这些繁琐的操作呢，大家应该会想到自动化测试脚本了，是的，我们可以借助脚本来完成全自动化测试，下面是我列的每天脚本自动执行流程：</p>
 
-<ul class="tag_box inline">
-  
-  
-
-
-  <h3>快速导航</h3>
-  
-    
-    	<li>---- <a href="#技术-ref">技术 <span>3</span></a></li>
-    
-    	<li>---- <a href="#iOS-ref">iOS <span>8</span></a></li>
-    
-    	<li>---- <a href="#工具-ref">工具 <span>3</span></a></li>
-    
-    	<li>---- <a href="#博客-ref">博客 <span>3</span></a></li>
-    
-    	<li>---- <a href="#机器学习-ref">机器学习 <span>4</span></a></li>
-    
-    	<li>---- <a href="#python-ref">python <span>1</span></a></li>
-    
-  
-
-
-
-</ul>
-
-<div class = "card">
-
-
-  <h3 id="技术-ref">技术</h3>
+<blockquote>
   <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/07/15/Codeless.html">老司机带你剖析无码统计</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/06/iBeacon.html">我们日常生活中的 iBeacon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/hexo/update/study/2015/08/25/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2.html">HEXO搭建个人博客</a></li>
-      	
-      
-    
-  
-
-
-
+    <li>1、<code class="highlighter-rouge">pull</code> git仓库里面的最新代码到本地。</li>
+    <li>2、然后打包成<code class="highlighter-rouge">App</code>。</li>
+    <li>3、安装到模拟器上。</li>
+    <li>4、运行App，执行单元测试，生成测试数据并保存到本地。</li>
+    <li>5、脚本读取测试数据，邮件发送给相关人员。</li>
   </ul>
+</blockquote>
 
+<p>当这些全自动化后，可以大大减少开发人员的维护成本，即使每次项目里面有新增模块后，增加测试case就行了，下面会介绍自动测试这5步具体怎么去执行，整个脚本是使用Python写的，代码很少功能也很简单，但这已经可以帮我们完成基本的自动化测试了，这就是脚本的强大之处，选择Pyhton纯属个人喜好，最近也在学习Python，当然了最终使用什么语言看你自己。</p>
 
+<h3 id="python执行shell命令完成测试">python执行shell命令完成测试</h3>
 
+<p>首先确认本机上安装了<code class="highlighter-rouge">git</code> 和 <code class="highlighter-rouge">python</code> 。  <br />
+脚本判断本地是否存在项目，不存在则使用命令 <code class="highlighter-rouge">git clone ...</code> ，存在则使用命令 <code class="highlighter-rouge">git pull ...</code> 。     <br />
+这些在Linux的命令都可以使用脚本来完成的，python的 <code class="highlighter-rouge">os.popen()</code> 方法 就是可以在Linux上执行shell命令。   <br />
+<strong>例如：</strong>  把下面这段代码添加到一个 test.py 的文件里，然后在终端上执行 <code class="highlighter-rouge">python test.py</code> 命令你就会看到，你的当前目录下正在下载我的博客了。</p>
 
-  <h3 id="iOS-ref">iOS</h3>
-  <ul>
-    
-    
+<div class="highlighter-rouge"><pre class="highlight"><code>import os
 
+os.popen('git clone https://github.com/leopardpan/leopardpan.github.io.git')   
 
-  
-    
-      
-      	
-      	<li><a href="/2017/01/03/iOS_Wifilist.html">Wifi 定位原理及 iOS Wifi 列表获取</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/12/02/iOS_Dev_Note.html">iOS开发中的小问题记录</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/16/macTips.html">Mac知识整合</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/25/Xcode8.html">Xcode 8 使用笔记</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/09/23/iOSLowerLeftAppicon.html">iOS设备左下角出现Appicon</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/04/02/CocoaPod_Use.html">CocoaPods使用心得</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/01/09/iOS_OTA.html">iOS动态更新</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2015/09/27/iOS9_Note.html">iOS 9 变化笔记</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="工具-ref">工具</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/markdownTool.html">Markdown工具集</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/13/GitTutorial.html">Git教程</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/02/Develop_Tool.html">开发常用工具</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="博客-ref">博客</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/jekyll/update/2018/01/15/welcome-to-jekyll.html">Welcome to Jekyll!</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/10/14/jekyll_tutorials1.html">Jekyll搭建个人博客</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/06/12/HEXO_Advanced.html">HEXO进阶</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="机器学习-ref">机器学习</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/11/20/neural_networks_using_TensorFlow.html">使用 TensorFlow 实现神经网络</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/11/03/TensorFlowOniOSUse1.html">TensorFlow 在 iOS 平台上的使用(一)</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/07/iOSMachineLearning_TensorFlow.html">iOS开发迎来机器学习的春天---TensorFlow</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/2016/07/05/MachineLearning_introduce.html">机器学习入门（名词科普）</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
-
-  <h3 id="python-ref">python</h3>
-  <ul>
-    
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/2016/08/04/PythonTestAutomationiOS.html">Python自动化测试iOS项目</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
-
+</code></pre>
 </div>
+<p>git pull 。。。 更新代码也是一样的。</p>
+
+<p>接下来的打包、安装、运行都是使用python执行shell命令</p>
+
+<p><strong>把iOS项目打包成App，下面的 <code class="highlighter-rouge">Demo</code> 是项目的名字</strong></p>
+
+<blockquote>
+  <ul>
+    <li>os.popen(‘xcodebuild -project Demo.xcodeproj -target Demo -configuration Debug -sdk iphonesimulator’)</li>
+  </ul>
+</blockquote>
+
+<p>这行脚本运行完成后，你就会发现同会生成一个 <code class="highlighter-rouge">build</code> 的文件夹。<br />
+Debug参数表示现在是Debug模式，如果Xcode里面改成Release了，这里需要改成Release。<br />
+xcodebuild 命令是 Xcode Command Line Tools 的一部分。通过调用这个命令，可以完成 iOS 工程的编译，打包和签名过程。可以使用 xcodebuild –help 来看看具体有哪些功能。</p>
+
+<p><strong>打开iOS模拟器，这里运行的是<code class="highlighter-rouge">iPhone 6 Plus</code> 你也可以换成其它型号的模拟器</strong></p>
+
+<blockquote>
+  <ul>
+    <li>os.popen(‘xcrun instruments -w “iPhone 6 Plus”’)</li>
+  </ul>
+</blockquote>
+
+<p><strong>把刚才打包生成的App安装到模拟器上</strong>    <br />
+在安装之前要先卸载App,不然你运行的永远是最初安装的那个，后来安装的不会覆盖之前的，卸载App</p>
+
+<blockquote>
+  <ul>
+    <li>os.popen(‘xcrun simctl uninstall booted com.test.Demo’)</li>
+  </ul>
+</blockquote>
+
+<p>booted 后面接的是 <code class="highlighter-rouge">Bundle Identifier</code>，我的是 com.test.Demo，然后再安装App</p>
+
+<blockquote>
+  <ul>
+    <li>os.popen(‘xcrun simctl install booted build/Debug-iphonesimulator/Demo.app ‘)</li>
+  </ul>
+</blockquote>
+
+<p>booted 后面接的是.app的路径，我打包的时候的是Debug，所以这个的文件夹名称是Debug-iphonesimulator。</p>
+
+<p><strong>在模拟器里运行App</strong></p>
+
+<blockquote>
+  <ul>
+    <li>os.popen(‘xcrun simctl launch booted com.test.Demo’)</li>
+  </ul>
+</blockquote>
+
+<p>booted 后面接的是 <code class="highlighter-rouge">Bundle Identifier</code>，我的是 com.test.Demo。</p>
+
+<p>到目前为止，你就会发现你的项目已经运行起来了，你可以在项目是Debug模式下一启动就执行单元测试，然后把对应的测试数据保存到本地为data.json。然后在使用python脚本读取测试文件的数据，最终使用邮件发送给相关人员，pyhton读取数据很简单，一行代码就行</p>
+
+<blockquote>
+  <ul>
+    <li>data = open(‘data.json’).read()</li>
+  </ul>
+</blockquote>
+
+<p>data里面就是json字符串，为了脚本操作简单，我在存储的时候直接把json格式的转成了字符串类型。</p>
+
+<h3 id="python发送邮件">python发送邮件</h3>
+
+<p>我使用的是SMTP进行邮件发送的，SMTP是发送邮件的协议，Python内置对SMTP的支持，可以发送纯文本邮件、HTML邮件以及带附件的邮件。</p>
+
+<p>Python对SMTP支持有smtplib和email两个模块，email负责构造邮件，smtplib负责发送邮件，具体代码如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>from email import encoders
+from email.header import Header
+from email.mime.text import MIMEText
+from email.utils import parseaddr, formataddr
+import smtplib
+
+def format_addr(self,s):
+    name, addr = parseaddr(s)
+    return formataddr(( \
+        Header(name, 'utf-8').encode(), \
+        addr.encode('utf-8') if isinstance(addr, unicode) else addr))
+
+def send_mail(self, mail, message, title):
+	from_addr = 'leopardpan@163.com'
+	password = ''
+	to_addr = mail
+	smtp_server = 'smtp.163.com'
+
+	msg = MIMEText(message, 'plain', 'utf-8')
+	msg['From'] = self.format_addr(u'自动化测试邮件 &lt;%s&gt;' % from_addr)
+	msg['To'] = self.format_addr(u'管理员 &lt;%s&gt;' % to_addr)
+	msg['Subject'] = Header(title, 'utf-8').encode()
+
+	server = smtplib.SMTP(smtp_server, 25)
+	server.set_debuglevel(1)
+	server.login(from_addr, password)
+	server.sendmail(from_addr, [to_addr], msg.as_string())
+	server.quit()
+
+send_mail('leopardpan@icloud.com','正文','标题')
+</code></pre>
+</div>
+
+<p>from_addr是发送方的邮箱地址，password是开通SMTP时输入的密码   <br />
+smtp_server是smtp的服务，如果你的from_addr是gamil.com，那么就要写成smtp_server = ‘smtp.gmail.com’ 了。</p>
+
+<p>方法 send_mail(self, mail, message, title): 有四个参数，第一个不用传，第二个参数是收信人的邮箱，第三个是邮件的正文，第四个是邮件的标题，方法调用格式： <code class="highlighter-rouge">send_mail('leopardpan@icloud.com','正文','标题')</code></p>
+
+<p>注意：发送方的邮箱必须要开通SMTP功能才行，否则会报错</p>
+
+<blockquote>
+  <ul>
+    <li>SMTPSenderRefused: (550, ‘User has no permission’, ‘leopardpan@163.com’)</li>
+  </ul>
+</blockquote>
+
+<p>163的SMTP开通，需要你登录网易邮箱，然后点击顶部的设置就会出现<code class="highlighter-rouge">POP3/SMTP/IMAP</code>，点击之后，勾选选择开启，这个时候需要你输入密码，记住这个密码就是上面代码中的<code class="highlighter-rouge">password</code>，如果你都完成的话，你把上面的代码拷贝出现，把邮箱修改成你自己的，使用 pyhton 运行一下吧。</p>
+
+<p>上面的几个流程结合起来就可以实现一个简单的自动化测试了，如果你有什么建议和意见欢迎讨论。</p>
+
+<p>参考链接：
+<a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000">SMTP发送邮件</a></p>
+
+<p><br /></p>
+
+<p>转载请注明：<a href="http://baixin">潘柏信的博客</a> » <a href="http://baixin.io/2016/08/PythonTestAutomationiOS/">点击阅读原文</a></p>
+
+
+    </section>
+</article>
         </div>
     </section>
     <section class="footer">
