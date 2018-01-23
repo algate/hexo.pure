@@ -378,10 +378,6 @@ iframe {
     max-width: 100%
 }
 
-img {
-    max-width: 100%
-}
-
 .pull-right {
     float: right !important
 }
@@ -447,7 +443,7 @@ a:focus {
 }
 
 a:hover {
-    color: #FF6651
+    /*color: #FF6651*/
 }
 
 a:focus {
@@ -4222,8 +4218,8 @@ body {
 .footer {
     clear: both;
     color: #bbb;
-    padding-top: 30px;
-    padding-bottom: 45px;
+    padding-top: 10px;
+    padding-bottom: 16px;
     border-top: 1px solid #eee;
     margin-top: 30px;
     font-size: 12px;
