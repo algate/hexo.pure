@@ -1,18 +1,34 @@
+
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|关于我</title>
-    <meta name="description" content="Welcome to my blog. If the site update the content, I will push information in time.">
+    <title>Algate's Blog|关于algate</title>
+    
+    
     <meta name="author" content="algate">
-    <link rel="alternate" type="application/rss+xml" title="Algate's Blog" href="http://localhost:4000/feed.xml">
+    <!-- Custom styles -->
+    <link href="/assets/src/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+    <!-- single page styles -->
+    
+        
+            <link href="/assets/css/resume.css" rel="stylesheet" type="text/css">
+        
+    
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link href="/assets/icon/favicon.ico" rel="bookmark" type="image/x-icon" />
     <link href="/assets/icon/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/assets/icon/favicon.svg" rel="shortcut icon" type="image/x-icon" />
-    <link rel="stylesheet" href="/assets/css/style.css" />
-    <script type="text/javascript" src="/assets/js/jquery-1.11.3.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
     
     <script>
     var _hmt = _hmt || [];
@@ -24,116 +40,85 @@
     })();
     </script>
     
-    <script type="text/javascript">
-    window.google = {
-        kEI: "3TLKTfD9DsmxcNrP7aIG",
-        kEXPI: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205",
-        kCSI: {
-            e: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205",
-            ei: "3TLKTfD9DsmxcNrP7aIG",
-            expi: "17259,18167,28505,28555,29685,29795,29813,29957,30035,30107,30152,30205"
-        },
-        authuser: 0,
-        ml: function() {},
-        kHL: "zh-CN",
-        time: function() {
-            return (new Date).getTime()
-        },
-        log: function(c, d, b) {
-            var a = new Image,
-                e = google,
-                g = e.lc,
-                f = e.li;
-            a.onerror = (a.onload = (a.onabort = function() {
-                delete g[f]
-            }));
-            g[f] = a;
-            b = b || "/gen_204?atyp=i&ct=" + c + "&cad=" + d + "&zx=" + google.time();
-            a.src = b;
-            e.li = f + 1
-        },
-        lc: [],
-        li: 0,
-        Toolbelt: {}
-    };
-    </script>
-</head>
 
-<body class="nav-fixed-top">
-    <header class="header" style="z-index: 3;background: rgba(0,155,219,0.8)">
-    <div class="container">
-        <h1 class="logo"><a href="javascript:;"  style="font-size: 20px;color:#fff;">Algate's Blog</a></h1>
-        <div class="sitenav">
-            <ul>
-                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-8"><a href="/">首页</a></li>
-                
-                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
-                    
-                    <a href="/archive" title="archive">
-                        所有文章
-                    </a>
-                    
-                    
-                </li>
-                
-                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
-                    
-                    <a href="/tags" title="tags">
-                        分类标签
-                    </a>
+  </head>
+  <body>
+    <div id="wrap">
+        <nav class="navbar navbar-default navbar-dark-orange" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Algate's Blog</a>
+            </div>
+            <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+                <ul class="nav navbar-nav">
                     
                     
-                </li>
-                
-                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
-                    
-                    <a href="/notes" title="notes">
-                        日记
-                    </a>
-                    
-                    
-                </li>
-                
-                <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10">
-                    
-                    <a href="/about" onclick="_hmt.push(['_trackEvent', 'algate', 'click', 'resume'])" title="about">
-                        关于我的
-                    </a>
-                    
-                    
-                </li>
-                
-            </ul>
-        </div>
-        <div style="color:#8fe620;float:right;">本站访客数<span id="busuanzi_value_site_uv"></span>人次</div>
-        <span class="sitenav-on"><i class="fa" style="color:#fff;"></i></span>
-        <span class="sitenav-mask"></span>
-    </div>
-</header>
-<style type="text/css">
-    .hdfocus {
-        height: 300px;
-        color: #fff;
-        background-color: #33383C;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-size: cover;
-        text-align: center;
-    }
-</style>
-<div class="focus-slider flexslider">
-    <canvas id="canvas" style="position: fixed;z-index: 0;top:0;"></canvas>
+                                                       
+<li class="menu-item"><a href="/main/">网站首页</a> 
+</li>
+        
+<li class="menu-item"><a href="/topics/life/">生活点滴</a> 
+    <ul class="dropdown-menu bounceOutDown animated">
+        
+        <li><a title="" target="_self" href="/topics/readlist">阅读列表</a></li>
+        
+        <li><a title="" target="_self" href="/topics/psd">手绘作品</a></li>
+        
+        <li><a title="" target="_self" href="/topics/mywork">我的作品</a></li>
+        
+    </ul>
+    
+</li>
+        
+<li class="menu-item"><a href="/topics/study/">学习点滴</a> 
+    <ul class="dropdown-menu bounceOutDown animated">
+        
+        <li><a title="" target="_self" href="/topics/webacc">前端积累</a></li>
+        
+        <li><a title="" target="_self" href="/topics/webcolle">资料收集</a></li>
+        
+    </ul>
+    
+</li>
+        
+<li class="menu-item"><a href="/archive/">文章存档</a> 
+</li>
+        
+<li class="active menu-item"><a href="/about/" class="active">关于algate</a> 
+</li>
+        
+<li class="menu-item"><a href="/sorts/">文档归类</a> 
+</li>
+       
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            
+
+<div class="page-header">
+    <h1>
+         <small>每个阶段，都把他当做从零开始</small>
+         <p>业精于勤荒于嬉，行成于思毁于随</p>
+    </h1>
 </div>
-    <section class="container">
-        <div class="excerpts-wrapper" style="margin-top:0;">
-            <link rel="stylesheet" type="text/css" href="/assets/css/resume.css">
+<div class="content-center">
+
+
+<div class="left-column">
+    有待完善，敬请期待……-……   ^-^
     <div class="resuem_container clearfix" id="container">
     <div class="mr_created mr_preview">
         <div class="mr_myresume_l mrcenter">
             <div id="mr_mr_head">
                 <div class="mr_top_bg" id="baseinfo">
-                    <img class="mr_headimg" src="//www.lgstatic.com/i/image2/M00/38/DC/CgotOVpMlnOAV5PuAAWL5lrPPRE512.png" alt="头像">
-                    <img class="opa" src="//www.lgstatic.com/www/static/mycenter/modules/common/img/tou_c3707c7.png" width="702" height="170">
+                    <img class="mr_headimg" style="margin-left:130px;" src="//www.lgstatic.com/i/image2/M00/38/DC/CgotOVpMlnOAV5PuAAWL5lrPPRE512.png" alt="头像">
+                    <img class="opa" style="margin-left:129px;" src="//www.lgstatic.com/www/static/mycenter/modules/common/img/tou_c3707c7.png" width="702" height="170">
                     <img class="shadow" src="//www.lgstatic.com/www/static/mycenter/modules/common/img/shadow_tx_a482008.png" width="119" height="119">
                 </div>
                 <div class="mr_baseinfo">
@@ -156,27 +141,27 @@
                         <div class="info_t">
                             <span class="shenfen">
                                 <i></i>
-                                <em data-id="2" title="web前端高级工程师 · 北京中庆现代科技股份有限公司">web前端高级工程师 · 北京中庆现代科技股份有限公司</em>
+                                <span data-id="2" title="web前端高级工程师 · 北京中庆现代科技股份有限公司">web前端高级工程师 · 北京中庆现代科技股份有限公司</span>
                             </span>
                             <span class="base_info">
                             <i></i>
-                            <em class="s"></em>
-                                                            <em class="a">
+                            <span class="s"></span>
+                                                            <span class="a">
                                     <span class="age">29岁</span>
                             <span class="birth_span dn">1988年08月出生
-                                        <em></em>
+                                        <span></span>
                                     </span>
-                            </em>
-                            <em class="x">本科</em>
-                            <em class="j">
+                            </span>
+                            <span class="x">本科</span>
+                            <span class="j">
                                 <span class="job_span">4年工作经验</span>
-                            </em>
-                            <em class="mr0 d">北京</em>
+                            </span>
+                            <span class="mr0 d">北京</span>
                             </span>
                         </div>
                         <div class="info_b">
-                            <span class="mobile"><i></i><em> 18513121204 </em></span>
-                            <span class="email"><i></i><em> 361593833@qq.com </em></span> </div>
+                            <span class="mobile"><i></i><span> 18513121204 </span></span>
+                            <span class="email"><i></i><span> 361593833@qq.com </span></span> </div>
                         <div class="mr_sns dn">
                         </div>
                     </div>
@@ -434,336 +419,83 @@
         </div>
     </div>
 </div>
-<!-- <div style="width:830px;margin:0 auto;overflow:hidden;">
-    <embed id="embed" type="application/pdf" title="我的简历" style="width:100%;height:100%;margin-top: -60px;"></embed>
-</div> -->
-<script type="text/javascript">
-/*var embed = document.getElementById('embed');
-window.URL = window.URL || window.webkitURL;
-var assetURL = '../assets/doc/algate-resume.pdf';
-// var xhr = new XMLHttpRequest;
-var xmlhttp = function () {
-    var xmlhttp;
-    if (window.XMLHttpRequest)  {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp = new XMLHttpRequest();
-    } else {// code for IE6, IE5
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    return xmlhttp;
-}
-function myAsyncFunction(url) {
-    return new Promise((resolve, reject) => {
-        // const xhr = new XMLHttpRequest();
-        let xhr = xmlhttp();
-        xhr.open("GET", url);
-        xhr.responseType = 'blob';
-        xhr.onload = () => resolve(xhr.response);
-        xhr.onerror = () => reject(xhr.status);
-        xhr.send();
-    });
-};
-let promiseBlob = myAsyncFunction(assetURL);
-promiseBlob.then(function(blob){
-    // console.log(blob);
-    embed.onload = function(){
-        window.URL.revokeObjectURL(embed.src);
-    }
-    embed.src = window.URL.createObjectURL(blob);
-})*/
+</div>
+<div class="right-column">
+    <div class="head-portrait">
+        <img src="../assets/src/img/bamzc.jpg" alt=""/>
+        <p>男 90后 处女座 前端工程师</p>
+        <ul>
+            <li><a target="_blank" href="https://segmentfault.com/u/algate">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-1x fa-inverse">sf</i>
+                </span></a>
+            </li>
+            <li><a target="_blank" href="http://weibo.com/u/2171895155">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                </span></a>
+            </li>
+            <li><a href="tencent://message/?uin=361593833&Site=&Menu=yes">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                </span></a>
+            </li>
+            <li><a target="_blank" href="https://github.com/algate">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                </span></a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar">
+        <h3 class="title">小白语录</h3>
+        <ul class="list">
+            <li>总有学习不完的东西，等着你去挖掘。</li>
+            <li>总有遗漏的地方，等着你去发现。</li>
+            <li>每个阶段，都把他当做从零开始。</li>
+        </ul>
+    </div>
+</div>
+<div style="clear:both"></div></div>
 
-/*function getFileBlob(dataURL) {
-    xhr.open('get', assetURL, true);
-    xhr.responseType = 'blob';
-    xhr.onload = function(){
-        console.log(this);
-        if(this.status == 200){
-            console.log(this.response);
-            var blob = this.response;
-            embed.onload = function(e){
-                window.URL.revokeObjectURL(embed.src);
-            }
-            embed.src = window.URL.createObjectURL(blob);
-        }
-    }
-    xhr.send();
-}*/
-
-</script>
         </div>
-    </section>
-    <section class="footer">
+        <hr/>
+        <section class="footer">
     <footer style="position: relative;z-index: 4;color:#444;">
-        <div class = "footer_div">
-        <nav class="cover-navigation navigation--social">
-          <ul class="navigation">
-
-          <!-- 
-
-          
-
-          
-
-          
-
-          RSS
-          <li class="navigation__item_social">
-            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
-              <i class='social fa fa-rss fa-2x'></i>
-              <span class="label">RSS</span>
-            </a>
-          </li>
-
-           -->
-
-          </ul>
-        </nav>
-
-        </div>
-
-        <div class = "footer_div">
-          <div style="text-align: center;">
-          <!-- 访问统计 -->
-            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-
-          </div>
-          <p class="copyright text-muted">
-            Copyright &copy; Algate's Blog 2015-2018 Theme by <a href="https://algate.github.io/">Algate</a> |
-            <iframe
-                style="margin-left: 2px; margin-bottom:-5px;"
-                frameborder="0" scrolling="0" width="91px" height="20px"
-                src="https://ghbtns.com/github-btn.html?user=algate&repo=algate.github.io&type=star&count=true" >
-            </iframe>
-          </p>
-        <div>
+        <div class="footer_div">
+            <div style="text-align: center;">
+                <!-- 访问统计 -->
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+            </div>
+            <p class="copyright text-muted">
+                Copyright &copy; Algate's Blog 2015-2018 Theme by <a href="https://algate.github.io/">Algate</a> |
+                <iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px" src="https://ghbtns.com/github-btn.html?user=algate&repo=algate.github.io&type=star&count=true">
+                </iframe>
+            </p>
+            <div>
     </footer>
 </section>
-
-    <script type="text/javascript">
-    var sitenavOn = document.getElementsByClassName('sitenav-on')[0];
-    sitenavOn.addEventListener('click',function(e){
-        document.body.classList.add('sitenav-active');
-        e.stopPropagation();
-    },false);
-    document.getElementsByClassName('sitenav-mask')[0].addEventListener('click',function(e){
-        var str = document.body.classList;
-        if(str && str[1] == 'sitenav-active'){
-            document.body.classList.remove('sitenav-active');
-        }
-    })
-</script>
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script type="text/javascript" src="/assets/js/main.js"></script>
-<script type="text/javascript">
-(function() {
-    try {
-        if (!google.doodle) google.doodle = {};
-        var d = [
-                [307, 48, 88, 89],
-                [307, 48, 89, 89],
-                [307, 48, 91, 89],
-                [305, 49, 93, 89],
-                [305, 50, 93, 88],
-                [305, 50, 93, 88],
-                [306, 52, 92, 86],
-                [305, 53, 93, 84],
-                [305, 54, 94, 83],
-                [306, 54, 93, 83],
-                [307, 54, 92, 83],
-                [307, 54, 92, 83],
-                [308, 54, 90, 83],
-                [308, 54, 90, 83],
-                [306, 53, 91, 84],
-                [306, 53, 91, 84],
-                [308, 53, 90, 84],
-                [308, 53, 90, 84],
-                [305, 53, 92, 84],
-                [305, 52, 92, 85],
-                [306, 52, 91, 85],
-                [308, 51, 88, 87, 1],
-                [308, 50, 88, 88],
-                [308, 49, 88, 88],
-                [307, 49, 89, 88],
-                [307, 50, 89, 87],
-                [308, 51, 89, 86],
-                [307, 54, 90, 83],
-                [307, 57, 90, 80],
-                [306, 58, 92, 79],
-                [306, 58, 92, 79],
-                [305, 60, 92, 77],
-                [302, 61, 95, 76],
-                [302, 63, 95, 74],
-                [302, 51, 96, 86],
-                [302, 66, 98, 71],
-                [304, 67, 96, 69],
-                [301, 63, 96, 74],
-                [301, 58, 93, 79],
-                [291, 52, 94, 85],
-                [288, 50, 71, 88],
-                [285, 43, 76, 95],
-                [285, 37, 70, 101],
-                [281, 29, 55, 109],
-                [278, 20, 58, 119],
-                [278, 20, 55, 119, 1],
-                [277, 12, 121, 127],
-                [271, 2, 122, 138],
-                [267, 1, 126, 139],
-                [264, 0, 136, 140],
-                [260, 0, 141, 140],
-                [255, 0, 148, 140],
-                [252, 0, 151, 140],
-                [249, 2, 121, 138],
-                [247, 3, 123, 137],
-                [246, 3, 123, 137],
-                [246, 2, 124, 137],
-                [258, 2, 112, 137],
-                [263, 2, 106, 137],
-                [263, 2, 106, 137],
-                [262, 2, 103, 137],
-                [260, 2, 104, 136],
-                [260, 2, 104, 137, 1],
-                [268, 2, 98, 137],
-                [267, 2, 99, 137],
-                [266, 2, 97, 137],
-                [266, 3, 96, 136],
-                [264, 3, 99, 136],
-                [263, 3, 100, 136],
-                [261, 3, 100, 136],
-                [259, 2, 138, 137],
-                [254, 2, 126, 137],
-                [247, 2, 101, 136],
-                [240, 2, 108, 136],
-                [238, 1, 110, 137],
-                [230, 1, 118, 138],
-                [220, 15, 128, 124],
-                [211, 18, 137, 121],
-                [205, 43, 102, 96],
-                [202, 45, 104, 93],
-                [200, 38, 97, 101],
-                [198, 38, 104, 101, 1],
-                [197, 39, 107, 100],
-                [197, 39, 112, 100],
-                [213, 39, 94, 110],
-                [212, 40, 95, 111],
-                [211, 41, 97, 111],
-                [209, 42, 99, 112],
-                [209, 43, 98, 112],
-                [213, 43, 87, 112],
-                [213, 42, 83, 113],
-                [211, 40, 86, 109],
-                [211, 38, 86, 103],
-                [211, 37, 88, 112],
-                [211, 20, 186, 131],
-                [213, 27, 167, 122],
-                [212, 44, 87, 105],
-                [210, 44, 88, 98],
-                [195, 44, 106, 98],
-                [189, 44, 110, 98],
-                [182, 46, 117, 99],
-                [173, 44, 118, 96, 1],
-                [161, 43, 130, 99],
-                [154, 42, 137, 97],
-                [153, 42, 137, 97],
-                [153, 42, 137, 97],
-                [152, 41, 137, 98],
-                [151, 41, 137, 97],
-                [149, 41, 145, 97],
-                [148, 25, 144, 114],
-                [148, 13, 144, 126],
-                [141, 12, 153, 127],
-                [115, 11, 173, 128],
-                [108, 7, 180, 133],
-                [108, 4, 180, 136],
-                [108, 3, 176, 137, 1],
-                [108, 1, 161, 139],
-                [105, 1, 235, 138],
-                [103, 1, 295, 148],
-                [103, 0, 277, 149],
-                [108, 0, 234, 137],
-                [101, 0, 232, 137],
-                [99, 0, 135, 139],
-                [95, 0, 244, 139],
-                [81, 0, 152, 139],
-                [69, 0, 164, 139, 1],
-                [66, 0, 169, 139],
-                [65, 0, 170, 139],
-                [63, 0, 168, 138],
-                [61, 0, 159, 138],
-                [35, 0, 304, 139],
-                [19, 0, 189, 140],
-                [18, 11, 138, 129],
-                [18, 11, 137, 129],
-                [18, 11, 137, 128],
-                [18, 6, 135, 133],
-                [7, 4, 146, 136],
-                [6, 4, 147, 136],
-                [3, 4, 150, 136, 1],
-                [3, 5, 150, 135],
-                [3, 8, 150, 132],
-                [4, 6, 394, 145],
-                [12, 6, 388, 145],
-                [11, 8, 389, 144],
-                [11, 8, 387, 144],
-                [11, 8, 387, 143, 1],
-                [10, 8, 113, 131],
-                [11, 8, 111, 131],
-                [10, 9, 112, 130],
-                [12, 9, 116, 130],
-                [12, 9, 111, 130],
-                [12, 9, 111, 130],
-                [12, 9, 110, 131],
-                [12, 34, 113, 106],
-                [13, 35, 110, 104]
-            ],
-            e = d.length,
-            f, g, h, i, j = -1,
-            k = function() {
-                google.nav && google.nav.go ? google.nav.go("http://www.google.com.hk//search?q=%E7%8E%9B%E8%8E%8E%C2%B7%E8%91%9B%E5%85%B0%E5%A7%86&ct=graham11-hp&oi=ddle&hl=zh-CN") : window.location.href = "http://www.google.com.hk//search?q=%E7%8E%9B%E8%8E%8E%C2%B7%E8%91%9B%E5%85%B0%E5%A7%86&ct=graham11-hp&oi=ddle&hl=zh-CN"
-            },
-            l = function() {
-                var a = d[f],
-                    c = document.getElementById("hplogo");
-                if (c && a[0]) {
-                    var b = document.createElement("div");
-                    b.id = "hplogo" + f;
-                    b.style.left = a[0] + "px";
-                    b.style.top = a[1] + "px";
-                    b.style.width = a[2] + "px";
-                    b.style.height = a[3] + "px";
-                    b.style.background = "url(/assets/images/graham11-hp-sprite.png) no-repeat " + -g + "px " + -h + "px";
-                    b.onmousedown = k;
-                    a[3] > i && (i = a[3]);
-                    a[4] ? (g = 0, h += i, i = 0) : g += a[2];
-                    c.appendChild(b);
-                    ++f;
-                    f < e && (j = window.setTimeout(l, 83))
-                }
-            },
-            m = function() {
-                google.doodle.a = !1;
-                i = h = g = f = 0;
-                j != -1 && (window.clearTimeout(j), j = -1);
-                for (var a = 0; a < e; ++a) {
-                    var c = document.getElementById("hplogo" + a);
-                    c && c.parentNode && c.parentNode.removeChild(c)
-                }
-                j = window.setTimeout(l, 83)
-            };
-        if (!google.doodle.a) {
-            google.doodle.a = !0;
-            var n = document.createElement("img");
-            n.addEventListener ? n.addEventListener("load", m, !1) : n.attachEvent("onload", m);
-            n.src = "/assets/images/graham11-hp-sprite.png"
-        }
-    } catch (o) {
-        google.ml(o, !1, {
-            cause: "DOODLE"
-        })
-    };
-})();
-</script>
+    </div>
+    <!-- <div class="focus-slider flexslider">
+        <canvas id="canvas" style="position: fixed;z-index: 0;top:0;"></canvas>
+    </div> -->
+    <!-- <script type="text/javascript" src="/assets/js/main.js"></script> -->
+    <script type="text/javascript" src="/assets/js/jquery-1.11.3.min.js"></script>
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
 
 
 
-</body>
-
+    <script src="/assets/js/common.js"></script>
+    
+        
+            <script src="/assets/js/about_me.js"></script>
+        
+    
+  </body>
 </html>
+
