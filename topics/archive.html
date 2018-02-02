@@ -1,0 +1,15 @@
+---
+layout: page
+title: 文章存档
+header: 文章存档
+tagline: 书中自有颜如玉，书中自有黄金屋
+message: 心和身体，总有一个再路上
+group: navigation
+index: 4
+permalink: /archive/
+---
+{% include JB/setup %}
+{% assign posts_archive = site.posts %}
+<div class="row">
+{% include JB/posts_archive %}
+</div>

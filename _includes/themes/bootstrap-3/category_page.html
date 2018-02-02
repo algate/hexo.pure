@@ -1,0 +1,41 @@
+<div class="page-header">
+    <h1>
+    {% if page.tagline %} <small>{{ page.tagline}}</small>{% endif %}
+    {% if page.message %} <p>{{ page.message }}</p>{% endif %}
+    </h1>
+    <hgroup>
+        <div class="post-meta">
+            <img src="{{ ASSET_PATH }}/images/calendar.png" width="20px" />
+            <time datetime="{{page.date | date: date_to_xmlschema}}" itemprop="datePublished" class="post-meta__date date">{{page.date | date: "%F"}}</time>
+            <span id="busuanzi_container_page_pv">
+              本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+            </span>
+            </p>
+        </div>
+    </hgroup>
+</div>
+<div class="content-center">
+    <div class="row">
+        <div class="col-md-12 post-container post-container-category">
+            {{content}}
+        </div>
+    </div>
+</div>
+<div style="width:1200px; margin:0 auto;">
+    {% include themes/bootstrap-3/new-old.html %}
+    <div><a href="https://github.com/login/oauth/authorize?scope=public_repo&redirect_uri=http%3A%2F%2Flocalhost%3A4010%2F2017%2F06%2F09%2Fvue-router%2Bwebpack-pit&client_id=0b0d43a49adc0200ac23&client_secret=82553f5ed0d11dc2792158cf476aa731664467ca">登录之后才能评论，请大家先用github账户登录</a></div>
+    <div id="gitmentContainer"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    var gitment = new Gitment({
+        owner: '{{site.github.name}}',
+        repo: '{{site.github.repo}}',
+        oauth: {
+            client_id: '{{site.github.client_id}}',
+            client_secret: '{{site.github.client_secret}}'
+        },
+    });
+    gitment.render('gitmentContainer');
+    </script>
+</div>

@@ -1,0 +1,134 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+Htitle: 欢迎来到Algate's Blog
+title : Algate's Blog
+tagline: 我的博客
+description: >- # this means to ignore newlines until "baseurl:"
+  Welcome to my blog. If the site update the content, I will push information in time.
+author :
+  name : algate
+  email : 361593833@qq.com
+  github : algate
+  feedburner : feedname
+
+
+# site message
+baidu:
+    id: 617bf75bfd954382202927d87bf48f13
+
+# Comment
+comment:
+    uyan: 2156466
+
+# github
+github:
+    name: algate
+    repo: algate.github.io
+    client_id: 0b0d43a49adc0200ac23
+    client_secret: 82553f5ed0d11dc2792158cf476aa731664467ca
+
+# The production_url is only used when full-domain names are needed
+# such as sitemap.txt
+# Most places will/should use BASE_PATH to make the urls
+#
+# If you have set a CNAME (pages.github.com) set your custom domain here.
+# Else if you are pushing to username.github.io, replace with your username.
+# Finally if you are pushing to a GitHub project page, include the project name at the end.
+#
+production_url : https://algate.github.io/
+#production_url : http://localhost:4000
+url: "https://algate.github.io/"
+baseurl : /
+#baseurl : https://bamzc.github.io
+host : localhost
+port : 4010
+
+# Build settings
+markdown: kramdown
+theme: minima
+gems:
+  - jekyll-feed
+exclude:
+  - Gemfile
+
+  # This is the default format.
+# For more see: http://jekyllrb.com/docs/permalinks/
+permalink: /:year/:month/:day/:title.html
+
+exclude: ["LICENSE", "README.md", .gitignore, Gemfile, Gemfile.lock]
+highlighter: rogue
+
+twitter_username: jekyllrb
+github_username:  jekyll
+
+
+paginate: 10
+#paginate_path: ['topics/study/page/:num','topics/life/page/:num']
+paginatepath: ['topics/life/page/:num','topics/jekyll/page/:num','topics/study/page/:num','topics/webacc/page/:num','topics/webcolle/page/:num','topics/javascript/page/:num','topics/es6/page/:num','topics/services/page/:num']
+# All Jekyll-Bootstrap specific configurations are namespaced into this hash
+#
+JB :
+  version : 0.3.0
+
+  # All links will be namespaced by BASE_PATH if defined.
+  # Links in your website should always be prefixed with {{BASE_PATH}}
+  # however this value will be dynamically changed depending on your deployment situation.
+  #
+  # CNAME (http://yourcustomdomain.com)
+  #   DO NOT SET BASE_PATH
+  #   (urls will be prefixed with "/" and work relatively)
+  #
+  # GitHub Pages (http://username.github.io)
+  #   DO NOT SET BASE_PATH
+  #   (urls will be prefixed with "/" and work relatively)
+  #
+  # GitHub Project Pages (http://username.github.io/project-name)
+  #
+  #   A GitHub Project site exists in the `gh-pages` branch of one of your repositories.
+  #  REQUIRED! Set BASE_PATH to: http://username.github.io/project-name
+  #
+  # CAUTION:
+  #   - When in Localhost, your site will run from root "/" regardless of BASE_PATH
+  #   - Only the following values are falsy: ["", null, false]
+  #   - When setting BASE_PATH it must be a valid url.
+  #     This means always setting the protocol (http|https) or prefixing with "/"
+  BASE_PATH : false
+
+  # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
+  # ex: [BASE_PATH]/assets/themes/[THEME-NAME]
+  #
+  # Override this by defining an absolute path to assets here.
+  # ex:
+  #   http://s3.amazonaws.com/yoursite/themes/watermelon
+  #   /assets
+  #
+  ASSET_PATH : false
+
+  # Settings for comments helper
+  # Set 'provider' to the comment provider you want to use.
+  # Set 'provider' to false to turn commenting off globally.
+
+  # Settings for analytics helper
+  # Set 'provider' to the analytics provider you want to use.
+  # Set 'provider' to false to turn analytics off globally.
+  # Settings for sharing helper.
+  # Sharing is for things like tweet, plusone, like, reddit buttons etc.
+  # Set 'provider' to the sharing provider you want to use.
+  # Set 'provider' to false to turn sharing off globally.
+  #
+  sharing :
+    provider : false
+

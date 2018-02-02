@@ -1,0 +1,29 @@
+---
+layout: page
+title: 文档归类
+header: 文档归类
+tagline: 无规矩不成方圆
+message: 整理是提高生活品质的基石，你会发现条理清晰是很美好的一件事情
+group: navigation
+index: 6
+permalink: /sorts/
+---
+{% include JB/setup %}
+
+<ul class="tag_box inline">
+  {% assign tags_list = site.tags %}
+  {% include JB/tags_list %}
+</ul>
+
+<div class = "card">
+{% for tag in site.tags %}
+
+  <h3 id="{{ tag[0] }}-ref">{{ tag[0] }}</h3>
+  <ul>
+    {% assign pages_list = tag[1] %}
+    {% include JB/pages_list %}
+  </ul>
+
+
+{% endfor %}
+</div>

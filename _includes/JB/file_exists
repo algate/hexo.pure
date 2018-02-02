@@ -1,0 +1,10 @@
+{% assign file_exists_result = false %}
+
+{% if include.file %}
+	{% for static_file in site.static_files %}
+		{% if static_file.path == include.file %}
+			{% assign file_exists_result = true %}
+			{% break %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
