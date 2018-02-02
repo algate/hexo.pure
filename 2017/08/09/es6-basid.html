@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|对Storage和cookie的封装</title>
+    <title>Algate's Blog|ECMAScript6 - 入门</title>
     
     
     <meta name="author" content="algate">
@@ -111,13 +111,13 @@
 
 <div class="page-header">
     <h1>
-     <small>对Storage和cookie的封装</small>
+     <small>ECMAScript6 - 入门</small>
     
     </h1>
     <hgroup>
         <div class="post-meta">
             <img src="/assets/images/calendar.png" width="20px" />
-            <time datetime="2016-11-05 01:21:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-05</time>
+            <time datetime="2017-08-09 01:30:00 +0800" itemprop="datePublished" class="post-meta__date date">2017-08-09</time>
             <span id="busuanzi_container_page_pv">
               本文总阅读量<span id="busuanzi_value_page_pv"></span>次
             </span>
@@ -128,146 +128,116 @@
 <div class="content-center">
     <div class="row">
         <div class="col-md-12 post-container post-container-category">
-            <pre>
-<textarea class="cm_textarea">
-&lt;!doctype html&gt;
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>test</title>
-</head>
-<body>
-	<script type="text/javascript">
-	var singleton = function( fn ){
-	    var result;
-	    return function(){
-	        return result || ( result = fn .apply( this, arguments ) );
-	    }
-	}
-	var _storage=singleton(function(){
-		var lstorage;
-		if(window.localStorage){
-			lstorage=localStorage;
-		}else{
-		    var UserData = {
-		    userData: null,
-		    name: location.hostname,
+            <h4 id="ecmascript-和-javascript-的关系">ECMAScript 和 JavaScript 的关系</h4>
 
-		    init: function() {
-		        if(!UserData.userData) {
-		            try {
-		                UserData.userData = document.createElement('div');
-		                UserData.userData.type = "hidden";
-		                UserData.userData.style.display = "none";
-		                UserData.userData.addBehavior("#default#userData");
-		                document.body.appendChild(UserData.userData);
-		                var expires = new Date();
-		                expires.setDate(expires.getDate() + 365);
-		                UserData.userData.expires = expires.toUTCString();
-		            } catch(e) {
-		                return false;
-		            }
-		        }
-		        return true;
-		    },
+<p>一个常见的问题是，ECMAScript 和 JavaScript 到底是什么关系？</p>
 
-		    setItem: function(key, value) {
-		        if(UserData.init()) {
-		            UserData.userData.setAttribute(key,value);
-		        }
-		    },
+<p>要讲清楚这个问题，需要回顾历史。1996 年 11 月，JavaScript 的创造者 Netscape 公司，决定将 JavaScript 提交给标准化组织 ECMA，希望这种语言能够成为国际标准。次年，ECMA 发布 262 号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为 ECMAScript，这个版本就是 1.0 版。</p>
 
-		    getItem: function(key) {
-		        if(UserData.init()) {
-		            var  v=UserData.userData.getAttribute(key);
-		            return v;
-		        }
-		    },
-		    removeItem: function(key) {
-		        if(UserData.init()) {
-		            UserData.userData.removeAttribute(key);
-		        }
-		    },
-		    //以下三个方法暂时留着,区别Attribute和property
-		    getAttr:function(el, prop){
-		    	return el[prop] || el.getAttribute(prop);
-		    },
-		    setAttr:function(el, prop, val){
-	    		el[prop] = val;
-		    },
-		    removeAttr:function(el, prop){
-		    	delete el[prop];
-		    }
-		};
-			lstorage=UserData;
-		};
-		var ls = {
-			setLocalStorage : function(k,v){
-				lstorage.setItem(k,v);
-			},
-			getLocalStorage : function(k){
-				return lstorage.getItem(k);
-			},
-			removeLocalStorage:function(k){
-				lstorage.removeItem(k);
-			},
-			clearLocalStorage : function(){
-				lstorage.clear();
-			}
-		};
-		return ls;
-	})();
+<p>该标准从一开始就是针对 JavaScript 语言制定的，但是之所以不叫 JavaScript，有两个原因。一是商标，Java 是 Sun 公司的商标，根据授权协议，只有 Netscape 公司可以合法地使用 JavaScript 这个名字，且 JavaScript 本身也已经被 Netscape 公司注册为商标。二是想体现这门语言的制定者是 ECMA，不是 Netscape，这样有利于保证这门语言的开放性和中立性。</p>
 
-	var _cookie=singleton(function(){
-		var ck={
-			addCookie:function(obj){
-				if(typeof(obj)==="undefined"){
-					return;
-				}
-				for(var c in obj){
-					var strCookie=c+"="+obj[c]+";"
-					// cookieString+=strCookie;
-					document.cookie=strCookie;
-				}
-				// alert(document.cookie)
-			},
-			getCookie : function(name){
-				var strCookie=document.cookie;
-				var arrCookie=strCookie.split("; ");
-				for(var i=0;i<arrCookie.length;i++){
-					var arr=arrCookie[i].split("=");
-					if(arr[0]==name){
-						return arr[1];
-					};
-				}
-				return "";
+<p>因此，ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现（另外的 ECMAScript 方言还有 Jscript 和 ActionScript）。日常场合，这两个词是可以互换的。</p>
 
-			},
-			deleteCookie : function(name){
-				var date=new Date();
-				date.setTime(date.getTime()-10000);
-				document.cookie=name+"=v; expires="+date.toGMTString();
-			}
-		};
-		return ck;
-	})();
-	//需要存储的数据
-	var storageJson={
-		"name":"bamzc",
-		"age":"23",
-		"sex":"男"
-	};
-	_storage.setLocalStorage("name",storageJson.name);
-	// _storage.removeLocalStorage("name");
-	document.write("我给localStorage赋值："+_storage.getLocalStorage("name"));
-    _cookie.addCookie(storageJson);
-    // _cookie.deleteCookie("age");
-    document.write("<br><br>我添加了一个cookie："+_cookie.getCookie("age"));
-	</script>
-</body>
-</html>
-</textarea>
-</pre>
+<h4 id="babel-转码器">Babel 转码器</h4>
+
+<p>Babel 是一个广泛使用的 ES6 转码器，可以将 ES6 代码转为 ES5 代码，从而在现有环境执行。这意味着，你可以用 ES6 的方式编写程序，又不用担心现有环境是否支持。下面是一个例子。</p>
+
+<p>// 转码前
+input.map(item =&gt; item + 1);</p>
+
+<p>// 转码后
+input.map(function (item) {
+  return item + 1;
+});</p>
+
+<p>上面的原始代码用了箭头函数，Babel 将其转为普通函数，就能在不支持箭头函数的 JavaScript 环境执行了。</p>
+
+<h4 id="配置文件babelrc">配置文件.babelrc</h4>
+
+<p>Babel 的配置文件是.babelrc，存放在项目的根目录下。使用 Babel 的第一步，就是配置这个文件。</p>
+
+<p>该文件用来设置转码规则和插件，基本格式如下。</p>
+
+<p>{
+  “presets”: [],
+  “plugins”: []
+}</p>
+
+<p>presets字段设定转码规则，官方提供以下的规则集，你可以根据需要安装。</p>
+
+<h1 id="最新转码规则">最新转码规则</h1>
+<p>$ npm install –save-dev babel-preset-latest</p>
+
+<h1 id="react-转码规则">react 转码规则</h1>
+<p>$ npm install –save-dev babel-preset-react</p>
+
+<h1 id="不同阶段语法提案的转码规则共有4个阶段选装一个">不同阶段语法提案的转码规则（共有4个阶段），选装一个</h1>
+<p>$ npm install –save-dev babel-preset-stage-0
+$ npm install –save-dev babel-preset-stage-1
+$ npm install –save-dev babel-preset-stage-2
+$ npm install –save-dev babel-preset-stage-3</p>
+
+<p>然后，将这些规则加入.babelrc。</p>
+
+<p>{
+    “presets”: [
+      “latest”,
+      “react”,
+      “stage-2”
+    ],
+    “plugins”: []
+  }</p>
+
+<p>注意，以下所有 Babel 工具和模块的使用，都必须先写好.babelrc。</p>
+
+<h4 id="babel-polyfill">babel-polyfill</h4>
+
+<p>Babel 默认只转换新的 JavaScript 句法（syntax），而不转换新的 API，比如Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise等全局对象，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。</p>
+
+<p>举例来说，ES6 在Array对象上新增了Array.from方法。Babel 就不会转码这个方法。如果想让这个方法运行，必须使用babel-polyfill，为当前环境提供一个垫片。</p>
+
+<p>安装命令如下。</p>
+
+<p>$ npm install –save babel-polyfill</p>
+
+<p>然后，在脚本头部，加入如下一行代码。</p>
+
+<p>import ‘babel-polyfill’;
+// 或者
+require(‘babel-polyfill’);</p>
+
+<p>Babel 默认不转码的 API 非常多，详细清单可以查看babel-plugin-transform-runtime模块的definitions.js文件。</p>
+
+<h4 id="浏览器环境">浏览器环境</h4>
+
+<p>Babel 也可以用于浏览器环境。但是，从 Babel 6.0 开始，不再直接提供浏览器版本，而是要用构建工具构建出来。如果你没有或不想使用构建工具，可以使用babel-standalone模块提供的浏览器版本，将其插入网页。</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.4.4/babel.min.js"></script>
+
+<script type="text/babel">
+// Your ES6 code
+</script>
+
+<p>注意，网页实时将 ES6 代码转为 ES5，对性能会有影响。生产环境需要加载已经转码完成的脚本。</p>
+
+<p>下面是如何将代码打包成浏览器可以使用的脚本，以Babel配合Browserify为例。首先，安装babelify模块。</p>
+
+<p>$ npm install –save-dev babelify babel-preset-latest</p>
+
+<p>然后，再用命令行转换 ES6 脚本。</p>
+
+<p>$  browserify script.js -o bundle.js \
+  -t [ babelify –presets [ latest ] ]</p>
+
+<p>上面代码将 ES6 脚本script.js，转为bundle.js，浏览器直接加载后者就可以了。</p>
+
+<p>在package.json设置下面的代码，就不用每次命令行都输入参数了。</p>
+
+<p>{
+  “browserify”: {
+    “transform”: [[“babelify”, { “presets”: [“latest”] }]]
+  }
+}</p>
 
         </div>
     </div>
@@ -456,12 +426,12 @@
     <ul class="pager">
         
         <li class="previous">
-            <a href="/2016/10/15/markdown.html" data-toggle="tooltip" data-placement="top" title="markdown语法">下一篇：  <span>markdown语法</span>
+            <a href="/2017/06/02/tomcat-config.html" data-toggle="tooltip" data-placement="top" title="tomcat - 多端口访问config">下一篇：  <span>tomcat - 多端口访问config</span>
             </a>
         </li>
          
         <li class="next">
-            <a href="/2016/11/07/resource-collection.html" data-toggle="tooltip" data-placement="top" title="javascript">上一篇：  <span>javascript</span>
+            <a href="/2017/08/11/es6-function.html" data-toggle="tooltip" data-placement="top" title="ECMAScript6 - 函数的扩展">上一篇：  <span>ECMAScript6 - 函数的扩展</span>
             </a>
         </li>
         

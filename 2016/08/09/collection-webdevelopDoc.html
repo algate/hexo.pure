@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|对Storage和cookie的封装</title>
+    <title>Algate's Blog|web开发文档</title>
     
     
     <meta name="author" content="algate">
@@ -111,13 +111,13 @@
 
 <div class="page-header">
     <h1>
-     <small>对Storage和cookie的封装</small>
+     <small>web开发文档</small>
     
     </h1>
     <hgroup>
         <div class="post-meta">
             <img src="/assets/images/calendar.png" width="20px" />
-            <time datetime="2016-11-05 01:21:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-05</time>
+            <time datetime="2016-08-09 01:30:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-08-09</time>
             <span id="busuanzi_container_page_pv">
               本文总阅读量<span id="busuanzi_value_page_pv"></span>次
             </span>
@@ -128,146 +128,10 @@
 <div class="content-center">
     <div class="row">
         <div class="col-md-12 post-container post-container-category">
-            <pre>
-<textarea class="cm_textarea">
-&lt;!doctype html&gt;
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>test</title>
-</head>
-<body>
-	<script type="text/javascript">
-	var singleton = function( fn ){
-	    var result;
-	    return function(){
-	        return result || ( result = fn .apply( this, arguments ) );
-	    }
-	}
-	var _storage=singleton(function(){
-		var lstorage;
-		if(window.localStorage){
-			lstorage=localStorage;
-		}else{
-		    var UserData = {
-		    userData: null,
-		    name: location.hostname,
-
-		    init: function() {
-		        if(!UserData.userData) {
-		            try {
-		                UserData.userData = document.createElement('div');
-		                UserData.userData.type = "hidden";
-		                UserData.userData.style.display = "none";
-		                UserData.userData.addBehavior("#default#userData");
-		                document.body.appendChild(UserData.userData);
-		                var expires = new Date();
-		                expires.setDate(expires.getDate() + 365);
-		                UserData.userData.expires = expires.toUTCString();
-		            } catch(e) {
-		                return false;
-		            }
-		        }
-		        return true;
-		    },
-
-		    setItem: function(key, value) {
-		        if(UserData.init()) {
-		            UserData.userData.setAttribute(key,value);
-		        }
-		    },
-
-		    getItem: function(key) {
-		        if(UserData.init()) {
-		            var  v=UserData.userData.getAttribute(key);
-		            return v;
-		        }
-		    },
-		    removeItem: function(key) {
-		        if(UserData.init()) {
-		            UserData.userData.removeAttribute(key);
-		        }
-		    },
-		    //以下三个方法暂时留着,区别Attribute和property
-		    getAttr:function(el, prop){
-		    	return el[prop] || el.getAttribute(prop);
-		    },
-		    setAttr:function(el, prop, val){
-	    		el[prop] = val;
-		    },
-		    removeAttr:function(el, prop){
-		    	delete el[prop];
-		    }
-		};
-			lstorage=UserData;
-		};
-		var ls = {
-			setLocalStorage : function(k,v){
-				lstorage.setItem(k,v);
-			},
-			getLocalStorage : function(k){
-				return lstorage.getItem(k);
-			},
-			removeLocalStorage:function(k){
-				lstorage.removeItem(k);
-			},
-			clearLocalStorage : function(){
-				lstorage.clear();
-			}
-		};
-		return ls;
-	})();
-
-	var _cookie=singleton(function(){
-		var ck={
-			addCookie:function(obj){
-				if(typeof(obj)==="undefined"){
-					return;
-				}
-				for(var c in obj){
-					var strCookie=c+"="+obj[c]+";"
-					// cookieString+=strCookie;
-					document.cookie=strCookie;
-				}
-				// alert(document.cookie)
-			},
-			getCookie : function(name){
-				var strCookie=document.cookie;
-				var arrCookie=strCookie.split("; ");
-				for(var i=0;i<arrCookie.length;i++){
-					var arr=arrCookie[i].split("=");
-					if(arr[0]==name){
-						return arr[1];
-					};
-				}
-				return "";
-
-			},
-			deleteCookie : function(name){
-				var date=new Date();
-				date.setTime(date.getTime()-10000);
-				document.cookie=name+"=v; expires="+date.toGMTString();
-			}
-		};
-		return ck;
-	})();
-	//需要存储的数据
-	var storageJson={
-		"name":"bamzc",
-		"age":"23",
-		"sex":"男"
-	};
-	_storage.setLocalStorage("name",storageJson.name);
-	// _storage.removeLocalStorage("name");
-	document.write("我给localStorage赋值："+_storage.getLocalStorage("name"));
-    _cookie.addCookie(storageJson);
-    // _cookie.deleteCookie("age");
-    document.write("<br><br>我添加了一个cookie："+_cookie.getCookie("age"));
-	</script>
-</body>
-</html>
-</textarea>
-</pre>
+            <p>es6</p>
+<ul>
+    <li><a href="http://es6.ruanyifeng.com/" target="view_window">阮一峰 - ECMAScript 6 入门</a></li>
+</ul>
 
         </div>
     </div>
@@ -454,14 +318,9 @@
     }
     </style>
     <ul class="pager">
-        
-        <li class="previous">
-            <a href="/2016/10/15/markdown.html" data-toggle="tooltip" data-placement="top" title="markdown语法">下一篇：  <span>markdown语法</span>
-            </a>
-        </li>
          
         <li class="next">
-            <a href="/2016/11/07/resource-collection.html" data-toggle="tooltip" data-placement="top" title="javascript">上一篇：  <span>javascript</span>
+            <a href="/2016/10/15/markdown.html" data-toggle="tooltip" data-placement="top" title="markdown语法">上一篇：  <span>markdown语法</span>
             </a>
         </li>
         

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|对Storage和cookie的封装</title>
+    <title>Algate's Blog|tomcat - 多端口访问config</title>
     
     
     <meta name="author" content="algate">
@@ -111,13 +111,13 @@
 
 <div class="page-header">
     <h1>
-     <small>对Storage和cookie的封装</small>
+     <small>tomcat - 多端口访问config</small>
     
     </h1>
     <hgroup>
         <div class="post-meta">
             <img src="/assets/images/calendar.png" width="20px" />
-            <time datetime="2016-11-05 01:21:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-05</time>
+            <time datetime="2017-06-02 01:30:00 +0800" itemprop="datePublished" class="post-meta__date date">2017-06-02</time>
             <span id="busuanzi_container_page_pv">
               本文总阅读量<span id="busuanzi_value_page_pv"></span>次
             </span>
@@ -128,146 +128,85 @@
 <div class="content-center">
     <div class="row">
         <div class="col-md-12 post-container post-container-category">
-            <pre>
-<textarea class="cm_textarea">
-&lt;!doctype html&gt;
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>test</title>
-</head>
-<body>
-	<script type="text/javascript">
-	var singleton = function( fn ){
-	    var result;
-	    return function(){
-	        return result || ( result = fn .apply( this, arguments ) );
-	    }
-	}
-	var _storage=singleton(function(){
-		var lstorage;
-		if(window.localStorage){
-			lstorage=localStorage;
-		}else{
-		    var UserData = {
-		    userData: null,
-		    name: location.hostname,
+            <center>tomcat配置多域名多端口访问</center>
+<p>话不多说，直接开始
+1。要使用tomcat，首先要安装Java，并且配置Java环境，这里不介绍如何安装，重点强调安装过程中遇到的问题
+　　一。tomcat启动服务，一闪而过，只能证明，环境变量配错了。正常的使用java，只需要把安装路径放到系统变量的Path里边，但是Tomcat启动找的却是JAVA_HOME,所以一定要配置java_home的环境变量，具体怎么配，请谷歌</p>
+<blockquote>
+  <p>[info] 如果不知道具体什么错误，可以cmd启动运行startup,会提示有什么错误</p>
+</blockquote>
 
-		    init: function() {
-		        if(!UserData.userData) {
-		            try {
-		                UserData.userData = document.createElement('div');
-		                UserData.userData.type = "hidden";
-		                UserData.userData.style.display = "none";
-		                UserData.userData.addBehavior("#default#userData");
-		                document.body.appendChild(UserData.userData);
-		                var expires = new Date();
-		                expires.setDate(expires.getDate() + 365);
-		                UserData.userData.expires = expires.toUTCString();
-		            } catch(e) {
-		                return false;
-		            }
-		        }
-		        return true;
-		    },
+<p>　　二。启动成功后，报错，就试具体原因了：有个刚启动就报的错，是因为tomcat和java的位数不同，所以安装的时候，最好选择同一版本，要么都是32，要么都是64位；
+  　　三。tomcat安装，一般都是直接解压放到你想放到的地方就行了。
+　　四.我把项目放到tomcat下时，放错了地方，导致页面显示空白
+  这里需要注意的是：一般放到webapps下就可以了，公司用到的大项目直接在webapps下。
+  我把webapps下的东西删除，放上我自己的项目，但是页面就是没有显示出来
+ 最后我把原安装包解压发现webapps下有好多的文件夹，复制这么多文件放到webapps下
+    &gt;[info] 我们需要把项目放到webapps下的ROOT文件夹里边。打开浏览器，就可以正常显示了</p>
 
-		    setItem: function(key, value) {
-		        if(UserData.init()) {
-		            UserData.userData.setAttribute(key,value);
-		        }
-		    },
+<pre><code>也许你会说，我直接点击页面就可以浏览了，但是有些时候调试，需要真实的服务器环境来看。
+</code></pre>
 
-		    getItem: function(key) {
-		        if(UserData.init()) {
-		            var  v=UserData.userData.getAttribute(key);
-		            return v;
-		        }
-		    },
-		    removeItem: function(key) {
-		        if(UserData.init()) {
-		            UserData.userData.removeAttribute(key);
-		        }
-		    },
-		    //以下三个方法暂时留着,区别Attribute和property
-		    getAttr:function(el, prop){
-		    	return el[prop] || el.getAttribute(prop);
-		    },
-		    setAttr:function(el, prop, val){
-	    		el[prop] = val;
-		    },
-		    removeAttr:function(el, prop){
-		    	delete el[prop];
-		    }
-		};
-			lstorage=UserData;
-		};
-		var ls = {
-			setLocalStorage : function(k,v){
-				lstorage.setItem(k,v);
-			},
-			getLocalStorage : function(k){
-				return lstorage.getItem(k);
-			},
-			removeLocalStorage:function(k){
-				lstorage.removeItem(k);
-			},
-			clearLocalStorage : function(){
-				lstorage.clear();
-			}
-		};
-		return ls;
-	})();
+<p>　　五。接下来就是配置ｔｏｍｃａｔ多域名，多端口的访问问题了：
+   　　　有三种情况：具体需要那种情况就看自己的需要了。但是修改的是同一个文件：安装目录下的conf文件夹里边的server.xml文件。可以直接看第三种情况，其实可以把前两个情况都解决。
+   　　　　（１）。相同的域名，不同的端口访问，这种情况访问同一个项目</p>
 
-	var _cookie=singleton(function(){
-		var ck={
-			addCookie:function(obj){
-				if(typeof(obj)==="undefined"){
-					return;
-				}
-				for(var c in obj){
-					var strCookie=c+"="+obj[c]+";"
-					// cookieString+=strCookie;
-					document.cookie=strCookie;
-				}
-				// alert(document.cookie)
-			},
-			getCookie : function(name){
-				var strCookie=document.cookie;
-				var arrCookie=strCookie.split("; ");
-				for(var i=0;i<arrCookie.length;i++){
-					var arr=arrCookie[i].split("=");
-					if(arr[0]==name){
-						return arr[1];
-					};
-				}
-				return "";
+<pre><code>       &lt;Service name="Catalina"&gt;
+   &lt;Connector port="8080" protocol="HTTP/1.1"
+              connectionTimeout="20000"
+              redirectPort="8443" /&gt;
+    &lt;Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /&gt;
+   &lt;Engine name="Catalina" defaultHost="localhost"&gt;
+    &lt;Realm className="org.apache.catalina.realm.LockOutRealm"&gt;
+     &lt;Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+            resourceName="UserDatabase"/&gt;
+      &lt;/Realm&gt;
+     &lt;Host name="localhost"  appBase="webapps"
+           unpackWARs="true" autoDeploy="true" &gt;
+        &lt;Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &amp;quot;%r&amp;quot; %s %b" /&gt;
+     &lt;/Host&gt;
+   &lt;/Engine&gt;
+ &lt;/Service&gt;
+</code></pre>
 
-			},
-			deleteCookie : function(name){
-				var date=new Date();
-				date.setTime(date.getTime()-10000);
-				document.cookie=name+"=v; expires="+date.toGMTString();
-			}
-		};
-		return ck;
-	})();
-	//需要存储的数据
-	var storageJson={
-		"name":"bamzc",
-		"age":"23",
-		"sex":"男"
-	};
-	_storage.setLocalStorage("name",storageJson.name);
-	// _storage.removeLocalStorage("name");
-	document.write("我给localStorage赋值："+_storage.getLocalStorage("name"));
-    _cookie.addCookie(storageJson);
-    // _cookie.deleteCookie("age");
-    document.write("<br><br>我添加了一个cookie："+_cookie.getCookie("age"));
-	</script>
-</body>
-</html>
-</textarea>
-</pre>
+<p>在service下找到Connector复制一份</p>
+
+<Connector port="80" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />
+
+<p>port的值随意修改成你想要的数字 ，然后在浏览器改端口号，直接可以预览了。</p>
+
+<p>　　　　（2）。不用的域名访问同一项目（此种方法没什么用，直接可以略过）
+     这个怎么操作呢，当然是复制一份<host></host>带标签的内容，修改localhost改为自己想要的内容，比如你想<a href="">yourname.com</a>就可以改为你想要的，OK了，不过还有个问题需要解决，在第三种情况会有说明，所以直接看三吧
+     　　　　（3）。不用的域名不同的端口（或者相同的端口），访问不同的项目
+         直接复制一份<Service></Service>(包括标签)</p>
+
+<pre><code>    &lt;Service name="Catalina2"&gt;
+       &lt;Connector port="8080" protocol="HTTP/1.1"
+                  connectionTimeout="20000"
+                  redirectPort="8443" /&gt;
+        &lt;Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /&gt;
+       &lt;Engine name="Catalina2" defaultHost="localhost"&gt;
+        &lt;Realm className="org.apache.catalina.realm.LockOutRealm"&gt;
+         &lt;Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                resourceName="UserDatabase"/&gt;
+          &lt;/Realm&gt;
+         &lt;Host name="你要的域名（www.baidu.com）"  appBase="安装目录先新建一个文件夹的名字"
+               unpackWARs="true" autoDeploy="true" &gt;
+            &lt;Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                   prefix="localhost_access_log." suffix=".txt"
+                   pattern="%h %l %u %t &amp;quot;%r&amp;quot; %s %b" /&gt;
+         &lt;/Host&gt;
+       &lt;/Engine&gt;
+     &lt;/Service&gt;
+</code></pre>
+
+<p><img src="/assets/images/topics/tomcat/001.png" /></p>
+
+<p>port端口号可以一样
+ 把webapps复制一份放到安装目录下，更改文件名为appBase的名，把项目放到ROOT下（之前说过了哦！）
+ 然后启动服务，浏览器访问：<a href="">你要的域名:8080/项目的路径文件</a> ,妥妥的，你就可以访问你的新文件夹下的新项目了。</p>
 
         </div>
     </div>
@@ -456,12 +395,12 @@
     <ul class="pager">
         
         <li class="previous">
-            <a href="/2016/10/15/markdown.html" data-toggle="tooltip" data-placement="top" title="markdown语法">下一篇：  <span>markdown语法</span>
+            <a href="/2016/11/07/resource-collection.html" data-toggle="tooltip" data-placement="top" title="前端资源教程">下一篇：  <span>前端资源教程</span>
             </a>
         </li>
          
         <li class="next">
-            <a href="/2016/11/07/resource-collection.html" data-toggle="tooltip" data-placement="top" title="javascript">上一篇：  <span>javascript</span>
+            <a href="/2017/08/09/es6-basid.html" data-toggle="tooltip" data-placement="top" title="ECMAScript6 - 入门">上一篇：  <span>ECMAScript6 - 入门</span>
             </a>
         </li>
         

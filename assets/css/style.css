@@ -57,11 +57,11 @@ img{
 }
 .poster-prev-btn {
     left: 0;
-    background: url(../src/images/btn_l.png) no-repeat center center;
+    background: url(../src/bannerimages/btn_l.png) no-repeat center center;
 }
 .poster-next-btn {
     right: 0;
-    background: url(../src/images/btn_r.png) no-repeat center center;
+    background: url(../src/bannerimages/btn_r.png) no-repeat center center;
 }
 ul.no-list-style {
     list-style-type: none;
@@ -1104,12 +1104,12 @@ h4 {
 }
 
 .content-center a {
-    color: #333
+    color: #009a61
 }
 
 .content-center a:focus,
 a:hover {
-    color: #034b79;
+    color: #006741;
     text-decoration: underline
 }
 
@@ -1513,7 +1513,7 @@ h5 {
 .right-column .head-portrait {
     text-align: center;
     width: 210px;
-    height: 294px;
+    height: 300px;
     background: #fff;
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;

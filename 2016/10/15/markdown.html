@@ -58,7 +58,7 @@
                 <ul class="nav navbar-nav">
                     
                     
-                                                       
+                                                                       
 <li class="menu-item"><a href="/main/">网站首页</a> 
 </li>
         
@@ -81,6 +81,14 @@
         <li><a title="" target="_self" href="/topics/webacc">前端积累</a></li>
         
         <li><a title="" target="_self" href="/topics/webcolle">资料收集</a></li>
+        
+        <li><a title="" target="_self" href="/topics/javascript">Javascript</a></li>
+        
+        <li><a title="" target="_self" href="/topics/jekyll">Jekyll</a></li>
+        
+        <li><a title="" target="_self" href="/topics/es6">ECMAScript</a></li>
+        
+        <li><a title="" target="_self" href="/topics/services">services</a></li>
         
     </ul>
     
@@ -237,7 +245,8 @@ _   底线
         </div>
     </div>
 </div>
-<section>
+<div style="width:1200px; margin:0 auto;">
+    <section>
     <div class="content-play">
         <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>
         <div class="hide_box-play"></div>
@@ -418,6 +427,11 @@ _   底线
     }
     </style>
     <ul class="pager">
+        
+        <li class="previous">
+            <a href="/2016/08/09/collection-webdevelopDoc.html" data-toggle="tooltip" data-placement="top" title="web开发文档">下一篇：  <span>web开发文档</span>
+            </a>
+        </li>
          
         <li class="next">
             <a href="/2016/11/05/storage-cookie.html" data-toggle="tooltip" data-placement="top" title="对Storage和cookie的封装">上一篇：  <span>对Storage和cookie的封装</span>
@@ -426,21 +440,23 @@ _   底线
         
     </ul>
 </section>
-<div><a href="https://github.com/login/oauth/authorize?scope=public_repo&redirect_uri=http%3A%2F%2Flocalhost%3A4010%2F2017%2F06%2F09%2Fvue-router%2Bwebpack-pit&client_id=0b0d43a49adc0200ac23&client_secret=82553f5ed0d11dc2792158cf476aa731664467ca">登录之后才能评论，请大家先登录</a></div>
-<div id="gitmentContainer"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-    owner: 'algate',
-    repo: 'algate.github.io',
-    oauth: {
-        client_id: '0b0d43a49adc0200ac23',
-        client_secret: '82553f5ed0d11dc2792158cf476aa731664467ca'
-    },
-});
-gitment.render('gitmentContainer');
-</script>
+    <div><a href="https://github.com/login/oauth/authorize?scope=public_repo&redirect_uri=http%3A%2F%2Flocalhost%3A4010%2F2017%2F06%2F09%2Fvue-router%2Bwebpack-pit&client_id=0b0d43a49adc0200ac23&client_secret=82553f5ed0d11dc2792158cf476aa731664467ca">登录之后才能评论，请大家先用github账户登录</a></div>
+    <div id="gitmentContainer"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    var gitment = new Gitment({
+        owner: 'algate',
+        repo: 'algate.github.io',
+        oauth: {
+            client_id: '0b0d43a49adc0200ac23',
+            client_secret: '82553f5ed0d11dc2792158cf476aa731664467ca'
+        },
+    });
+    gitment.render('gitmentContainer');
+    </script>
+</div>
+
 
         </div>
         <hr/>
@@ -466,10 +482,6 @@ gitment.render('gitmentContainer');
     <!-- <script type="text/javascript" src="/assets/js/main.js"></script> -->
     <script type="text/javascript" src="/assets/js/jquery-1.11.3.min.js"></script>
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-
-
-
     <script src="/assets/js/common.js"></script>
     
         

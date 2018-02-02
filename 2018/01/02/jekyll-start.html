@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Algate's Blog|对Storage和cookie的封装</title>
+    <title>Algate's Blog|jekyll创建-环境配置及安装</title>
     
     
     <meta name="author" content="algate">
@@ -111,13 +111,13 @@
 
 <div class="page-header">
     <h1>
-     <small>对Storage和cookie的封装</small>
+     <small>jekyll创建blog基本环境搭建</small>
     
     </h1>
     <hgroup>
         <div class="post-meta">
             <img src="/assets/images/calendar.png" width="20px" />
-            <time datetime="2016-11-05 01:21:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-05</time>
+            <time datetime="2018-01-02 01:30:00 +0800" itemprop="datePublished" class="post-meta__date date">2018-01-02</time>
             <span id="busuanzi_container_page_pv">
               本文总阅读量<span id="busuanzi_value_page_pv"></span>次
             </span>
@@ -128,146 +128,135 @@
 <div class="content-center">
     <div class="row">
         <div class="col-md-12 post-container post-container-category">
-            <pre>
-<textarea class="cm_textarea">
-&lt;!doctype html&gt;
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>test</title>
-</head>
-<body>
-	<script type="text/javascript">
-	var singleton = function( fn ){
-	    var result;
-	    return function(){
-	        return result || ( result = fn .apply( this, arguments ) );
-	    }
-	}
-	var _storage=singleton(function(){
-		var lstorage;
-		if(window.localStorage){
-			lstorage=localStorage;
-		}else{
-		    var UserData = {
-		    userData: null,
-		    name: location.hostname,
+            <p>前人栽树，后人乘凉。多谢各位大牛的技术文档，让我可以站在巨人的肩膀上眺望远方！(不过在windows上走流程有各种坑)下边是我结合制作自己博客写的总结：（非常建议Windows下用hexo环境创建博客，jekyll下问题多多，坑坑多多）
+本人的博客地址:<a href="https://algate.github.io/">https://algate.github.io/</a></p>
 
-		    init: function() {
-		        if(!UserData.userData) {
-		            try {
-		                UserData.userData = document.createElement('div');
-		                UserData.userData.type = "hidden";
-		                UserData.userData.style.display = "none";
-		                UserData.userData.addBehavior("#default#userData");
-		                document.body.appendChild(UserData.userData);
-		                var expires = new Date();
-		                expires.setDate(expires.getDate() + 365);
-		                UserData.userData.expires = expires.toUTCString();
-		            } catch(e) {
-		                return false;
-		            }
-		        }
-		        return true;
-		    },
+<p>不知为何，master上传代码之后，加了分页显示的内容展示不出来。
+所以原jekyll代码放在了另一个地方,欢迎大家star —— <a href="https://github.com/algate/algate-blog">传送门</a></p>
 
-		    setItem: function(key, value) {
-		        if(UserData.init()) {
-		            UserData.userData.setAttribute(key,value);
-		        }
-		    },
+<p>mkdir Algate’s Site</p>
 
-		    getItem: function(key) {
-		        if(UserData.init()) {
-		            var  v=UserData.userData.getAttribute(key);
-		            return v;
-		        }
-		    },
-		    removeItem: function(key) {
-		        if(UserData.init()) {
-		            UserData.userData.removeAttribute(key);
-		        }
-		    },
-		    //以下三个方法暂时留着,区别Attribute和property
-		    getAttr:function(el, prop){
-		    	return el[prop] || el.getAttribute(prop);
-		    },
-		    setAttr:function(el, prop, val){
-	    		el[prop] = val;
-		    },
-		    removeAttr:function(el, prop){
-		    	delete el[prop];
-		    }
-		};
-			lstorage=UserData;
-		};
-		var ls = {
-			setLocalStorage : function(k,v){
-				lstorage.setItem(k,v);
-			},
-			getLocalStorage : function(k){
-				return lstorage.getItem(k);
-			},
-			removeLocalStorage:function(k){
-				lstorage.removeItem(k);
-			},
-			clearLocalStorage : function(){
-				lstorage.clear();
-			}
-		};
-		return ls;
-	})();
+<p><img src="/assets/images/topics/jekyll/001.png" /></p>
 
-	var _cookie=singleton(function(){
-		var ck={
-			addCookie:function(obj){
-				if(typeof(obj)==="undefined"){
-					return;
-				}
-				for(var c in obj){
-					var strCookie=c+"="+obj[c]+";"
-					// cookieString+=strCookie;
-					document.cookie=strCookie;
-				}
-				// alert(document.cookie)
-			},
-			getCookie : function(name){
-				var strCookie=document.cookie;
-				var arrCookie=strCookie.split("; ");
-				for(var i=0;i<arrCookie.length;i++){
-					var arr=arrCookie[i].split("=");
-					if(arr[0]==name){
-						return arr[1];
-					};
-				}
-				return "";
+<p>在Windows环境下和其他环境系统下安装内容和方法有所不同，此处只介绍windows下安装方法
+windows环境下安装；
+操作说明连接地址：<a href="http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html">http://www.madhur.co.in/blog/2011/09/01/runningjekyllwindows.html</a></p>
+<h4 id="1-安装-ruby">1. 安装 Ruby</h4>
 
-			},
-			deleteCookie : function(name){
-				var date=new Date();
-				date.setTime(date.getTime()-10000);
-				document.cookie=name+"=v; expires="+date.toGMTString();
-			}
-		};
-		return ck;
-	})();
-	//需要存储的数据
-	var storageJson={
-		"name":"bamzc",
-		"age":"23",
-		"sex":"男"
-	};
-	_storage.setLocalStorage("name",storageJson.name);
-	// _storage.removeLocalStorage("name");
-	document.write("我给localStorage赋值："+_storage.getLocalStorage("name"));
-    _cookie.addCookie(storageJson);
-    // _cookie.deleteCookie("age");
-    document.write("<br><br>我添加了一个cookie："+_cookie.getCookie("age"));
-	</script>
-</body>
-</html>
-</textarea>
-</pre>
+<p>官网：<a href="http://rubyinstaller.org/downloads/">http://rubyinstaller.org/downloads/</a></p>
+
+<p>测试：Ruby是否安装成功，执行命令ruby -v</p>
+
+<p>注意：勾选 “Add Ruby executables to your PATH”，安装路径不能包含空格</p>
+
+<h4 id="2安装devkit-mingw64-64-472-20130224-1432-sfxexe">2.安装DevKit-mingw64-64-4.7.2-20130224-1432-sfx.exe</h4>
+<p>地址：在步骤一的官网地址里
+这里需要特别注意：</p>
+
+<p><img src="/assets/images/topics/jekyll/002.png" /></p>
+
+<p>要下载相对应的版本
+步骤：在命令窗口下切换到安装目录，并执行以下命令
+C:\Devkit 下：</p>
+<pre><code>ruby dk.rb init
+notepad config.yml
+</code></pre>
+<p>在打开的记事本窗口中，末尾会自动添加新的一行- C:\Ruby…-x64。（相对应的安装路径）</p>
+
+<p>回到命令行窗口内，审查（非必须）并安装。</p>
+<pre><code>ruby dk.rb review
+
+ruby dk.rb install
+</code></pre>
+
+<p>测试：gem是否安装成功，执行命令gem -v</p>
+
+<h4 id="3到想要创建站点项目的本地路径下">3.到想要创建站点项目的本地路径下</h4>
+<p>步骤：在命令窗口下执行以下命令
+可以更改源，可以直接略过直接安装jekyll
+（但是国内你就不要跳过了）详细方法连接地址：<a href="http://blog.csdn.net/rxm1989/article/details/40050185">http://blog.csdn.net/rxm1989/article/details/40050185</a></p>
+<pre><code>//更换gem源
+gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
+|~~|此处有错，截止到发稿时，镜像地址已经改变，地址为：[http://gems.ruby-china.org/](http://gems.ruby-china.org/)
+gem sources -a http://gems.ruby-china.org/
+
+//查看gem源
+gem sources -l
+
+清空源缓存
+gem sources -c
+
+更新源缓存
+gem sources -u
+
+//更新gem
+gem update --system
+</code></pre>
+
+<p>//安装jekyll
+gem install jekyll
+是否安装成功
+测试：</p>
+
+<p>坑：（提醒 ridk install）- 但是呢你根本下载不下来，网上不好找，终于找到一个
+连接地址：<a href="https://www.jianshu.com/p/181e3fe0b545">https://www.jianshu.com/p/181e3fe0b545</a></p>
+
+<p><img src="/assets/images/topics/jekyll/003.png" /></p>
+
+<p>测试：gem是否安装成功，执行命令gem -v</p>
+
+<h4 id="4安装python可以直接略过直接看第七步骤">4.安装python（可以直接略过直接看第七步骤）</h4>
+<p>地址：<a href="https://www.python.org/downloads/release/python-2714/">https://www.python.org/downloads/release/python-2714/</a>
+需要手动配置环境变量</p>
+
+<h4 id="5安装-easy-install">5.安装 Easy Install</h4>
+
+<p>下载distribute_setup.py</p>
+
+<p>地址：<a href="http://pypi.python.org/pypi/distribute">http://pypi.python.org/pypi/distribute</a>
+（官网下载的py文件一直执行不成功）换成被人改好的文件执行成功了
+下载地址：<a href="https://pan.baidu.com/s/1jG2bYbs">https://pan.baidu.com/s/1jG2bYbs</a></p>
+
+<p>把此文件单独放到python安装根目录下</p>
+
+<p>命令：在python根目录下执行：python distribute_setup.py</p>
+
+<p>判断是否安装成功，网上的测试在Windows下有问题：
+测试：Easy Install 是否安装成功，执行命令easy_install –version
+测试是否安装成功需要找到python根目录下找相关路径 （Lib\site-packages\easy_install.py）
+例如：C:\Python27\Lib\site-packages
+然后执行 easy_install.py  –version(.py文件后缀必须添加，负责永远对不了-我的电脑如此)</p>
+
+<p>此处问题较多，再加上官网也没有详细的结束，会长时间尝试安装，大坑啊！
+网上解决方法<a href="https://jingyan.baidu.com/article/09ea3ede27f88ac0aede3900.html">https://jingyan.baidu.com/article/09ea3ede27f88ac0aede3900.html</a></p>
+
+<h4 id="6安装-pygments">6.安装 Pygments</h4>
+
+<h4 id="7可以是第四步">7.（可以是第四步）。</h4>
+<p>jekyll new algateJekyll</p>
+
+<p><img src="/assets/images/topics/jekyll/004.png" /></p>
+
+<p>然后在文件夹下可以自动生成文件夹，初始内容如下图所示</p>
+
+<p><img src="/assets/images/topics/jekyll/005.png" /></p>
+
+<p>8.cd algateJekyll
+jekyll serve
+我这执行启动服务的时候，出现了下列报错</p>
+
+<p><img src="/assets/images/topics/jekyll/006.png" /></p>
+
+<p>需要安装bundler（gem install bundler）
+可能需要重新打开命令窗口执行server</p>
+
+<p>jekyll –serve –watch 命令将开启实时更新，修改文件后在浏览器中刷新就可看到效果，对本地调试很有帮助；</p>
+
+<p>至此，简单的jekyll服务搭建完成
+（4-6是为了高亮显示所需要的插件）</p>
+
+<p>仿照<a href="https://themebetter.com/">https://themebetter.com/</a> 主题制作属于自己的blog</p>
 
         </div>
     </div>
@@ -456,12 +445,12 @@
     <ul class="pager">
         
         <li class="previous">
-            <a href="/2016/10/15/markdown.html" data-toggle="tooltip" data-placement="top" title="markdown语法">下一篇：  <span>markdown语法</span>
+            <a href="/2017/08/11/es6-function.html" data-toggle="tooltip" data-placement="top" title="ECMAScript6 - 函数的扩展">下一篇：  <span>ECMAScript6 - 函数的扩展</span>
             </a>
         </li>
          
         <li class="next">
-            <a href="/2016/11/07/resource-collection.html" data-toggle="tooltip" data-placement="top" title="javascript">上一篇：  <span>javascript</span>
+            <a href="/2018/01/30/heart-thankful.html" data-toggle="tooltip" data-placement="top" title="学会感激">上一篇：  <span>学会感激</span>
             </a>
         </li>
         
