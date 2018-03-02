@@ -1,6 +1,14 @@
 # algate's Blog
 
-### [我的个人博客](https://algate.github.io/)
+我的新博客地址 ：
+
+欢迎进入我的新博客 [白纸驿站](https://algate.gitlab.io)
+
+本项目已经不再更新维护。
+### [我的博客](https://algate.github.io/)
+
+如果想学习本博客如何制作可以访问相关地址链接：[如何使用jekyll制作blog](https://algate.gitlab.io/2017/06/25/Jekyll%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84blog/)
+
 
 
 #### Get Started
