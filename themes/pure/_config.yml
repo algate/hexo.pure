@@ -1,0 +1,237 @@
+# menu
+menu:
+  Home: .
+  Archives: archives  # 归档
+  Categories: categories  # 分类
+  Tags: tags  # 标签
+  Repository: repository  # github repositories
+  Books: books  # 豆瓣书单
+  Links: links  # 友链
+  About: about  # 关于
+
+# Enable/Disable menu icons
+menu_icons:
+  enable: true  # 是否启用导航菜单图标
+  home: icon-home3
+  archives: icon-drive
+  categories: icon-folder
+  tags: icon-price-tags
+  repository: icon-stackoverflow
+  books: icon-books
+  links: icon-link
+  about: icon-quill
+
+# rss
+rss: atom.xml
+
+# Site
+site:
+  logo:
+    enabled: true
+    width: 40
+    height: 40
+    url: images/logo.png
+  title: 白纸驿站 # 页面title
+  favicon: icon/favicon.ico
+  svg: icon/favicon.svg
+  board: <p>欢迎交流与分享经验!</p> # 站点公告
+  copyright: true # 底部版权信息
+
+# config
+config:
+  skin:  # 主题颜色 theme-black theme-blue theme-green theme-purple
+  layout: main-center # 布局方式 main-left main-center main-right
+  toc: true # 是否开启文章章节目录导航
+  menu_highlight: false # 是否开启当前菜单高亮显示
+  thumbnail: false # enable posts thumbnail, options: true, false
+  excerpt_link: Read More
+
+# Pagination
+pagination:
+  number: false
+  prev:
+    alwayShow: true
+  next:
+    alwayShow: true
+
+# Sidebar
+sidebar: right
+widgets:
+  - music163
+  - board
+  - category
+  - tag
+  - tagcloud
+  - archive
+  - recent_posts
+
+# display widgets at the bottom of index pages (pagination == 2)
+index_widgets:
+# - category
+# - tagcloud
+# - archive
+
+# music163
+music:
+  wangyiyun: true
+
+# widget behavior
+archive_type: 'monthly'
+show_count: true
+
+# Search
+search:
+  insight: true # you need to install `hexo-generator-json-content` before using Insight Search
+  swiftype: # enter swiftype install key here
+  baidu: false # you need to disable other search engines to use Baidu search
+
+# Donate
+donate:
+  enable: true
+  weipay:
+    image: images/donate/weipay.jpg
+    qrcode: images/donate/weipayimg.png
+    title: 微信支付
+  alipay:
+    image: images/donate/alipay.jpg
+    qrcode: images/donate/alipayimg.png
+    title: 支付宝
+
+# Share
+# weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin
+share:
+  enable: true  # 是否启用分享
+  sites: weibo,qq,wechat,facebook,twitter  # PC端显示的分享图标
+  mobile_sites: weibo,qq,qzone  # 移动端显示的分享图标
+
+# Github
+github:
+  username: algate  # github username
+
+# Comment
+# Gitment
+# Introduction: https://imsun.net/posts/gitment-introduction/
+comment:
+  type: livere # gitment # 启用哪种评论系统
+  disqus: # enter disqus shortname here
+  youyan:
+    uid: # 2156466 # enter youyan uid
+  livere:
+    uid: MTAyMC8zNDMxNS8xMDg1Mg== # enter livere uid
+  gitment:
+    githubID: # algate
+    repo: # algate.github.io
+    ClientID: # 0b0d43a49adc0200ac23
+    ClientSecret: # 82553f5ed0d11dc2792158cf476aa731664467ca
+    lazy: # false
+
+# douban 豆瓣书单
+# Api：
+  # https://developers.douban.com/wiki/?title=book_v2 图书
+  # https://developers.douban.com/wiki/?title=movie_v2 电影
+# books：
+  # https://api.douban.com/v2/book/user/:name/collections?start=0&count=100 个人书单列表
+# movies:
+  # https://api.douban.com/v2/movie/in_theaters 正在上映的电影
+  # https://api.douban.com/v2/movie/coming_soon 即将上映的电影
+  # https://api.douban.com/v2/movie/subject/:id 单个电影信息
+  # https://api.douban.com/v2/movie/search?q={text} 电影搜索
+douban:
+  user: 64967205 # 豆瓣用户名
+  start: 0 # 从哪一条记录开始
+  count: 100 # 获取豆瓣书单数据条数
+
+# PV
+pv:
+  busuanzi:
+    enable: true  # 不蒜子统计
+  leancloud:
+    enable: false  # leancloud统计
+    app_id: # leancloud <AppID>
+    app_key: # leancloud <AppKey>
+
+# wordcount
+postCount:
+  enable: false
+  wordcount: true  # 文章字数统计
+  min2read: true  # 阅读时长预计
+
+# Plugins
+plugins:
+  lightgallery: true # options: true, false (open gallery)
+  justifiedgallery: true # options: true, false (画廊)
+  google_analytics: # enter the tracking ID for your Google Analytics
+  google_site_verification: # enter Google site verification code
+  baidu_analytics: 9a7f5c6b952f516145c8be030ef28239 # enter Baidu Analytics hash key
+  tencent_analytics: # 65342153 # enter Tencent Analytics hash key
+
+# Miscellaneous
+twitter:
+google_plus:
+fb_admins:
+fb_app_id:
+
+# profile
+profile:
+  enabled: true # Whether to show profile bar
+  avatar: images/avatar.jpg
+  gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
+  author: Algate
+  author_title: Knowledge harvesters
+  author_description: 我是一个爱折腾的人，依心而为，无悔今生；不忘初心，方得始终；
+  location: Beijing - China
+  follow: https://github.com/algate
+  # Social Links
+  social:
+    links:
+      github: https://github.com/algate
+      # gitlab: https://gitlab.com/algate
+      sina-weibo: http://weibo.com/algate
+      # twitter: https://twitter.com/algate
+      cloud: https://www.kancloud.cn/algate/algatejs/218443
+      # facebook: /
+      # dribbble: /
+      rss: atom.xml
+    link_tooltip: true # enable the social link tooltip, options: true, false
+  # My Skills
+  skills:
+    Photoshop: ★★★★☆
+    Javascript: ★★★★☆
+    HTML+CSS: ★★★★☆
+    Bootstrap: ★★★★☆
+    Vue: ★★★★☆
+    AngularJs: ★★★★☆
+    Jekyll: ★★★★☆
+    Hexo: ★★★★☆
+    Git: ★★★★☆
+    Gulp: ★★★★☆
+  # My Personal Links
+  links:
+    # Github: https://github.com/algate
+    Jekyll博客: https://algate.github.io
+    白纸驿站: https://algate.coding.me
+    Hexo博客: https://algate.gitlab.io
+    微博: http://weibo.com/algate
+    Segmentfault: https://segmentfault.com/u/algate
+    KanCloud: https://www.kancloud.cn/algate/algatejs/218443
+  # My Personal Labels
+  labels:
+    - 前端开发
+    - 前端框架搭建
+    - Blog博客
+    - 真的爱你
+    - 旅行
+    - 读书
+    - 想念父母
+  # My Personal Works
+  works:
+    百度金融:
+      link: https://www.baidu.com/
+      date: 2014
+    中庆现代:
+      link: https://www.baidu.com/
+      date: 2016
+  # My Personal Projects
+  projects:
+    algate/vue-smart: https://github.com/algate/vue-smart
+    algate/jekyll-of-myself: https://github.com/algate/jekyll-of-myself

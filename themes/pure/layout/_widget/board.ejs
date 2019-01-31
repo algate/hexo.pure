@@ -1,0 +1,15 @@
+<div class="widget">
+    <h3 class="widget-title"><%= __('widget.board') %></h3>
+    <div class="widget-body">
+        <div id="board">
+            <p style="color:red;">系统升级中……有部分文章可能暂时读不了！</p>
+            <p>可以访问另一个地址：<a href="https://algate.coding.me/">[白纸驿站]</a></p>
+            <% if (theme.pv.busuanzi.enable) { %>
+            <p>您好，您是第<span id="busuanzi_value_site_uv" style="color: #b90404;font-size: 17px;padding: 0 5px;">0</span>位访客</p>
+            <% } %>
+            <div class="content">
+                <%- theme.site.board %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+# links
+创造狮:
+    link: http://chuangzaoshi.com/
+    avatar: /images/favatar/chuangzaoshi-logo.png
+    desc: 为创意工作者而设计
+腾讯设计导航:
+    link: http://idesign.qq.com/
+    avatar: /images/favatar/idesign-logo.png
+    desc: 网罗全网高逼格的设计站点
+Github-algate:
+    link: http://algate.github.io/
+    avatar: /images/favatar/github-logo.jpg
+    desc: Algate's Blog (Jekyll)
+简书:
+    link: https://www.jianshu.com/
+    avatar: /images/favatar/jianshu-logo.jpg
+    desc: 简书
+CSDN:
+    link: https://www.csdn.net/
+    avatar: /images/favatar/csdn-logo.jpg
+    desc: CSDN
+阮一峰:
+    link: http://www.ruanyifeng.com
+    avatar: /images/favatar/ruanyifeng-logo.jpg
+    desc: 阮一峰
+开源中国社区:
+    link: https://www.oschina.net/
+    avatar: /images/favatar/oschina-logo.jpg
+    desc: 开源中国社区
+技术宅:
+    link: https://www.gn00.com/
+    avatar: /images/favatar/jishuzhai-logo.jpg
+    desc: 技术宅
+慕课网:
+    link: https://www.imooc.com/
+    avatar: /images/favatar/imooc-logo.jpg
+    desc: 慕课网
+W3CPlus:
+    link: https://www.w3cplus.com/
+    avatar: /images/favatar/w3c-logo.jpg
+    desc: W3CPlus
+掘金:
+    link: https://juejin.im/
+    avatar: /images/favatar/juejin-logo.svg
+    desc: 掘金

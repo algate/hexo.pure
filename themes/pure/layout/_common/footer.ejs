@@ -1,0 +1,16 @@
+<footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	<%- partial('_common/social', null, {cache: !config.relative_link}) %>
+    <div class="copyright">
+        <p id="busuanzi_container_site_pv" style="text-align: center;">
+            <i class="icon icon-user"></i>... | <i class="icon icon-sphere"></i> <span id="busuanzi_value_site_pv"></span>
+        </p>
+    	<% if(theme.site.copyright) { %>
+        <div>&copy; 2015-<%= date(new Date(), 'YYYY') %> by <a href="https://github.com/algate"></a> <%= config.author || config.title %></div>
+        <% } %>
+        <!-- <div class="publishby">
+            <%= __('copyright.theme_by') %> <a href="https://github.com/algate" target="_blank"> algate </a><%= __('copyright.base_on') %> <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div> -->
+        Powered by <a href="https://hexo.io/zh-cn/">Hexo</a>. Theme by <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        <iframe frameborder="0" scrolling="0" style="height:24px;" src="https://ghbtns.com/github-btn.html?user=algate&repo=algate.github.io&type=star&count=true"></iframe>
+    </div>
+</footer>
