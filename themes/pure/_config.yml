@@ -195,22 +195,21 @@ profile:
     link_tooltip: true # enable the social link tooltip, options: true, false
   # My Skills
   skills:
+    HTML+CSS&Javascript: ★★★★☆
+    Vue&AngularJs&React: ★★★★☆
+    Jekyll&Hexo: ★★★★☆
+    Git&SVN: ★★★★☆
+    Gulp&Grunt: ★★★★☆
     Photoshop: ★★★★☆
-    Javascript: ★★★★☆
-    HTML+CSS: ★★★★☆
-    Bootstrap: ★★★★☆
-    Vue: ★★★★☆
-    AngularJs: ★★★★☆
-    Jekyll: ★★★★☆
-    Hexo: ★★★★☆
-    Git: ★★★★☆
-    Gulp: ★★★★☆
+    TS&ES6&Webpack&……: ★★★☆☆
   # My Personal Links
   links:
     # Github: https://github.com/algate
-    Jekyll博客: https://algate.github.io
-    白纸驿站: https://algate.coding.me
+    Jekyll博客(已经废弃): https://algate.github.io
+    白纸驿站: https://algate.github.io
     Hexo博客: https://algate.gitlab.io
+    Coding博客: https://algate.coding.me
+    React项目: https://algate.github.io/onions.com
     微博: http://weibo.com/algate
     Segmentfault: https://segmentfault.com/u/algate
     KanCloud: https://www.kancloud.cn/algate/algatejs/218443
@@ -231,7 +230,11 @@ profile:
     中庆现代:
       link: https://www.baidu.com/
       date: 2016
+    新北洋:
+      link: https://www.baidu.com/
+      date: Now
   # My Personal Projects
   projects:
     algate/vue-smart: https://github.com/algate/vue-smart
     algate/jekyll-of-myself: https://github.com/algate/jekyll-of-myself
+    algate/react: https://algate.github.io/onions.com

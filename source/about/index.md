@@ -17,8 +17,8 @@ sidebar: custom
 
 ```
 {
-      name: 'cofess'
-      age: 29,
+      name: 'FE-onions'
+      age: 30,
       gender: '男',
       profession: '前端工程师&WEB架构&前端技术指导',
       experience: '2014年初 to future',
@@ -26,7 +26,7 @@ sidebar: custom
       address: '北京市',
       education: '本科',
       github: 'https://github.com/algate',
-      blog: 'https://algate.coding.me',
+      blog: 'https://algate.github.io',
       email: 'algate@foxmail.com',
       description:
             ' 进入前端行业，后悔了some days；
@@ -36,12 +36,11 @@ sidebar: custom
 
       skills: [
           ['Html', 'Javascript', 'jQuery', 'CSS', 'ES6', 'Node'],
-          ['Webpack', 'Gulp'],
-          ['Canvas', 'h5']
-          ['Vue', 'AngularJs'],
+          ['Webpack', 'Gulp', 'Grunt'],
+          ['Canvas', 'h5'],
+          ['Vue', 'AngularJs', 'React'],
           ['Less','Sass'],
           ['Git', 'SVN'],
-          ['Vue'],
           ['Bootstrap', 'ElementUI', 'iView'],
           ['Hexo', 'Jekyll'],
           ['Photoshop', 'icon', 'Sublime Text']

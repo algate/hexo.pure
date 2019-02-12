@@ -105,7 +105,7 @@ deploy:
   type: git
   repo: https://github.com/algate/algate.github.io.git
   branch: master
-  message: hexo
+  message: 更改个人信息
 # deploy:
 #   type: git
 #   repo: https://git.coding.net/algate/algate.coding.me.git
