@@ -1,4 +1,4 @@
-# algate.github.io
+# algate.github.io/hexo.pure
 Algate’s Blog
 
 分支gh-pages
