@@ -42,7 +42,7 @@ IE10浏览器很奇葩的，它也可以设置已完成进度的背景色，使�
     progress::-webkit-progress-value  { background: #19ca6c; }
 
 得到如下效果样式：
-![](/images/posts/progress/01.png)
+![](/hexo.pure/images/posts/progress/01.png)
 
 >最后：IE6~IE9浏览器不支持progress元素，我们可以通过嵌套其他元素的方法进行兼容
 

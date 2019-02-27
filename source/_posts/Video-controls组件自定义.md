@@ -8,7 +8,7 @@ tags:
 ---
 项目参考地址 [video-contral-rewrite](https://github.com/algate/video-contral-rewrite)
 效果如下：
-![](/images/posts/video/01.png)![](/images/posts/video/02.png)
+![](/hexo.pure/images/posts/video/01.png)![](/hexo.pure/images/posts/video/02.png)
 <!-- more -->
 ##### html
 ```

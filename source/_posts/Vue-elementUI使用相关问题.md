@@ -86,7 +86,7 @@ tags:
 
 ##### 4.多项checkbox选择
 如下图所示:
-![](/images/posts/vue/elementUI/01.png)
+![](/hexo.pure/images/posts/vue/elementUI/01.png)
 
     <el-table-column prop="fronts" label="前台功能权限" min-width="400">
         <template slot-scope="scope" >

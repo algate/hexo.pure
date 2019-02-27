@@ -4,9 +4,9 @@ categories:
 - 摘抄
 tags:
 - 勉励
-<!-- banner: /images/posts/2018-02-22.jpg -->
+<!-- banner: /hexo.pure/images/posts/2018-02-22.jpg -->
 ---
-![](/images/posts/2018-02-22.jpg)
+![](/hexo.pure/images/posts/2018-02-22.jpg)
 
 有个朋友，几年前辞掉了工作，自己创业，自从身份和角色转换了之后，经常听他念叨，老板难当。
 

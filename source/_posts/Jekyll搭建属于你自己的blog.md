@@ -16,7 +16,7 @@ tags:
 
 mkdir Algate's Site
 
-<img src="/images/posts/jekyll/001.png">
+<img src="/hexo.pure/images/posts/jekyll/001.png">
 
 在Windows环境下和其他环境系统下安装内容和方法有所不同，此处只介绍windows下安装方法
 windows环境下安装；
@@ -33,7 +33,7 @@ windows环境下安装；
 地址：在步骤一的官网地址里
 这里需要特别注意：
 
-<img src="/images/posts/jekyll/002.png">
+<img src="/hexo.pure/images/posts/jekyll/002.png">
 
 要下载相对应的版本
 步骤：在命令窗口下切换到安装目录，并执行以下命令
@@ -85,7 +85,7 @@ gem install jekyll
 坑：（提醒 ridk install）- 但是呢你根本下载不下来，网上不好找，终于找到一个
 连接地址：[https://www.jianshu.com/p/181e3fe0b545](https://www.jianshu.com/p/181e3fe0b545)
 
-<img src="/images/posts/jekyll/003.png">
+<img src="/hexo.pure/images/posts/jekyll/003.png">
 
 测试：gem是否安装成功，执行命令gem -v
 
@@ -120,17 +120,17 @@ gem install jekyll
 #### 7.（可以是第四步）。
 jekyll new algateJekyll
 
-<img src="/images/posts/jekyll/004.png">
+<img src="/hexo.pure/images/posts/jekyll/004.png">
 
 然后在文件夹下可以自动生成文件夹，初始内容如下图所示
 
-<img src="/images/posts/jekyll/005.png">
+<img src="/hexo.pure/images/posts/jekyll/005.png">
 
 8.cd algateJekyll
 jekyll serve
 我这执行启动服务的时候，出现了下列报错
 
-<img src="/images/posts/jekyll/006.png">
+<img src="/hexo.pure/images/posts/jekyll/006.png">
 
 需要安装bundler（gem install bundler）
 可能需要重新打开命令窗口执行server

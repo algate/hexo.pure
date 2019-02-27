@@ -23,16 +23,16 @@ ssh-keygen -t rsa -C "youremail@yourcompany.com"
 
 
   <font color="#00f">若一路回车（密码可以不写），这样只会在~/.ssh/ 目录下生成 id_rsa 和 id_rsa.pub 两个文件。为了区分，我们在第一个回车后设置路径：</font>如图所示：
-  ![](/images/posts/git/01.png)
+  ![](/hexo.pure/images/posts/git/01.png)
   ```
     Enter file in which to save the key (/root/.ssh/id_rsa):~/.ssh/gerrit_rsa
   ```
   之后回车完成就会出现上图中效果，github也如此。
-  ![](/images/posts/git/03.png)
+  ![](/hexo.pure/images/posts/git/03.png)
 
 * 2.服务器端绑定相对应的公钥，这个步骤使必须的，
 以github为例：(如图所示就OK了)
-![](/images/posts/git/04.png)
+![](/hexo.pure/images/posts/git/04.png)
 
 测试是否通了：(github为例)
 ```

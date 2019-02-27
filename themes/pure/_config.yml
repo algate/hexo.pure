@@ -22,7 +22,7 @@ menu_icons:
   about: icon-quill
 
 # rss
-rss: atom.xml
+rss: /hexo.pure/atom.xml
 
 # Site
 site:
@@ -32,8 +32,8 @@ site:
     height: 40
     url: images/logo.png
   title: 白纸驿站 # 页面title
-  favicon: icon/favicon.ico
-  svg: icon/favicon.svg
+  favicon: hexo.pure/icon/favicon.ico
+  svg: hexo.pure/icon/favicon.svg
   copyright: true # 底部版权信息
 
 # config
@@ -88,12 +88,12 @@ search:
 donate:
   enable: true
   weipay:
-    image: images/donate/weipay.jpg
-    qrcode: images/donate/weipayimg.png
+    image: hexo.pure/images/donate/weipay.jpg
+    qrcode: hexo.pure/images/donate/weipayimg.png
     title: 微信支付
   alipay:
-    image: images/donate/alipay.jpg
-    qrcode: images/donate/alipayimg.png
+    image: hexo.pure/images/donate/alipay.jpg
+    qrcode: hexo.pure/images/donate/alipayimg.png
     title: 支付宝
 
 # Share

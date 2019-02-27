@@ -6,7 +6,7 @@ tags:
 - dialog
 ---
 效果如下图流程
-![](/images/posts/vue/dialog/01.png)![](/images/posts/vue/dialog/02.png)
+![](/hexo.pure/images/posts/vue/dialog/01.png)![](/hexo.pure/images/posts/vue/dialog/02.png)
 
 #### one.自己定义弹层(弹层实现不包括别的样式和事件-非UI框架实现思路)
 

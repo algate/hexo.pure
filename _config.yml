@@ -19,7 +19,7 @@ timezone: Asia/Shanghai
 # url: https://algate.coding.me
 # root: /hexo/
 url: https://algate.coding.me
-root: /
+root: /hexo.pure/
 permalink: :year/:month/:day/:title/
 # permakink: :year-:month-:day-:title.html
 permalink_defaults:
@@ -103,9 +103,9 @@ theme: pure
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/algate/algate.github.io.git
+  repo: https://github.com/algate/hexo.pure.git
   branch: master
-  message: 更改个人信息
+  message: deploy-hexo.pure
 # deploy:
 #   type: git
 #   repo: https://git.coding.net/algate/algate.coding.me.git

@@ -18,7 +18,7 @@ main.js 即vue项目的入口文件，开头部分需要引入
 
 * #### config下index文件 assetsPublicPath
 如下图
-![](/images/posts/vue/01.png)
+![](/hexo.pure/images/posts/vue/01.png)
 
     [右侧箭头]想说的是，原本内容为  '/'。没有小点；
     解决的问题是：**文档发布找文件路径是在当前路径下找相对路径**，否则的话会找绝对路径
@@ -27,7 +27,7 @@ main.js 即vue项目的入口文件，开头部分需要引入
 * * * * *
 * #### static (stylesheel图片路径问题)
 如下图所示
-![](/images/posts/vue/02.png)
+![](/hexo.pure/images/posts/vue/02.png)
 
     【此处关键】解决的问题是：**样式表里引入的背景图片原本会自动加入'static/css'。把背景图识别到了样式css的目录下加上词句后，就可以找到样式表外层目录；**
 
@@ -36,7 +36,7 @@ main.js 即vue项目的入口文件，开头部分需要引入
 
 * #### 域名是否开启html5模式(history)
 如下图所示
-![](/images/posts/vue/03.png)
+![](/hexo.pure/images/posts/vue/03.png)
 
 【此处关键】图片中注释的一句：mode：'history'；在浏览器域名下不显示'#'，使用的是html5模式；
 
@@ -45,7 +45,7 @@ main.js 即vue项目的入口文件，开头部分需要引入
 ******
 * #### alias (build下webpack.config.base中exports-resolve下)
 如下图所示
-![](/images/posts/vue/04.png)
+![](/hexo.pure/images/posts/vue/04.png)
 
  [文件路径]但我们在页面中import，图片……需要添加文件路径的时候，写一堆“../../../”等等的路径，费半天劲，此刻不用了，只要设置了上图中的文件路径，就可以在页面中直接写"config/...文件"，开发和打包的时候，vue会自动匹配文件路径，方便又省事。
 
@@ -54,12 +54,12 @@ main.js 即vue项目的入口文件，开头部分需要引入
 ******
 * #### jquery引入(不推荐-实际项目用到的地方不是太多)
 
-（1）入口文件main.js中加入![](/images/posts/vue/05.png)
+（1）入口文件main.js中加入![](/hexo.pure/images/posts/vue/05.png)
 
-（2）base.conf.js中添加路径![](/images/posts/vue/06.png)
+（2）base.conf.js中添加路径![](/hexo.pure/images/posts/vue/06.png)
 
 （3）步骤2中，和entry同级添加入下图内容：【此处添加如果没有引入webpack】需要引入var webpack = require("webpack")
-![](/images/posts/vue/07.png)
+![](/hexo.pure/images/posts/vue/07.png)
 
 *****
 * #### `<a></a>` :active激活状态样式
@@ -78,11 +78,11 @@ main.js 即vue项目的入口文件，开头部分需要引入
 >我做过的项目就遇到过一个问题
 设置完代理服务器之后，我们登录单独用cas做了一个项目，当登录后台返回结果之后，如果不配置ip，多个人开发项目的时候，默认返回的都是127.0.0.1。导致不知道返回设备的session可能失效……等等
 
-![](/images/posts/vue/08.png)
+![](/hexo.pure/images/posts/vue/08.png)
 
 *****
 * #### port
 
 启动多个服务器项目，不仅仅是vue，可能需要改变下域名的port。
 
-![](/images/posts/vue/09.png)
+![](/hexo.pure/images/posts/vue/09.png)

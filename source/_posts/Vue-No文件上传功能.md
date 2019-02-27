@@ -14,7 +14,7 @@ elementUI组件其实已经很方便的使用上传功能，但是有很多弊�
 
 * ‘eg’：存储数据不方便，最主要的就是，绑定一堆乱七八糟的方法和变量，有时候（需要特殊处理的时候）就是不管你怎么操作，就是不对。
 <!-- more -->
-![](/images/posts/vue/upload01.png)
+![](/hexo.pure/images/posts/vue/upload01.png)
 
 ```
 // html部分：

@@ -7,7 +7,7 @@ tags:
 ---
 
 引用网上的一张图
-![](/images/posts/js/inherit/01.png)
+![](/hexo.pure/images/posts/js/inherit/01.png)
 
 >简单概括就四句话
 1.实例的__proto__ === 构造函数的prototype

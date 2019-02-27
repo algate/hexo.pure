@@ -7,7 +7,7 @@ tags:
 ---
 
 ##### 1.class样式问题：
-![](/images/posts/vue/wenti/01.png)
+![](/hexo.pure/images/posts/vue/wenti/01.png)
 
     <span class="c_v_i_state" :class="[video == '1'?'bgcolor1aaf60':video == '2'?'bgcolor2dabff':video == '3'?'bgcolorff8b2d':'']">{{video == '1'?'正在直播':video == '2'?'即将开始':video == '3'?'直播回放':''}}</span>
 

@@ -13,7 +13,7 @@ tags:
 原因是使用了https方式 push
 这种方式产生的原因，一般是我们clone是一定是使用了http的方式
 例如我们在github上创建了一个项目，然后我们clone到本地时使用了http/https而非git
-![](/images/posts/git/05.png)
+![](/hexo.pure/images/posts/git/05.png)
 ```
 git clone https://github.com/***/***.git
 ```

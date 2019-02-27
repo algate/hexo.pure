@@ -1,4 +1,5 @@
 title: Vue-实现分步骤流程效果
+
 date: 2017-08-15 17:31:30
 categories:
 - Vue
@@ -9,7 +10,7 @@ tags:
 
 实现效果如下：
 
-![](/images/posts/vue/step01.png)
+![](/hexo.pure/images/posts/vue/step01.png)
 
 element实现方法：[官网通道](http://element.eleme.io/#/zh-CN/component/steps)
 <!-- more -->

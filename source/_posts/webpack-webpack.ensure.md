@@ -74,7 +74,7 @@ mapBtn.click(function() {
 
 说完了上面的原理。下面就实践一下
 
-![](images/screenshot_1516859787697.png)
+![](/hexo.pure/images/screenshot_1516859787697.png)
 
 entry.js 依赖三个 js。
 
@@ -135,25 +135,25 @@ document.getElementById("bBtn").onclick = function() {
 
 webpack打包后，形成
 
-![](images/screenshot_1516859844447.png)
+![](/hexo.pure/images/screenshot_1516859844447.png)
 
 其实， 1.1…  2.2…就是我们ensure导出来的js文件
 
 我们看看代码是如何加载的执行的，点击打包插入js后的html
 
-![](images/screenshot_1516859852906.png)
+![](/hexo.pure/images/screenshot_1516859852906.png)
 
 可以看到，并没有加载 ensure导出来的 1.1…js    2.2…js
 
 点击 abtn,
 
-![](images/screenshot_1516859860340.png)
+![](/hexo.pure/images/screenshot_1516859860340.png)
 
 发现浏览器下载并加载了 1.1…js
 
 点击 bbtn
 
-![](images/screenshot_1516859868698.png)
+![](/hexo.pure/images/screenshot_1516859868698.png)
 发现浏览器下载并加载了 2.2…js
 
 ok 全部完成

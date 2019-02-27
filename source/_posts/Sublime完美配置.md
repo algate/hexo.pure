@@ -4,7 +4,7 @@ categories:
 - 工具
 tags:
 - sublime
-banner: /images/posts/sublime.jpg
+banner: /hexo.pure/images/posts/sublime.jpg
 ---
 ### 插件安装
 
@@ -31,7 +31,7 @@ Code:
 #### 3.基础用户设置
 
 网上现在的教程都是比较老的，
-![](/images/posts/sublime/01.png)
+![](/hexo.pure/images/posts/sublime/01.png)
 如图所示，只有一个settings，没错，直接点击就行了，新窗口，左边为default设置，是不允许更改的，右边为user设置，自己可以更改：
 
 我的默认设置：
@@ -146,7 +146,7 @@ auto_find_in_selection: true ，开启选中范围内搜索（而不是整个文
 
 #### 6.SideBarEnhancements ，增强型侧边栏
 
-![](/images/posts/sublime/02.png)
+![](/hexo.pure/images/posts/sublime/02.png)
 
 如上图打开之后输入：
 
@@ -203,9 +203,9 @@ auto_find_in_selection: true ，开启选中范围内搜索（而不是整个文
 
 tools->HTML/CSS/JS Prettify->set prettify preference
 修改文件目录（sublime版本）
-![](/images/posts/sublime/03.png)
+![](/hexo.pure/images/posts/sublime/03.png)
 修改路径：
-![](/images/posts/sublime/04.png)
+![](/hexo.pure/images/posts/sublime/04.png)
 
 找到这一样代码后面添加 vue
 
@@ -234,11 +234,11 @@ tools->HTML/CSS/JS Prettify->set prettify preference
 #### 10.最新版sublime主题、字体相关设置：
 
 preferences（首选项） -> color（配色方案）->弹出下图所示，选择monokai extended就ok了
-![](/images/posts/sublime/05.png)
+![](/hexo.pure/images/posts/sublime/05.png)
 
 修改左侧边栏样式：（继续往下看，不要着急操作）
 preferences（首选项） -> theme（主题方案）->弹出下图所示，选择Default.sublime-theme
-![](/images/posts/sublime/06.png)
+![](/hexo.pure/images/posts/sublime/06.png)
 
 但是这个只是选择默认样式，如何修改呢。继续往下看：
 
@@ -254,7 +254,7 @@ preferences（首选项） -> theme（主题方案）->弹出下图所示，选�
 #### 11.为了省去更改侧边栏样式的问题，直接更改主题是最快的方式，需要安装相关插件
  搜索 theme 可以发现有很多的主题， 网上推荐这个 Afterglow 不错（可显示侧边栏小图标）
  改之前的效果：（10-相关操作之后的样式 + sidebar）
-![](/images/posts/sublime/07.png)
+![](/hexo.pure/images/posts/sublime/07.png)
 Welcome to Afterglow Theme
   To activate the theme, add or replace your current theme settings with the code below.
   安装完afterglow之后，会有package control message。关于插件的相关信息，如果要修改需要设置里添加相关信息
@@ -296,13 +296,13 @@ Welcome to Afterglow Theme
 https://github.com/YabataDesign/afterglow-theme/blob/master/README.md
 
 我选择的主题是：（决定侧边栏的样式效果）
-![](/images/posts/sublime/08.png)
+![](/hexo.pure/images/posts/sublime/08.png)
 配色方案是：（决定编辑部分的样式效果）
-![](/images/posts/sublime/09.png)
+![](/hexo.pure/images/posts/sublime/09.png)
 由于默认的侧边的样式效果看不清问，颜色几乎和背景融为一体，网上好多人说好看，还是那句话，萝卜白菜各有所爱，关键是看不清……
 修改
 像 10 中提到的那样，利用 PackageResourceViewer 插件，修改样式文件
-![](/images/posts/sublime/10.png)
+![](/hexo.pure/images/posts/sublime/10.png)
 字体大小有 12,13，他默认是 14 修改font.size 为自己合适的大小
 ```
 // Sidebar entry font size 14
@@ -321,18 +321,18 @@ https://github.com/YabataDesign/afterglow-theme/blob/master/README.md
 还有 hover，selected 等 自己可以自行配置相关的样式
 ```
 it's mine.
-![](/images/posts/sublime/11.png)
+![](/hexo.pure/images/posts/sublime/11.png)
 
 STATUS BAR
     label_control
         修改下图部位的样式（编辑器最下边文字样式）
-        ![](/images/posts/sublime/12.png)
-        ![](/images/posts/sublime/13.png)
+        ![](/hexo.pure/images/posts/sublime/12.png)
+        ![](/hexo.pure/images/posts/sublime/13.png)
 
 BOTTOM PANEL ICONS - GROUP 2
     icon_reverse + icon_wrap
         修改下图中部位样式
-        ![](/images/posts/sublime/14.png)
+        ![](/hexo.pure/images/posts/sublime/14.png)
 
 
 #### 12.YUI Compressor

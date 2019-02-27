@@ -7,7 +7,7 @@ tags:
 ---
 执行命令 create-react-app命令：
 
-![](/images/posts/react/error01.png)
+![](/hexo.pure/images/posts/react/error01.png)
 <!-- more -->
 
 但是执行了好久，安装了好久，当你以为成功的时候。不好意思，他不仅罢工了，连之前话很长时间安装的都delete了，delete，delete了。。。。
