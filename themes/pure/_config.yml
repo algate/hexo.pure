@@ -34,7 +34,6 @@ site:
   title: 白纸驿站 # 页面title
   favicon: icon/favicon.ico
   svg: icon/favicon.svg
-  board: <p>欢迎交流与分享经验!</p> # 站点公告
   copyright: true # 底部版权信息
 
 # config
@@ -177,7 +176,7 @@ profile:
   avatar: images/avatar.jpg
   gravatar: # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
   author: Algate
-  author_title: Knowledge harvesters
+  author_title: FE-Onions
   author_description: 我是一个爱折腾的人，依心而为，无悔今生；不忘初心，方得始终；
   location: Beijing - China
   follow: https://github.com/algate
@@ -204,11 +203,9 @@ profile:
     TS&ES6&Webpack&……: ★★★☆☆
   # My Personal Links
   links:
-    # Github: https://github.com/algate
-    Jekyll博客(已经废弃): https://algate.github.io
-    白纸驿站: https://algate.github.io
-    Hexo博客: https://algate.gitlab.io
-    Coding博客: https://algate.coding.me
+    博客主站: https://algate.github.io
+    白纸驿站(原文地址): https://algate.github.io/hexo.pure
+    Vue项目: http://algate.github.io/onions.vuecli3
     React项目: https://algate.github.io/onions.com
     微博: http://weibo.com/algate
     Segmentfault: https://segmentfault.com/u/algate
@@ -235,6 +232,6 @@ profile:
       date: Now
   # My Personal Projects
   projects:
-    algate/vue-smart: https://github.com/algate/vue-smart
-    algate/jekyll-of-myself: https://github.com/algate/jekyll-of-myself
+    Blog: https://algate.github.io
+    algate/vue: https://algate.github.io/onions.vuecli3
     algate/react: https://algate.github.io/onions.com

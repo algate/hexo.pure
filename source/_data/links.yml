@@ -6,11 +6,15 @@
 腾讯设计导航:
     link: http://idesign.qq.com/
     avatar: /images/favatar/idesign-logo.png
-    desc: 网罗全网高逼格的设计站点
-Github-algate:
-    link: http://algate.github.io/
+    desc: 网罗全网高逼格的设计
+Github-主博客:
+    link: http://algate.github.io
     avatar: /images/favatar/github-logo.jpg
-    desc: Algate's Blog (Jekyll)
+    desc: Algate's Blog
+Github-原博客:
+    link: http://algate.github.io/hexo.pure
+    avatar: /images/favatar/github-logo.jpg
+    desc: 白纸驿站
 简书:
     link: https://www.jianshu.com/
     avatar: /images/favatar/jianshu-logo.jpg
