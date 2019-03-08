@@ -143,13 +143,13 @@ douban:
 # PV
 pv:
   busuanzi:
-    enable: true  # 不蒜子统计
+    enable: false  # 不蒜子统计
   leancloud:
     enable: false  # leancloud统计
     app_id: # leancloud <AppID>
     app_key: # leancloud <AppKey>
 
-# wordcount
+# wordcountfalse
 postCount:
   enable: false
   wordcount: true  # 文章字数统计
@@ -161,7 +161,7 @@ plugins:
   justifiedgallery: true # options: true, false (画廊)
   google_analytics: # enter the tracking ID for your Google Analytics
   google_site_verification: # enter Google site verification code
-  baidu_analytics: 9a7f5c6b952f516145c8be030ef28239 # enter Baidu Analytics hash key
+  baidu_analytics: # 9a7f5c6b952f516145c8be030ef28239 # enter Baidu Analytics hash key
   tencent_analytics: # 65342153 # enter Tencent Analytics hash key
 
 # Miscellaneous
