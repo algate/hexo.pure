@@ -5,7 +5,7 @@ categories:
 tags:
 - 特殊标签
 ---
-1.manifest   页面头部 link rel="manifest" href="manifest.json"
+1.manifest   页面头部 `<link rel="manifest" href="manifest.json">`
 
 manifest 属性规定文档的缓存 manifest 的位置。
 
@@ -26,13 +26,17 @@ manifest 文件是一个简单的文本文件，列举出了浏览器用于离�
     base href="http://www.w3school.com.cn/i/"
     base target="_blank"
 
-<base> 标签为页面上的所有链接规定默认地址或默认目标。
+`<base>` 标签为页面上的所有链接规定默认地址或默认目标。
 
-通常情况下，浏览器会从当前文档的 URL 中提取相应的元素来填写相对 URL 中的空白。
+通常情况下，浏览器会从当前文档的 `URL` 中提取相应的元素来填写相对 `URL` 中的空白。
 
-使用 <base> 标签可以改变这一点。浏览器随后将不再使用当前文档的 URL，而使用指定的基本 URL 来解析所有的相对 URL。这其中包括 <a>、<img>、<link>、<form> 标签中的 URL。
+使用 `<base>` 标签可以改变这一点。浏览器随后将不再使用当前文档的 `URL`，而使用指定的基本 `URL` 来解析所有的相对 `URL`。这其中包括 `<a>`、`<img>`、`<link>`、`<form>` 标签中的 `URL`。
 
-3.meta标签的相关属性
+3.`meta`标签的相关属性
+
+    <meta http-equiv="refresh" content="5; url='//algate.github.io/'">
+上面meta的功能是, 访问该页面的时候，3秒钟后将自动跳转到url的地址
+
 http://blog.csdn.net/cczhumin/article/details/51241609
 
-……
+
